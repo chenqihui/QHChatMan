@@ -94,9 +94,10 @@ NSString *const kChatOpValueEnter = @"enter";
     QHChatBaseModel *model = self.chatDatasArray[indexPath.row];
     NSDictionary *data = model.originChatDataDic;
     NSString *op = data[kChatOpKey];
-    if ([op isEqualToString:kChatOpValueChat] == YES ||
-        [op isEqualToString:kChatOpValueGift] == YES ||
-        [op isEqualToString:kChatOpValueEnter] == YES) {
+    if ([op isEqualToString:kChatOpValueDate] == YES) {
+        return QHCHAT_LC_DATE_SPACE_TOP + _dateStringHeight;
+    }
+    else {
         if (model.chatAttributedText == nil) {
             return 0;
         }
@@ -106,9 +107,6 @@ NSString *const kChatOpValueEnter = @"enter";
         CGFloat h = rect.size.height + self.config.cellConfig.cellLineSpacing + QHCHAT_LC_CONTENT_EDGEINSETS.top + QHCHAT_LC_CONTENT_EDGEINSETS.bottom + QHCHAT_LC_CONTENT_TEXT_EDGEINSETS.top + QHCHAT_LC_CONTENT_TEXT_EDGEINSETS.bottom;
         return h;
     }
-    else if ([op isEqualToString:kChatOpValueDate] == YES) {
-        return QHCHAT_LC_DATE_SPACE_TOP + _dateStringHeight;
-    }
     return -1;
 }
 
@@ -117,17 +115,17 @@ NSString *const kChatOpValueEnter = @"enter";
     QHChatBaseModel *model = self.chatDatasArray[indexPath.row];
     NSDictionary *data = model.originChatDataDic;
     NSString *op = data[kChatOpKey];
-    if ([op isEqualToString:kChatOpValueChat] == YES ||
-        [op isEqualToString:kChatOpValueGift] == YES ||
-        [op isEqualToString:kChatOpValueEnter] == YES) {
-        QHChatLiveCloudContentViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kQHCHAT_LC_CONTENT_CELLIDENTIFIER];
-        cell.contentL.attributedText = model.chatAttributedText;
-        chatCell = cell;
-    }
-    else if ([op isEqualToString:kChatOpValueDate] == YES) {
+    if ([op isEqualToString:kChatOpValueDate] == YES) {
         QHChatLiveCloudDateViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kQHCHAT_LC_DATE_CELLIDENTIFIER];
         cell.contentL.text = data[kQHCHAT_LC_SHOWDATE_KEY];
         chatCell = cell;
+    }
+    else {
+        if (model.chatAttributedText != nil) {
+            QHChatLiveCloudContentViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kQHCHAT_LC_CONTENT_CELLIDENTIFIER];
+            cell.contentL.attributedText = model.chatAttributedText;
+            chatCell = cell;
+        }
     }
     return chatCell;
 }
