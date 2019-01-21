@@ -17,6 +17,7 @@
     // [NSAttributedString 的使用 - 简书](https://www.jianshu.com/p/3f85f91d1208)
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
     paragraphStyle.lineSpacing = lineSpacing;
+    paragraphStyle.lineBreakMode = NSLineBreakByCharWrapping;
     [attr addAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:fontSize], NSParagraphStyleAttributeName: paragraphStyle} range:NSMakeRange(0, attr.length)];
 }
 

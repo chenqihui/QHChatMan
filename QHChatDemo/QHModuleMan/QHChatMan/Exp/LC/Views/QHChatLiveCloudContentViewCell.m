@@ -69,7 +69,8 @@
     _contentL = [[UILabel alloc] initWithFrame:CGRectZero];
     _contentL.font = [UIFont systemFontOfSize:15];
     _contentL.numberOfLines = 0;
-    _contentL.lineBreakMode = NSLineBreakByWordWrapping;
+    // [苹果开发中文网站-UILabel 设置NSLineBreakByCharWrapping无效？ | iOS开发 - CocoaChina CocoaChina_让移动开发更简单](http://www.cocoachina.com/bbs/read.php?tid=257338)
+    _contentL.lineBreakMode = NSLineBreakByCharWrapping;
     _contentL.backgroundColor = [UIColor clearColor];
     [_contentV addSubview:_contentL];
     [QHViewUtil fullScreen:_contentL edgeInsets:QHCHAT_LC_CONTENT_TEXT_EDGEINSETS];

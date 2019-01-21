@@ -25,6 +25,8 @@
 @property (nonatomic, strong) NSTimer *reloadTimer;
 @property (nonatomic, strong) UIView<QHChatBaseNewDataViewProtcol> *hasNewDataView;
 
+@property (nonatomic) dispatch_queue_t chatReloadQueue;
+
 @end
 
 @implementation QHChatBaseView
@@ -34,6 +36,9 @@
     NSLog(@"%s", __FUNCTION__);
 #endif
     [self p_closeReloadTimer];
+    _chatDatasArray = nil;
+    _chatDatasTempArray = nil;
+    _hasNewDataView = nil;
 }
 
 - (instancetype)init {
@@ -63,9 +68,11 @@
         return;
     }
     
-    BOOL bRefresh = (_chatDatasTempArray.count <= 0);
     [_chatDatasTempArray addObjectsFromArray:data];
-    [self p_reloadAndRefresh:bRefresh];
+    if (_chatDatasTempArray.count > _config.chatCountMax) {
+        [_chatDatasTempArray removeObjectsInRange:NSMakeRange(0, _config.chatCountDelete)];
+    }
+    [self p_reloadAndRefresh:NO];
 }
 
 #pragma mark - Private
@@ -82,6 +89,8 @@
     _chatDatasTempArray = [NSMutableArray new];
     _bAutoReloadChat = YES;
     self.backgroundColor = [UIColor clearColor];
+    
+    _chatReloadQueue = dispatch_queue_create("com.qhchat.queue", NULL);
 }
 
 - (void)p_setupUI {
@@ -114,16 +123,18 @@
     [self qhChatAddCell2TableView:_mainTableV];
 }
 
-- (void)p_reloadAndRefresh:(BOOL)bRefresh {
+- (void)p_reloadAndRefresh:(BOOL)bRefreshImmediately {
     if (_bAutoReloadChat == YES) {
         if (_reloadTimer == nil || _reloadTimer.isValid == NO) {
             __weak typeof(self) weakSelf = self;
             _reloadTimer = [NSTimer qheoc_scheduledTimerWithTimeInterval:_config.chatReloadDuration block:^{
-                [weakSelf p_reloadAction];
+                dispatch_sync(weakSelf.chatReloadQueue, ^{
+                    [weakSelf p_reloadAction];
+                });
             } repeats:YES];
             [[NSRunLoop mainRunLoop] addTimer:_reloadTimer forMode:NSRunLoopCommonModes];
         }
-        if (bRefresh == YES) {
+        if (bRefreshImmediately == YES) {
             // [NSTimer的使用 停止 暂停 重启 - wahaha13168 - CSDN博客](https://blog.csdn.net/wahaha13168/article/details/52804048)
             // setFireDate 会立即触发 Timer 并重新计时，而 fire 只是立即触发
             [_reloadTimer setFireDate:[NSDate date]];
@@ -144,43 +155,53 @@
         [self p_closeReloadTimer];
         return;
     }
+    
     NSArray<NSDictionary *> *tempArray = [NSArray arrayWithArray:_chatDatasTempArray];
     [_chatDatasTempArray removeAllObjects];
-    NSInteger tempArrayCount = tempArray.count;
+    
+    __block BOOL isReplaceChatData = NO;
     [tempArray enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         BOOL bReplace = [self qhChatUseReplace:obj old:[self.chatDatasArray lastObject].originChatDataDic];
         QHChatBaseModel *model = [[QHChatBaseModel alloc] initWithChatData:obj];
         model.cellConfig = self.config.cellConfig;
         if (bReplace == YES) {
             [self.chatDatasArray replaceObjectAtIndex:self.chatDatasArray.count - 1 withObject:model];
-            if (tempArrayCount == 1) {
-                [self.mainTableV reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:(self.chatDatasArray.count - 1) inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-            }
+            isReplaceChatData = YES;
         }
         else {
             [self.chatDatasArray addObject:model];
-            if (tempArrayCount == 1) {
-                [self.mainTableV insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:(self.chatDatasArray.count - 1) inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-            }
         }
     }];
-    tempArray = nil;
     
+    BOOL bDeleteChatData = NO;
     if (_chatDatasArray.count > _config.chatCountMax) {
         [_chatDatasArray removeObjectsInRange:NSMakeRange(0, _config.chatCountDelete)];
+        bDeleteChatData = YES;
     }
     
-    if (tempArrayCount > 1) {
+    // 只有当加入的数据为1个，且是替换，和此次没有删除数据时，才启动指定刷新
+    if (tempArray.count == 1 && bDeleteChatData == NO && isReplaceChatData == YES) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(self.chatDatasArray.count - 1) inSection:0];
+//        if (isReplaceChatData == YES) {
+            [self.mainTableV reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+//        }
+//        else {
+//            [self.mainTableV insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+//        }
+    }
+    else {
     // [IOS开发之CLAyer 隐式动画 - 简书](https://www.jianshu.com/p/930cea99023d)
         [CATransaction begin];
         [CATransaction setDisableActions:YES];
         [self.mainTableV reloadData];
         [CATransaction commit];
     }
+    
     if (self.mainTableV.isDragging == NO && self.mainTableV.tracking == NO) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.chatDatasArray.count - 1 inSection:0];
         [self.mainTableV scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
+    tempArray = nil;
 }
 
 - (void)p_refreshAutoReloadChat {
@@ -252,8 +273,11 @@
 
 - (void)p_clickNewDataViewAction {
     _hasNewDataView.hidden = YES;
+    if (_chatDatasArray.count > 0) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.chatDatasArray.count - 1 inSection:0];
+        [self.mainTableV scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
     _bAutoReloadChat = YES;
-    [self p_reloadAndRefresh:YES];
 }
 
 #pragma mark - QHChatBaseViewProtocol
