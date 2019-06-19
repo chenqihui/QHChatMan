@@ -41,6 +41,11 @@
 		743D416B21D362C1000FAF61 /* sex_xx@3x.webp in Resources */ = {isa = PBXBuildFile; fileRef = 743D416921D362C0000FAF61 /* sex_xx@3x.webp */; };
 		743D416C21D362C1000FAF61 /* sex_xx@2x.webp in Resources */ = {isa = PBXBuildFile; fileRef = 743D416A21D362C0000FAF61 /* sex_xx@2x.webp */; };
 		743D417121D382A7000FAF61 /* dy_level.png in Resources */ = {isa = PBXBuildFile; fileRef = 743D417021D382A6000FAF61 /* dy_level.png */; };
+		746FE5C522BA3097003C9AE0 /* QHSVLRoomChatContentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 746FE5C422BA3097003C9AE0 /* QHSVLRoomChatContentViewCell.m */; };
+		746FE5C822BA30CC003C9AE0 /* QHSVLChatRoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 746FE5C722BA30CC003C9AE0 /* QHSVLChatRoomView.m */; };
+		746FE5CC22BA3325003C9AE0 /* QHSVLRoomChatViewUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 746FE5CB22BA3325003C9AE0 /* QHSVLRoomChatViewUtil.m */; };
+		746FE5D222BA3BC5003C9AE0 /* QHSVLRoomChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 746FE5D022BA3BC5003C9AE0 /* QHSVLRoomChatViewController.m */; };
+		746FE5D322BA3BC5003C9AE0 /* QHSVLRoomChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 746FE5D122BA3BC5003C9AE0 /* QHSVLRoomChatViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +109,16 @@
 		743D416921D362C0000FAF61 /* sex_xx@3x.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sex_xx@3x.webp"; sourceTree = "<group>"; };
 		743D416A21D362C0000FAF61 /* sex_xx@2x.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sex_xx@2x.webp"; sourceTree = "<group>"; };
 		743D417021D382A6000FAF61 /* dy_level.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dy_level.png; sourceTree = "<group>"; };
+		746FE5C322BA3097003C9AE0 /* QHSVLRoomChatContentViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHSVLRoomChatContentViewCell.h; sourceTree = "<group>"; };
+		746FE5C422BA3097003C9AE0 /* QHSVLRoomChatContentViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHSVLRoomChatContentViewCell.m; sourceTree = "<group>"; };
+		746FE5C622BA30CC003C9AE0 /* QHSVLChatRoomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHSVLChatRoomView.h; sourceTree = "<group>"; };
+		746FE5C722BA30CC003C9AE0 /* QHSVLChatRoomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHSVLChatRoomView.m; sourceTree = "<group>"; };
+		746FE5CA22BA3325003C9AE0 /* QHSVLRoomChatViewUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHSVLRoomChatViewUtil.h; sourceTree = "<group>"; };
+		746FE5CB22BA3325003C9AE0 /* QHSVLRoomChatViewUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHSVLRoomChatViewUtil.m; sourceTree = "<group>"; };
+		746FE5CE22BA35CD003C9AE0 /* QHSVLRoomChatViewUtilHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHSVLRoomChatViewUtilHeader.h; sourceTree = "<group>"; };
+		746FE5CF22BA3BC5003C9AE0 /* QHSVLRoomChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = QHSVLRoomChatViewController.h; path = QHTableSubController/QHSVLRoomChatViewController.h; sourceTree = "<group>"; };
+		746FE5D022BA3BC5003C9AE0 /* QHSVLRoomChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = QHSVLRoomChatViewController.m; path = QHTableSubController/QHSVLRoomChatViewController.m; sourceTree = "<group>"; };
+		746FE5D122BA3BC5003C9AE0 /* QHSVLRoomChatViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = QHSVLRoomChatViewController.xib; path = QHTableSubController/QHSVLRoomChatViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +190,9 @@
 				7434CBAA21D6000C008E03B2 /* QHLiveCloudViewController.h */,
 				7434CBAB21D6000C008E03B2 /* QHLiveCloudViewController.m */,
 				7434CBAC21D6000C008E03B2 /* QHLiveCloudViewController.xib */,
+				746FE5CF22BA3BC5003C9AE0 /* QHSVLRoomChatViewController.h */,
+				746FE5D022BA3BC5003C9AE0 /* QHSVLRoomChatViewController.m */,
+				746FE5D122BA3BC5003C9AE0 /* QHSVLRoomChatViewController.xib */,
 			);
 			name = QHTableSubController;
 			sourceTree = "<group>";
@@ -229,6 +247,7 @@
 			children = (
 				7405206721CCF755003872FA /* DY */,
 				74343D1B21D32C14004243A0 /* LC */,
+				746FE5BE22BA2C79003C9AE0 /* SVL */,
 			);
 			path = Exp;
 			sourceTree = "<group>";
@@ -327,6 +346,36 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
+		746FE5BE22BA2C79003C9AE0 /* SVL */ = {
+			isa = PBXGroup;
+			children = (
+				746FE5C922BA32D3003C9AE0 /* Util */,
+				746FE5BF22BA2D2B003C9AE0 /* Views */,
+				746FE5C622BA30CC003C9AE0 /* QHSVLChatRoomView.h */,
+				746FE5C722BA30CC003C9AE0 /* QHSVLChatRoomView.m */,
+			);
+			path = SVL;
+			sourceTree = "<group>";
+		};
+		746FE5BF22BA2D2B003C9AE0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				746FE5C322BA3097003C9AE0 /* QHSVLRoomChatContentViewCell.h */,
+				746FE5C422BA3097003C9AE0 /* QHSVLRoomChatContentViewCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		746FE5C922BA32D3003C9AE0 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				746FE5CE22BA35CD003C9AE0 /* QHSVLRoomChatViewUtilHeader.h */,
+				746FE5CA22BA3325003C9AE0 /* QHSVLRoomChatViewUtil.h */,
+				746FE5CB22BA3325003C9AE0 /* QHSVLRoomChatViewUtil.m */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -389,6 +438,7 @@
 				743D416C21D362C1000FAF61 /* sex_xx@2x.webp in Resources */,
 				743D417121D382A7000FAF61 /* dy_level.png in Resources */,
 				7405204821CBA3F7003872FA /* LaunchScreen.storyboard in Resources */,
+				746FE5D322BA3BC5003C9AE0 /* QHSVLRoomChatViewController.xib in Resources */,
 				7405204521CBA3F7003872FA /* Assets.xcassets in Resources */,
 				743D416B21D362C1000FAF61 /* sex_xx@3x.webp in Resources */,
 				7405204321CBA3F6003872FA /* Main.storyboard in Resources */,
@@ -404,6 +454,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				746FE5C822BA30CC003C9AE0 /* QHSVLChatRoomView.m in Sources */,
 				74343D1821D238FA004243A0 /* QHDouyuViewController.m in Sources */,
 				7434CBA921D4D21D008E03B2 /* QHChatBaseUtil+DYText.m in Sources */,
 				7434CBB721D62953008E03B2 /* QHChatLiveCloudNewDataView.m in Sources */,
@@ -412,6 +463,8 @@
 				74343D0D21D0D017004243A0 /* NSTimer+QHEOCBlocksSupport.m in Sources */,
 				7405205F21CCB9A6003872FA /* QHViewUtil.m in Sources */,
 				7434CBAD21D6000C008E03B2 /* QHLiveCloudViewController.m in Sources */,
+				746FE5CC22BA3325003C9AE0 /* QHSVLRoomChatViewUtil.m in Sources */,
+				746FE5D222BA3BC5003C9AE0 /* QHSVLRoomChatViewController.m in Sources */,
 				7405203421CBA3F6003872FA /* QHTableRootViewController.m in Sources */,
 				7405203021CBA3F6003872FA /* AppDelegate.m in Sources */,
 				7405206521CCE03C003872FA /* QHChatBaseModel.m in Sources */,
@@ -425,6 +478,7 @@
 				7405205621CBABCA003872FA /* QHChatBaseView.m in Sources */,
 				7434CBBA21D642F2008E03B2 /* QHChatLiveCloudDateViewCell.m in Sources */,
 				7405203B21CBA3F6003872FA /* QHTableSubViewController.m in Sources */,
+				746FE5C522BA3097003C9AE0 /* QHSVLRoomChatContentViewCell.m in Sources */,
 				7405204B21CBA3F7003872FA /* main.m in Sources */,
 				74343D0A21CFE228004243A0 /* QHChatBaseConfig.m in Sources */,
 				7405204021CBA3F6003872FA /* ViewController.m in Sources */,

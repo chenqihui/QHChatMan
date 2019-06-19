@@ -13,6 +13,7 @@
 struct QHChatCellConfig {
     CGFloat fontSize;
     CGFloat cellWidth;
+    // 一定要设置 行距 不为0，因为 UILabel 绘制本身是有上下空白处
     CGFloat cellLineSpacing;
 };
 typedef struct QHChatCellConfig QHChatCellConfig;

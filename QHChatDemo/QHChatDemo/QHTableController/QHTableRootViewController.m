@@ -12,6 +12,7 @@
 #import "QHTableSubViewController.h"
 #import "QHDouyuViewController.h"
 #import "QHLiveCloudViewController.h"
+#import "QHSVLRoomChatViewController.h"
 
 @interface QHTableRootViewController ()
 
@@ -24,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSArray *array = @[@"QHChatMan", @"QHChatDouyu", @"QHLiveCloud"];
+    NSArray *array = @[@"QHChatMan", @"QHChatDouyu", @"QHLiveCloud", @"QHSVLRoom(等间距 & 行距)"];
     self.arData = [NSMutableArray arrayWithArray:array];
 }
 
@@ -67,6 +68,9 @@
     }
     else if ([title isEqualToString:@"QHLiveCloud"] == YES) {
         subVC = [[QHLiveCloudViewController alloc] init];
+    }
+    else if ([title isEqualToString:@"QHSVLRoom(等间距 & 行距)"]) {
+        subVC = [QHSVLRoomChatViewController new];
     }
     else {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
