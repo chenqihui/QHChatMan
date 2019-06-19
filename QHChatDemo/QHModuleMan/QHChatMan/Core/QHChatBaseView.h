@@ -36,6 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)insertChatData:(NSArray<NSDictionary *> *)data;
 
+- (void)clearChatData;
+
 @end
 
 NS_ASSUME_NONNULL_END

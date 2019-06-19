@@ -75,6 +75,23 @@
     [self p_reloadAndRefresh:NO];
 }
 
+- (void)clearChatData {
+    if (![NSThread isMainThread]) {
+        [self performSelectorOnMainThread:_cmd withObject:nil waitUntilDone:NO];
+        return;
+    }
+    [_chatDatasTempArray removeAllObjects];
+    [_chatDatasArray removeAllObjects];
+    _bAutoReloadChat = YES;
+    [_hasNewDataView hide];
+    [self p_closeReloadTimer];
+    
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    [self.mainTableV reloadData];
+    [CATransaction commit];
+}
+
 #pragma mark - Private
 
 - (void)p_setup {
