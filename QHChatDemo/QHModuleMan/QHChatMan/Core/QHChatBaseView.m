@@ -295,6 +295,7 @@
         [self.mainTableV scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
     _bAutoReloadChat = YES;
+    [self p_reloadAndRefresh:YES];
 }
 
 #pragma mark - QHChatBaseViewProtocol
