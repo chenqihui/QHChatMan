@@ -22,12 +22,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QHChatBaseViewCell : UITableViewCell
 
-@property (nonatomic, strong, readonly) UILabel *contentL;
+@property (nonatomic, strong) UILabel *contentL;
 //@property (nonatomic, strong, readonly) UITextView *contentTV;
 
 @property (nonatomic, weak) id<QHChatBaseViewCellDelegate> delegate;
 
 - (void)makeContent:(UIEdgeInsets)edgeInsets;
+
+- (void)p_addTapGesture;
 
 @end
 

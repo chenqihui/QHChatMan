@@ -13,7 +13,6 @@
 @interface QHSVLRoomChatContentViewCell ()
 
 @property (nonatomic, strong) UIView *contentV;
-@property (nonatomic, strong, readwrite) UILabel *contentL;
 
 @end
 
@@ -47,6 +46,7 @@
     self.contentView.backgroundColor = [UIColor clearColor];
     [self p_addContentView];
     [self p_addContentLabel];
+    [self p_addTapGesture];
 }
 
 - (void)p_addContentView {
@@ -64,13 +64,13 @@
 }
 
 - (void)p_addContentLabel {
-    _contentL = [[UILabel alloc] initWithFrame:CGRectZero];
-    _contentL.font = [UIFont systemFontOfSize:15];
-    _contentL.numberOfLines = 0;
-    _contentL.lineBreakMode = NSLineBreakByWordWrapping;
-    _contentL.backgroundColor = [UIColor clearColor];
-    [_contentV addSubview:_contentL];
-    [QHViewUtil fullScreen:_contentL edgeInsets:SVLQHCHAT_LC_CONTENT_TEXT_EDGEINSETS];
+    self.contentL = [[UILabel alloc] initWithFrame:CGRectZero];
+    self.contentL.font = [UIFont systemFontOfSize:15];
+    self.contentL.numberOfLines = 0;
+    self.contentL.lineBreakMode = NSLineBreakByWordWrapping;
+    self.contentL.backgroundColor = [UIColor clearColor];
+    [_contentV addSubview:self.contentL];
+    [QHViewUtil fullScreen:self.contentL edgeInsets:SVLQHCHAT_LC_CONTENT_TEXT_EDGEINSETS];
 }
 
 @end

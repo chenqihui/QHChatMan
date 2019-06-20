@@ -22,6 +22,8 @@
         _chatCountMax = 300;
         _chatCountDelete = 100;
         _chatReloadDuration = 0.2;
+        _bLongPress = NO;
+        _minimumPressDuration = -1;
     }
     return self;
 }

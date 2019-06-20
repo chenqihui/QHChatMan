@@ -25,7 +25,7 @@
  * [iOS UILabel中文字与边框间距的自定义 - 掘金](https://juejin.im/post/5a312950f265da4320033ebc)
  */
 
-@interface QHSVLChatRoomView ()
+@interface QHSVLChatRoomView () <QHChatBaseViewCellDelegate>
 
 @property (nonatomic) CGFloat imageStringHeight;
 @property (nonatomic) CGFloat lineH;
@@ -60,7 +60,7 @@
      
      */
     
-    UIFont *ff = [UIFont boldSystemFontOfSize:15];
+    UIFont *ff = [UIFont boldSystemFontOfSize:self.config.cellConfig.fontSize];
     _imageStringHeight = ff.pointSize; // 真正的f文字占用的高度
 }
 
@@ -112,11 +112,12 @@
     if (model.chatAttributedText != nil) {
         QHSVLRoomChatContentViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kQHCHAT_LC_CONTENT_CELLIDENTIFIER];
         cell.contentL.attributedText = model.chatAttributedText;
+        cell.delegate = self;
 //        if (indexPath.row%2 == 0) {
-//            cell.contentL.backgroundColor = [UIColor orangeColor];
+//            cell.svlContentL.backgroundColor = [UIColor orangeColor];
 //        }
 //        else {
-//            cell.contentL.backgroundColor = [UIColor blueColor];
+//            cell.svlContentL.backgroundColor = [UIColor blueColor];
 //        }
         chatCell = cell;
     }

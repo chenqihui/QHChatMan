@@ -99,6 +99,12 @@
  如果想 insert 数据时判断，建议自定义 insert 函数，即调用 insert 时进行数据分析，添加需要的数据
  */
 
+/*
+ 长按响应的接口重写，这是继承 QHChatBaseViewCell 时，开启默认的长按手势才会触发，配置为 QHChatBaseConfig.bLongPress
+ 如果是自定义 cell 的 tap 则自行实现。
+ */
+- (void)qhlongPressAction:(UILongPressGestureRecognizer *)gec;
+
 @end
 
 

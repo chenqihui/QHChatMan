@@ -33,6 +33,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) NSInteger chatCountDelete;
 @property (nonatomic) CGFloat chatReloadDuration;
 
+// 继承 QHChatBaseViewCell 的 长按手势开关 & 长按时长（小于等于 0 为默认值）
+@property (nonatomic) BOOL bLongPress;
+@property (nonatomic) NSTimeInterval minimumPressDuration;
+
 - (BOOL)isEqualToCellConfig:(QHChatCellConfig)cellConfig;
 
 @end

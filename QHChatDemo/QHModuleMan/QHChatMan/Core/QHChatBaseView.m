@@ -42,8 +42,13 @@
 }
 
 - (instancetype)init {
+    return [self initWithConfig:[QHChatBaseConfig new]];
+}
+
+- (instancetype)initWithConfig:(QHChatBaseConfig *)config {
     self = [super init];
     if (self) {
+        self.config = config;
         [self p_setup];
     }
     return self;
@@ -53,6 +58,14 @@
 
 + (instancetype)createChatViewToSuperView:(UIView *)superView {
     QHChatBaseView *subView = [[self alloc] init];
+    [superView addSubview:subView];
+    [QHViewUtil fullScreen:subView];
+    
+    return subView;
+}
+
++ (instancetype)createChatViewToSuperView:(UIView *)superView withConfig:(QHChatBaseConfig *)config {
+    QHChatBaseView *subView = [[self alloc] initWithConfig:config];
     [superView addSubview:subView];
     [QHViewUtil fullScreen:subView];
     
@@ -101,7 +114,6 @@
 }
 
 - (void)p_setupData {
-    _config = [QHChatBaseConfig new];
     _chatDatasArray = [NSMutableArray new];
     _chatDatasTempArray = [NSMutableArray new];
     _bAutoReloadChat = YES;
@@ -112,6 +124,14 @@
 
 - (void)p_setupUI {
     [self p_addTableView];
+    
+    if (_config.bLongPress) {
+        UILongPressGestureRecognizer *longPressGec = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressAction:)];
+        if (_config.minimumPressDuration > 0) {
+            longPressGec.minimumPressDuration = _config.minimumPressDuration;
+        }
+        [_mainTableV addGestureRecognizer:longPressGec];
+    }
 }
 
 - (void)p_addTableView {
@@ -392,18 +412,32 @@
 #pragma mark - QHChatBaseViewCellDelegate
 
 - (void)selectViewCell:(UITableViewCell *)viewCell {
-    NSIndexPath *indexPath = [_mainTableV indexPathForCell:viewCell];
-    QHChatBaseModel *model = _chatDatasArray[indexPath.row];
     if ([self.delegate respondsToSelector:@selector(chatView:didSelectRowWithData:)] == YES) {
+        NSIndexPath *indexPath = [_mainTableV indexPathForCell:viewCell];
+        QHChatBaseModel *model = _chatDatasArray[indexPath.row];
         [self.delegate chatView:self didSelectRowWithData:model.originChatDataDic];
     }
 }
 
 - (void)deselectViewCell:(UITableViewCell *)viewCell {
-    NSIndexPath *indexPath = [_mainTableV indexPathForCell:viewCell];
-    QHChatBaseModel *model = _chatDatasArray[indexPath.row];
-    if ([self.delegate respondsToSelector:@selector(chatView:didSelectRowWithData:)] == YES) {
-        [self.delegate chatView:self didSelectRowWithData:model.originChatDataDic];
+    if ([self.delegate respondsToSelector:@selector(chatView:didDeselectRowWithData:)] == YES) {
+        NSIndexPath *indexPath = [_mainTableV indexPathForCell:viewCell];
+        QHChatBaseModel *model = _chatDatasArray[indexPath.row];
+        [self.delegate chatView:self didDeselectRowWithData:model.originChatDataDic];
+    }
+}
+
+#pragma mark - Action
+
+- (void)longPressAction:(UILongPressGestureRecognizer *)gec {
+    if (gec.state == UIGestureRecognizerStateBegan) {
+        if ([self.delegate respondsToSelector:@selector(chatView:didLongSelectRowWithData:)]) {
+            CGPoint point = [gec locationInView:_mainTableV];
+            NSIndexPath *indexPath = [_mainTableV indexPathForRowAtPoint:point];
+            QHChatBaseModel *model = _chatDatasArray[indexPath.row];
+        
+            [self.delegate chatView:self didLongSelectRowWithData:model.originChatDataDic];
+        }
     }
 }
 

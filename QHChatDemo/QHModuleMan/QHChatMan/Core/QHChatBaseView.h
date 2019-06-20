@@ -23,6 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)chatView:(QHChatBaseView *)view didSelectRowWithData:(NSDictionary *)chatData;
 
+- (void)chatView:(QHChatBaseView *)view didDeselectRowWithData:(NSDictionary *)chatData;
+
+- (void)chatView:(QHChatBaseView *)view didLongSelectRowWithData:(NSDictionary *)chatData;
+
 @end
 
 @interface QHChatBaseView : UIView <QHChatBaseViewProtocol>
@@ -33,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id<QHChatBaseViewDelegate> delegate;
 
 + (instancetype)createChatViewToSuperView:(UIView *)superView;
++ (instancetype)createChatViewToSuperView:(UIView *)superView withConfig:(QHChatBaseConfig *)config;
 
 - (void)insertChatData:(NSArray<NSDictionary *> *)data;
 

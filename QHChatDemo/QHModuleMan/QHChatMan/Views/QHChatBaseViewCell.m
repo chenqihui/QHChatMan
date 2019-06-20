@@ -12,7 +12,7 @@
 
 @interface QHChatBaseViewCell ()
 
-@property (nonatomic, strong, readwrite) UILabel *contentL;
+//@property (nonatomic, strong, readwrite) UILabel *contentL;
 //@property (nonatomic, strong, readwrite) UITextView *contentTV;
 
 @end

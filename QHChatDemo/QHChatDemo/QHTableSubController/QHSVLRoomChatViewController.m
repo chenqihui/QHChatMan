@@ -23,13 +23,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    QHSVLChatRoomView *v = [QHSVLChatRoomView createChatViewToSuperView:_chatSuperView];
-    v.delegate = self;
-    QHChatCellConfig cellConfig = v.config.cellConfig;
+    QHChatBaseConfig *config = [QHChatBaseConfig new];
+    config.bLongPress = YES;
+    QHChatCellConfig cellConfig = config.cellConfig;
     cellConfig.cellLineSpacing = 6;
     cellConfig.fontSize = 15;
     cellConfig.cellWidth = [UIScreen mainScreen].bounds.size.width - 60;
-    v.config.cellConfig = cellConfig;
+    config.cellConfig = cellConfig;
+    QHSVLChatRoomView *v = [QHSVLChatRoomView createChatViewToSuperView:_chatSuperView withConfig:config];
+    v.delegate = self;
     
     _chatView = v;
 }
