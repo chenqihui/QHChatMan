@@ -27,7 +27,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        [self p_setup];
+        [self setup];
     }
     return self;
 }
@@ -44,11 +44,18 @@
     [QHViewUtil fullScreen:_contentL edgeInsets:edgeInsets];
 }
 
+- (void)addTapGesture {
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureAction:)];
+    [self addGestureRecognizer:tap];
+    self.backgroundColor = [UIColor clearColor];
+    tap = nil;
+}
+
 #pragma mark - Private
 
-- (void)p_setup {
+- (void)setup {
     [self p_addContentLabel];
-    [self p_addTapGesture];
+    [self addTapGesture];
 }
 
 - (void)p_addContentLabel {
@@ -71,13 +78,6 @@
 //    [self.contentView addSubview:_contentTV];
 //    [QHViewUtil fullScreen:_contentTV];
 //}
-
-- (void)p_addTapGesture {
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureAction:)];
-    [self addGestureRecognizer:tap];
-    self.backgroundColor = [UIColor clearColor];
-    tap = nil;
-}
 
 #pragma mark - Action
 

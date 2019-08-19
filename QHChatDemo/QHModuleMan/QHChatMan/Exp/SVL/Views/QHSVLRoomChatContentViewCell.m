@@ -33,7 +33,6 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        [self p_setup];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
@@ -41,12 +40,12 @@
 
 #pragma mark - Private
 
-- (void)p_setup {
+- (void)setup {
     self.backgroundColor = [UIColor clearColor];
     self.contentView.backgroundColor = [UIColor clearColor];
     [self p_addContentView];
     [self p_addContentLabel];
-    [self p_addTapGesture];
+    [self addTapGesture];
 }
 
 - (void)p_addContentView {

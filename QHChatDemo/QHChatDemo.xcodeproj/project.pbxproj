@@ -622,8 +622,6 @@
 		7405204F21CBA3F7003872FA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JC9Y4K55DX;
 				INFOPLIST_FILE = QHChatDemo/Info.plist;
@@ -641,8 +639,6 @@
 		7405205021CBA3F7003872FA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JC9Y4K55DX;
 				INFOPLIST_FILE = QHChatDemo/Info.plist;

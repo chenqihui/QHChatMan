@@ -29,7 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)makeContent:(UIEdgeInsets)edgeInsets;
 
-- (void)p_addTapGesture;
+// 创建时候会调用，进行 UI & data 的初始化，子类可以重写，无需在init时候调用
+- (void)setup;
+// 重写 setup 时，如果需要手势，需主动添加，默认 setup 会添加手势 & contentL
+- (void)addTapGesture;
 
 @end
 
