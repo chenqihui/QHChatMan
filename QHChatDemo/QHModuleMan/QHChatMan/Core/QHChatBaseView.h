@@ -43,6 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)clearChatData;
 
+- (void)scrollToBottom;
+
 @end
 
 NS_ASSUME_NONNULL_END

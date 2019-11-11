@@ -105,6 +105,26 @@
     [CATransaction commit];
 }
 
+- (void)scrollToBottom {
+    [self p_closeReloadTimer];
+    _hasNewDataView.hidden = YES;
+    _bAutoReloadChat = YES;
+    
+    if (self.chatDatasArray.count > 0) {
+        [CATransaction begin];
+        [CATransaction setDisableActions:YES];
+        [self.mainTableV reloadData];
+        [CATransaction commit];
+        
+        if (self.mainTableV.isDragging == NO && self.mainTableV.tracking == NO) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.chatDatasArray.count - 1 inSection:0];
+            [self.mainTableV scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        }
+    }
+    [self p_reloadAndRefresh:NO];
+}
+
+
 #pragma mark - Private
 
 - (void)p_setup {
