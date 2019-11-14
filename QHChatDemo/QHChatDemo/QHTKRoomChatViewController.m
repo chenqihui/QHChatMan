@@ -21,7 +21,6 @@
 
 @property (weak, nonatomic) IBOutlet UIView *chatSuperView;
 @property (nonatomic, strong) QHTKChatRoomView *chatView;
-@property (nonatomic, strong) NSTimer *t;
 
 @end
 
@@ -37,7 +36,10 @@
     QHChatCellConfig cellConfig = config.cellConfig;
     cellConfig.cellLineSpacing = 1;
     cellConfig.fontSize = 14;
-    cellConfig.cellWidth = [UIScreen mainScreen].bounds.size.width*0.7;
+    if ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationLandscapeLeft || [UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationLandscapeRight)
+        cellConfig.cellWidth = [UIScreen mainScreen].bounds.size.height;
+    else
+        cellConfig.cellWidth = [UIScreen mainScreen].bounds.size.width*0.7;
     config.cellConfig = cellConfig;
     QHTKChatRoomView *v = [QHTKChatRoomView createChatViewToSuperView:_chatSuperView withConfig:config];
     v.delegate = self;
@@ -49,14 +51,6 @@
     NSDictionary *body = @{@"c": @"欢迎来到直播间！XX倡导绿色健康直播，不提倡未成年人进行充值。直播内容和评论严禁包含政治、低俗色情、吸烟酗酒等内容，若有违反，将视情节严重程度给予禁播、永久封禁或停封账户。"};
     NSDictionary *msg = @{@"op": @"notice", @"body": body};
     [self.chatView insertChatData:@[msg]];
-    
-//    static int i = 0;
-//    NSTimer *t = [NSTimer qheoc_scheduledTimerWithTimeInterval:0.5 block:^{
-//        i++;
-//        [self sayAction:nil];
-//    } repeats:YES];
-//    [t fire];
-//    _t = t;
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
@@ -81,7 +75,7 @@
 
 - (void)addMaskView:(UIView *)superView height:(CGFloat)height {
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-    CGRect frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height*(2.0/7.0));
+    CGRect frame = CGRectMake(0, 0, MIN([UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width), MAX([UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width)*(2.0/7.0));
     gradientLayer.frame = frame;
     gradientLayer.colors = @[(__bridge id)[UIColor clearColor].CGColor, (__bridge id)[UIColor blackColor].CGColor, (__bridge id)[UIColor blackColor].CGColor, (__bridge id)[UIColor clearColor].CGColor];
     gradientLayer.locations = @[@(0), @(height), @(0.999), @(1)];
