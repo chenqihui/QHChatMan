@@ -24,6 +24,7 @@
         _chatReloadDuration = 0.2;
         _bLongPress = NO;
         _minimumPressDuration = -1;
+        _bOpenScorllFromBottom = NO;
     }
     return self;
 }

@@ -105,7 +105,9 @@
     [self.mainTableV reloadData];
     [CATransaction commit];
     
-    _bOutHeight = NO;
+    if (_config.bOpenScorllFromBottom == YES) {
+        _bOutHeight = NO;
+    }
 }
 
 - (void)scrollToBottom {
@@ -120,13 +122,16 @@
         [CATransaction commit];
         
         CGFloat hasCellHeight = 0;
-        _bOutHeight = NO;
-        hasCellHeight = [self p_hasCellHeight];
-        if (hasCellHeight >= self.mainTableV.bounds.size.height) {
-            _bOutHeight = YES;
+        
+        if (_config.bOpenScorllFromBottom == YES) {
+            _bOutHeight = NO;
+            hasCellHeight = [self p_hasCellHeight];
+            if (hasCellHeight >= self.mainTableV.bounds.size.height) {
+                _bOutHeight = YES;
+            }
         }
         
-        if (_bOutHeight == YES) {
+        if (_bOutHeight == YES || _config.bOpenScorllFromBottom == NO) {
             if (self.mainTableV.isDragging == NO && self.mainTableV.tracking == NO) {
                 NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.chatDatasArray.count - 1 inSection:0];
                 [self.mainTableV scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
@@ -155,6 +160,12 @@
     self.backgroundColor = [UIColor clearColor];
     
     _chatReloadQueue = dispatch_queue_create("com.qhchat.queue", NULL);
+    if (_config.bOpenScorllFromBottom == YES) {
+        _bOutHeight = NO;
+    }
+    else {
+        _bOutHeight = YES;
+    }
 }
 
 - (void)p_setupUI {
@@ -277,7 +288,7 @@
         }
     }
     
-    if (_bOutHeight == YES) {
+    if (_bOutHeight == YES || _config.bOpenScorllFromBottom == NO) {
         if (self.mainTableV.isDragging == NO && self.mainTableV.tracking == NO) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.chatDatasArray.count - 1 inSection:0];
             [self.mainTableV scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];

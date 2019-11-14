@@ -33,8 +33,7 @@
     
     QHChatBaseConfig *config = [QHChatBaseConfig new];
     config.bLongPress = YES;
-    config.chatCountMax = 30;
-    config.chatCountDelete = 10;
+    config.bOpenScorllFromBottom = YES;
     QHChatCellConfig cellConfig = config.cellConfig;
     cellConfig.cellLineSpacing = 1;
     cellConfig.fontSize = 14;
