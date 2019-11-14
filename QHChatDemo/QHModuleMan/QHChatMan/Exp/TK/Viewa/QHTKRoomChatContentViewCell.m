@@ -70,7 +70,7 @@
     UIView *bgV = [[UIView alloc] initWithFrame:CGRectZero];
     bgV.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
     bgV.layer.masksToBounds = true;
-    bgV.layer.cornerRadius = 6;
+    bgV.layer.cornerRadius = 10;
     [subView addSubview:bgV];
     [QHViewUtil fullScreen:bgV];
     

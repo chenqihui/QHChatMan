@@ -26,6 +26,7 @@
 @property (nonatomic, strong) UIView<QHChatBaseNewDataViewProtcol> *hasNewDataView;
 
 @property (nonatomic) dispatch_queue_t chatReloadQueue;
+@property (nonatomic) BOOL bOutHeight;
 
 @end
 
@@ -103,6 +104,8 @@
     [CATransaction setDisableActions:YES];
     [self.mainTableV reloadData];
     [CATransaction commit];
+    
+    _bOutHeight = NO;
 }
 
 - (void)scrollToBottom {
@@ -116,9 +119,21 @@
         [self.mainTableV reloadData];
         [CATransaction commit];
         
-        if (self.mainTableV.isDragging == NO && self.mainTableV.tracking == NO) {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.chatDatasArray.count - 1 inSection:0];
-            [self.mainTableV scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        CGFloat hasCellHeight = 0;
+        _bOutHeight = NO;
+        hasCellHeight = [self p_hasCellHeight];
+        if (hasCellHeight >= self.mainTableV.bounds.size.height) {
+            _bOutHeight = YES;
+        }
+        
+        if (_bOutHeight == YES) {
+            if (self.mainTableV.isDragging == NO && self.mainTableV.tracking == NO) {
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.chatDatasArray.count - 1 inSection:0];
+                [self.mainTableV scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            }
+        }
+        else {
+            [self p_updateTableContentInset:hasCellHeight];
         }
     }
     [self p_reloadAndRefresh:NO];
@@ -254,9 +269,22 @@
         [CATransaction commit];
     }
     
-    if (self.mainTableV.isDragging == NO && self.mainTableV.tracking == NO) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.chatDatasArray.count - 1 inSection:0];
-        [self.mainTableV scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    CGFloat hasCellHeight = 0;
+    if (_bOutHeight == NO) {
+        hasCellHeight = [self p_hasCellHeight];
+        if (hasCellHeight >= self.mainTableV.bounds.size.height) {
+            _bOutHeight = YES;
+        }
+    }
+    
+    if (_bOutHeight == YES) {
+        if (self.mainTableV.isDragging == NO && self.mainTableV.tracking == NO) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.chatDatasArray.count - 1 inSection:0];
+            [self.mainTableV scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        }
+    }
+    else {
+        [self p_updateTableContentInset:hasCellHeight];
     }
     tempArray = nil;
 }
@@ -336,6 +364,20 @@
     }
     _bAutoReloadChat = YES;
     [self p_reloadAndRefresh:YES];
+}
+
+- (CGFloat)p_hasCellHeight {
+    NSInteger numRows = [self tableView:self.mainTableV numberOfRowsInSection:0];
+    CGFloat hasCellHeight = 0;
+    for (NSInteger i = 0; i < numRows; i++) {
+        hasCellHeight += [self tableView:self.mainTableV heightForRowAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
+    }
+    return hasCellHeight;
+}
+
+- (void)p_updateTableContentInset:(CGFloat)height {
+    CGFloat contentInsetTop = MAX(self.mainTableV.bounds.size.height - height, 0);
+    self.mainTableV.contentInset = UIEdgeInsetsMake(contentInsetTop, 0, 0, 0);
 }
 
 #pragma mark - QHChatBaseViewProtocol
