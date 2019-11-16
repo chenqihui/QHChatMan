@@ -21,6 +21,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *chatSuperView;
 @property (nonatomic, strong) QHTKChatRoomView *chatView;
+@property (nonatomic, strong) NSTimer *t;
 
 @end
 
@@ -33,6 +34,8 @@
     QHChatBaseConfig *config = [QHChatBaseConfig new];
     config.bLongPress = YES;
     config.bOpenScorllFromBottom = YES;
+    config.chatCountMax = 100;
+    config.chatCountDelete = 30;
     QHChatCellConfig cellConfig = config.cellConfig;
     cellConfig.cellLineSpacing = 1;
     cellConfig.fontSize = 14;
@@ -51,6 +54,13 @@
     NSDictionary *body = @{@"c": @"欢迎来到直播间！XX倡导绿色健康直播，不提倡未成年人进行充值。直播内容和评论严禁包含政治、低俗色情、吸烟酗酒等内容，若有违反，将视情节严重程度给予禁播、永久封禁或停封账户。"};
     NSDictionary *msg = @{@"op": @"notice", @"body": body};
     [self.chatView insertChatData:@[msg]];
+    
+//    __weak typeof(self) weakSelf = self;
+//    NSTimer *t = [NSTimer qheoc_scheduledTimerWithTimeInterval:0.1 block:^{
+//        [weakSelf sayAction:nil];
+//    } repeats:YES];
+//    [t fire];
+//    _t = t;
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
