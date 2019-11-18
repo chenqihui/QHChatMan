@@ -57,7 +57,10 @@
     
 //    __weak typeof(self) weakSelf = self;
 //    NSTimer *t = [NSTimer qheoc_scheduledTimerWithTimeInterval:0.1 block:^{
-//        [weakSelf sayAction:nil];
+////        [weakSelf sayAction:nil];
+//        NSDictionary *body = @{@"c": @"欢迎来到直播间！XX倡导绿色健康直播，不提倡未成年人进行充值。直播内容和评论严禁包含政治、低俗色情、吸烟酗酒等内容，若有违反，将视情节严重程度给予禁播、永久封禁或停封账户。"};
+//        NSDictionary *msg = @{@"op": @"notice", @"body": body};
+//        [weakSelf.chatView insertChatData:@[msg]];
 //    } repeats:YES];
 //    [t fire];
 //    _t = t;
