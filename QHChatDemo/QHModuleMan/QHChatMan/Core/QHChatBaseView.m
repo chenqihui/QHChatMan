@@ -94,11 +94,11 @@
         [self performSelectorOnMainThread:_cmd withObject:nil waitUntilDone:NO];
         return;
     }
+    [self p_closeReloadTimer];
     [_chatDatasTempArray removeAllObjects];
     [_chatDatasArray removeAllObjects];
     _bAutoReloadChat = YES;
     [_hasNewDataView hide];
-    [self p_closeReloadTimer];
     
     [CATransaction begin];
     [CATransaction setDisableActions:YES];
@@ -114,7 +114,6 @@
     [self p_closeReloadTimer];
     _hasNewDataView.hidden = YES;
     _bAutoReloadChat = YES;
-    
     if (self.chatDatasArray.count > 0) {
         [CATransaction begin];
         [CATransaction setDisableActions:YES];
@@ -320,8 +319,8 @@
 - (void)p_closeReloadTimer {
     if (_reloadTimer != nil) {
         [_reloadTimer invalidate];
-        _reloadTimer = nil;
     }
+    _reloadTimer = nil;
 }
 
 - (NSAttributedString *)p_goContent:(NSIndexPath *)indexPath {
