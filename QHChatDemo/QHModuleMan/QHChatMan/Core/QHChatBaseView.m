@@ -220,7 +220,7 @@
             // [NSTimer的使用 停止 暂停 重启 - wahaha13168 - CSDN博客](https://blog.csdn.net/wahaha13168/article/details/52804048)
             // setFireDate 会立即触发 Timer 并重新计时，而 fire 只是立即触发
             // 该延迟可以避免加载过清空时，公屏列表出现空白的情况
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(MIN(0.05, _config.chatReloadDuration) * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(MIN(0.05, _config.chatReloadDuration/2) * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.reloadTimer setFireDate:[NSDate date]];
             });
         }
