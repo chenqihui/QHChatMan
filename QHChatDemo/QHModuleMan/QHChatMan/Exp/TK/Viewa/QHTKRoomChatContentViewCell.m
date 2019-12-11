@@ -10,12 +10,6 @@
 
 #import "QHViewUtil.h"
 
-@interface QHTKRoomChatContentViewCell ()
-
-@property (nonatomic, strong) UIView *contentV;
-
-@end
-
 @implementation QHTKRoomChatContentViewCell
 
 - (void)awakeFromNib {

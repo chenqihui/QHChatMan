@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QHTKRoomChatContentViewCell : QHChatBaseViewCell
 
+@property (nonatomic, strong) UIView *contentV;
+
 - (void)cellUpdateConstraints;
 
 @end
