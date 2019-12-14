@@ -55,9 +55,8 @@
 		7491F087239D4D2200DD9C1E /* QHBgRoomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7491F085239D4D2200DD9C1E /* QHBgRoomViewController.xib */; };
 		7491F08B239D4E1500DD9C1E /* QHBGChatRoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7491F08A239D4E1500DD9C1E /* QHBGChatRoomView.m */; };
 		7491F08F239D511400DD9C1E /* QHBGRoomChatContentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7491F08E239D511400DD9C1E /* QHBGRoomChatContentViewCell.m */; };
-		7491F092239D5A2000DD9C1E /* 444@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7491F090239D5A2000DD9C1E /* 444@3x.png */; };
-		7491F093239D5A2000DD9C1E /* ddd@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7491F091239D5A2000DD9C1E /* ddd@3x.png */; };
-		7491F095239D5C9A00DD9C1E /* 111@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7491F094239D5C9900DD9C1E /* 111@3x.png */; };
+		7491F14623A1170D00DD9C1E /* ggg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7491F14523A1170C00DD9C1E /* ggg@3x.png */; };
+		7491F14823A1196600DD9C1E /* ggg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7491F14723A1196600DD9C1E /* ggg.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -147,9 +146,8 @@
 		7491F08A239D4E1500DD9C1E /* QHBGChatRoomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBGChatRoomView.m; sourceTree = "<group>"; };
 		7491F08D239D511400DD9C1E /* QHBGRoomChatContentViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBGRoomChatContentViewCell.h; sourceTree = "<group>"; };
 		7491F08E239D511400DD9C1E /* QHBGRoomChatContentViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBGRoomChatContentViewCell.m; sourceTree = "<group>"; };
-		7491F090239D5A2000DD9C1E /* 444@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "444@3x.png"; sourceTree = "<group>"; };
-		7491F091239D5A2000DD9C1E /* ddd@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ddd@3x.png"; sourceTree = "<group>"; };
-		7491F094239D5C9900DD9C1E /* 111@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "111@3x.png"; sourceTree = "<group>"; };
+		7491F14523A1170C00DD9C1E /* ggg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ggg@3x.png"; sourceTree = "<group>"; };
+		7491F14723A1196600DD9C1E /* ggg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ggg.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -457,9 +455,8 @@
 		7491F08C239D50BE00DD9C1E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7491F094239D5C9900DD9C1E /* 111@3x.png */,
-				7491F090239D5A2000DD9C1E /* 444@3x.png */,
-				7491F091239D5A2000DD9C1E /* ddd@3x.png */,
+				7491F14723A1196600DD9C1E /* ggg.png */,
+				7491F14523A1170C00DD9C1E /* ggg@3x.png */,
 				7491F08D239D511400DD9C1E /* QHBGRoomChatContentViewCell.h */,
 				7491F08E239D511400DD9C1E /* QHBGRoomChatContentViewCell.m */,
 			);
@@ -528,17 +525,16 @@
 				743D416C21D362C1000FAF61 /* sex_xx@2x.webp in Resources */,
 				7491F087239D4D2200DD9C1E /* QHBgRoomViewController.xib in Resources */,
 				743D417121D382A7000FAF61 /* dy_level.png in Resources */,
-				7491F093239D5A2000DD9C1E /* ddd@3x.png in Resources */,
 				7405204821CBA3F7003872FA /* LaunchScreen.storyboard in Resources */,
-				7491F092239D5A2000DD9C1E /* 444@3x.png in Resources */,
 				746FE5D322BA3BC5003C9AE0 /* QHSVLRoomChatViewController.xib in Resources */,
+				7491F14823A1196600DD9C1E /* ggg.png in Resources */,
 				7405204521CBA3F7003872FA /* Assets.xcassets in Resources */,
 				745E0FA623754F040064269E /* QHTKRoomChatViewController.xib in Resources */,
+				7491F14623A1170D00DD9C1E /* ggg@3x.png in Resources */,
 				743D416B21D362C1000FAF61 /* sex_xx@3x.webp in Resources */,
 				7405204321CBA3F6003872FA /* Main.storyboard in Resources */,
 				7434CBA321D4AF3B008E03B2 /* QHChatDouyuTipTableViewCell.xib in Resources */,
 				7434CBAE21D6000C008E03B2 /* QHLiveCloudViewController.xib in Resources */,
-				7491F095239D5C9A00DD9C1E /* 111@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
