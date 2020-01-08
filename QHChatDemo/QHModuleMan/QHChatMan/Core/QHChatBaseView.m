@@ -369,6 +369,16 @@
     return model.cellHeight;
 }
 
+- (void)p_clickNewDataViewAction {
+    _hasNewDataView.hidden = YES;
+    if (_chatDatasArray.count > 0) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.chatDatasArray.count - 1 inSection:0];
+        [self.mainTableV scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
+    _bAutoReloadChat = YES;
+    [self p_reloadAndRefresh:YES];
+}
+
 - (CGFloat)p_hasCellHeight {
     NSInteger numRows = [self tableView:self.mainTableV numberOfRowsInSection:0];
     CGFloat hasCellHeight = 0;
@@ -504,16 +514,6 @@
             [self.delegate chatView:self didLongSelectRowWithData:model.originChatDataDic];
         }
     }
-}
-
-- (void)p_clickNewDataViewAction {
-    _hasNewDataView.hidden = YES;
-    if (_chatDatasArray.count > 0) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.chatDatasArray.count - 1 inSection:0];
-        [self.mainTableV scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    }
-    _bAutoReloadChat = YES;
-    [self p_reloadAndRefresh:YES];
 }
 
 #pragma mark - Get
