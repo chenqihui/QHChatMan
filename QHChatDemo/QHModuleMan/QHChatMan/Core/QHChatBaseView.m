@@ -8,6 +8,8 @@
 
 #import "QHChatBaseView.h"
 
+#import <pthread.h>
+
 #import "QHViewUtil.h"
 #import "NSTimer+QHEOCBlocksSupport.h"
 
@@ -29,6 +31,18 @@
 @property (nonatomic) BOOL bOutHeight;
 
 @end
+
+static pthread_mutex_t pLock;
+
+static inline void onMainThreadAsync(void (^block)(void)) {
+    if ([NSThread isMainThread]) block();
+    else dispatch_async(dispatch_get_main_queue(), block);
+}
+
+static inline void onGlobalThreadAsync(void (^block)(void)) {
+    if (![NSThread isMainThread]) block();
+    else dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block);
+}
 
 @implementation QHChatBaseView
 
@@ -77,72 +91,30 @@
     if (data == nil || data.count <= 0) {
         return;
     }
-    if (![NSThread isMainThread]) {
-        [self performSelectorOnMainThread:_cmd withObject:data waitUntilDone:NO];
-        return;
-    }
-    
-    [_chatDatasTempArray addObjectsFromArray:data];
-    if (_chatDatasTempArray.count > _config.chatCountMax) {
-        [_chatDatasTempArray removeObjectsInRange:NSMakeRange(0, _config.chatCountDelete)];
-    }
-    [self p_reloadAndRefresh:NO];
+    onGlobalThreadAsync(^{
+        pthread_mutex_lock(&pLock);
+        [self.chatDatasTempArray addObjectsFromArray:data];
+        if (self.chatDatasTempArray.count > self.config.chatCountMax) {
+            [self.chatDatasTempArray removeObjectsInRange:NSMakeRange(0, self.config.chatCountDelete)];
+        }
+        pthread_mutex_unlock(&pLock);
+        onMainThreadAsync(^{
+            [self p_reloadAndRefresh:NO];
+        });
+    });
 }
 
 - (void)clearChatData {
-    if (![NSThread isMainThread]) {
-        [self performSelectorOnMainThread:_cmd withObject:nil waitUntilDone:NO];
-        return;
-    }
-    [self p_closeReloadTimer];
-    [_chatDatasTempArray removeAllObjects];
-    [_chatDatasArray removeAllObjects];
-    _bAutoReloadChat = YES;
-    [_hasNewDataView hide];
-    
-    [CATransaction begin];
-    [CATransaction setDisableActions:YES];
-    [self.mainTableV reloadData];
-    [CATransaction commit];
-    
-    if (_config.bOpenScorllFromBottom == YES) {
-        _bOutHeight = NO;
-    }
+    onMainThreadAsync(^{
+        [self p_clearChatData];
+    });
 }
 
 - (void)scrollToBottom {
-    [self p_closeReloadTimer];
-    _hasNewDataView.hidden = YES;
-    _bAutoReloadChat = YES;
-    if (self.chatDatasArray.count > 0) {
-        [CATransaction begin];
-        [CATransaction setDisableActions:YES];
-        [self.mainTableV reloadData];
-        [CATransaction commit];
-        
-        CGFloat hasCellHeight = 0;
-        
-        if (_config.bOpenScorllFromBottom == YES) {
-            _bOutHeight = NO;
-            hasCellHeight = [self p_hasCellHeight];
-            if (hasCellHeight >= self.mainTableV.bounds.size.height) {
-                _bOutHeight = YES;
-            }
-        }
-        
-        if (_bOutHeight == YES || _config.bOpenScorllFromBottom == NO) {
-            if (self.mainTableV.isDragging == NO && self.mainTableV.tracking == NO) {
-                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.chatDatasArray.count - 1 inSection:0];
-                [self.mainTableV scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-            }
-        }
-        else {
-            [self p_updateTableContentInset:hasCellHeight];
-        }
-    }
-    [self p_reloadAndRefresh:NO];
+    onMainThreadAsync(^{
+        [self p_scrollToBottom];
+    });
 }
-
 
 #pragma mark - Private
 
@@ -159,6 +131,7 @@
     self.backgroundColor = [UIColor clearColor];
     
     _chatReloadQueue = dispatch_queue_create("com.qhchat.queue", NULL);
+    dispatch_set_target_queue(_chatReloadQueue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0));
     if (_config.bOpenScorllFromBottom == YES) {
         _bOutHeight = NO;
     }
@@ -240,9 +213,10 @@
         [self p_closeReloadTimer];
         return;
     }
-    
+    pthread_mutex_lock(&pLock);
     NSArray<NSDictionary *> *tempArray = [NSArray arrayWithArray:_chatDatasTempArray];
     [_chatDatasTempArray removeAllObjects];
+    pthread_mutex_unlock(&pLock);
     
     __block BOOL isReplaceChatData = NO;
     [tempArray enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -370,13 +344,15 @@
 }
 
 - (void)p_clickNewDataViewAction {
-    _hasNewDataView.hidden = YES;
-    if (_chatDatasArray.count > 0) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.chatDatasArray.count - 1 inSection:0];
-        [self.mainTableV scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    }
-    _bAutoReloadChat = YES;
-    [self p_reloadAndRefresh:YES];
+    onMainThreadAsync(^{
+        self.hasNewDataView.hidden = YES;
+        if (self.chatDatasArray.count > 0) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.chatDatasArray.count - 1 inSection:0];
+            [self.mainTableV scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        }
+        self.bAutoReloadChat = YES;
+        [self p_reloadAndRefresh:YES];
+    });
 }
 
 - (CGFloat)p_hasCellHeight {
@@ -391,6 +367,63 @@
 - (void)p_updateTableContentInset:(CGFloat)height {
     CGFloat contentInsetTop = MAX(self.mainTableV.bounds.size.height - height, 0);
     self.mainTableV.contentInset = UIEdgeInsetsMake(contentInsetTop, 0, 0, 0);
+}
+
+- (void)p_clearChatData {
+    [self p_closeReloadTimer];
+    
+    pthread_mutex_lock(&pLock);
+    [self.chatDatasTempArray removeAllObjects];
+    pthread_mutex_unlock(&pLock);
+    
+    dispatch_async(self.chatReloadQueue, ^{
+        [self.chatDatasArray removeAllObjects];
+    });
+    
+    self.bAutoReloadChat = YES;
+    [self.hasNewDataView hide];
+    
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    [self.mainTableV reloadData];
+    [CATransaction commit];
+    
+    if (self.config.bOpenScorllFromBottom == YES) {
+        self.bOutHeight = NO;
+    }
+}
+
+- (void)p_scrollToBottom {
+    [self p_closeReloadTimer];
+    _hasNewDataView.hidden = YES;
+    _bAutoReloadChat = YES;
+    if (self.chatDatasArray.count > 0) {
+        [CATransaction begin];
+        [CATransaction setDisableActions:YES];
+        [self.mainTableV reloadData];
+        [CATransaction commit];
+        
+        CGFloat hasCellHeight = 0;
+        
+        if (_config.bOpenScorllFromBottom == YES) {
+            _bOutHeight = NO;
+            hasCellHeight = [self p_hasCellHeight];
+            if (hasCellHeight >= self.mainTableV.bounds.size.height) {
+                _bOutHeight = YES;
+            }
+        }
+        
+        if (_bOutHeight == YES || _config.bOpenScorllFromBottom == NO) {
+            if (self.mainTableV.isDragging == NO && self.mainTableV.tracking == NO) {
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.chatDatasArray.count - 1 inSection:0];
+                [self.mainTableV scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            }
+        }
+        else {
+            [self p_updateTableContentInset:hasCellHeight];
+        }
+    }
+    [self p_reloadAndRefresh:NO];
 }
 
 #pragma mark - QHChatBaseViewProtocol
@@ -420,7 +453,6 @@
 }
 
 - (void)qhChatMakeAfterChatBaseViewCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
 }
 
 - (void)qhChatAddCellDefualAttributes:(NSMutableAttributedString *)attr {
@@ -429,6 +461,9 @@
 
 - (BOOL)qhChatUseReplace:(NSDictionary *)newData old:(NSDictionary *)lastData {
     return NO;
+}
+
+- (void)qhlongPressAction:(UILongPressGestureRecognizer *)gec {
 }
 
 #pragma mark - UITableViewDataSource
