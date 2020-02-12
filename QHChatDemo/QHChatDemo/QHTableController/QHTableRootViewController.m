@@ -15,6 +15,7 @@
 #import "QHSVLRoomChatViewController.h"
 #import "QHTKRoomChatViewController.h"
 #import "QHBgRoomViewController.h"
+#import "QHTFHppleViewController.h"
 
 @interface QHTableRootViewController ()
 
@@ -27,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSArray *array = @[@"QHChatMan", @"QHChatDouyu", @"QHLiveCloud", @"QHSVLRoom(等间距 & 行距)", @"QHChatDouyin", @"QHChatBg(背景图片)"];
+    NSArray *array = @[@"QHChatMan", @"QHChatDouyu", @"QHLiveCloud", @"QHSVLRoom(等间距 & 行距)", @"QHChatDouyin", @"QHChatBg(背景图片)", @"QHTFHpple(使用 TFHpple 解析 html)"];
     self.arData = [NSMutableArray arrayWithArray:array];
 }
 
@@ -79,6 +80,9 @@
     }
     else if ([title isEqualToString:@"QHChatBg(背景图片)"]) {
         subVC = [QHBgRoomViewController new];
+    }
+    else if ([title isEqualToString:@"QHTFHpple(使用 TFHpple 解析 html)"]) {
+        subVC = [QHTFHppleViewController new];
     }
     else {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

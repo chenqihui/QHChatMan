@@ -22,6 +22,12 @@
 		7405206521CCE03C003872FA /* QHChatBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7405206421CCE03C003872FA /* QHChatBaseModel.m */; };
 		7405206A21CCF770003872FA /* QHChatDouyuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7405206921CCF770003872FA /* QHChatDouyuView.m */; };
 		741C6E5921D7292000ED6E17 /* QHChatLiveCloudUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 741C6E5821D7292000ED6E17 /* QHChatLiveCloudUtil.m */; };
+		742BD44923CC537F005BD7BA /* QHTFHppleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 742BD44823CC537F005BD7BA /* QHTFHppleViewController.m */; };
+		742BD44C23CC53B4005BD7BA /* QHChatLiveCloudTFHppleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 742BD44B23CC53B4005BD7BA /* QHChatLiveCloudTFHppleView.m */; };
+		742BD44F23CC53DF005BD7BA /* QHChatLiveCloudTFHppleUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 742BD44E23CC53DF005BD7BA /* QHChatLiveCloudTFHppleUtil.m */; };
+		742BD45723CC569A005BD7BA /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = 742BD45223CC5699005BD7BA /* TFHpple.m */; };
+		742BD45823CC569A005BD7BA /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 742BD45523CC569A005BD7BA /* TFHppleElement.m */; };
+		742BD45923CC569A005BD7BA /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 742BD45623CC569A005BD7BA /* XPathQuery.m */; };
 		74343D0721CFDE8B004243A0 /* QHChatBaseViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74343D0621CFDE8B004243A0 /* QHChatBaseViewCell.m */; };
 		74343D0A21CFE228004243A0 /* QHChatBaseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 74343D0921CFE228004243A0 /* QHChatBaseConfig.m */; };
 		74343D0D21D0D017004243A0 /* NSTimer+QHEOCBlocksSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 74343D0B21D0D017004243A0 /* NSTimer+QHEOCBlocksSupport.m */; };
@@ -88,6 +94,18 @@
 		741C6E5721D7292000ED6E17 /* QHChatLiveCloudUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHChatLiveCloudUtil.h; sourceTree = "<group>"; };
 		741C6E5821D7292000ED6E17 /* QHChatLiveCloudUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHChatLiveCloudUtil.m; sourceTree = "<group>"; };
 		741C6E6021D7689100ED6E17 /* QHChatBaseProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHChatBaseProtocol.h; sourceTree = "<group>"; };
+		742BD44723CC537F005BD7BA /* QHTFHppleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHTFHppleViewController.h; sourceTree = "<group>"; };
+		742BD44823CC537F005BD7BA /* QHTFHppleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHTFHppleViewController.m; sourceTree = "<group>"; };
+		742BD44A23CC53B4005BD7BA /* QHChatLiveCloudTFHppleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHChatLiveCloudTFHppleView.h; sourceTree = "<group>"; };
+		742BD44B23CC53B4005BD7BA /* QHChatLiveCloudTFHppleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHChatLiveCloudTFHppleView.m; sourceTree = "<group>"; };
+		742BD44D23CC53DF005BD7BA /* QHChatLiveCloudTFHppleUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHChatLiveCloudTFHppleUtil.h; sourceTree = "<group>"; };
+		742BD44E23CC53DF005BD7BA /* QHChatLiveCloudTFHppleUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHChatLiveCloudTFHppleUtil.m; sourceTree = "<group>"; };
+		742BD45123CC5699005BD7BA /* TFHppleElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHppleElement.h; sourceTree = "<group>"; };
+		742BD45223CC5699005BD7BA /* TFHpple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHpple.m; sourceTree = "<group>"; };
+		742BD45323CC569A005BD7BA /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPathQuery.h; sourceTree = "<group>"; };
+		742BD45423CC569A005BD7BA /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHpple.h; sourceTree = "<group>"; };
+		742BD45523CC569A005BD7BA /* TFHppleElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHppleElement.m; sourceTree = "<group>"; };
+		742BD45623CC569A005BD7BA /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
 		74343D0521CFDE8B004243A0 /* QHChatBaseViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHChatBaseViewCell.h; sourceTree = "<group>"; };
 		74343D0621CFDE8B004243A0 /* QHChatBaseViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHChatBaseViewCell.m; sourceTree = "<group>"; };
 		74343D0821CFE228004243A0 /* QHChatBaseConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHChatBaseConfig.h; sourceTree = "<group>"; };
@@ -210,6 +228,7 @@
 		7405203821CBA3F6003872FA /* QHTableSubController */ = {
 			isa = PBXGroup;
 			children = (
+				742BD44523CC528B005BD7BA /* QHTFHppleViewController */,
 				7405203921CBA3F6003872FA /* QHTableSubViewController.h */,
 				7405203A21CBA3F6003872FA /* QHTableSubViewController.m */,
 				7405203C21CBA3F6003872FA /* QHTableSubViewController.xib */,
@@ -351,6 +370,33 @@
 				74343D0621CFDE8B004243A0 /* QHChatBaseViewCell.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		742BD44523CC528B005BD7BA /* QHTFHppleViewController */ = {
+			isa = PBXGroup;
+			children = (
+				742BD45023CC5699005BD7BA /* TFHpple */,
+				742BD44723CC537F005BD7BA /* QHTFHppleViewController.h */,
+				742BD44823CC537F005BD7BA /* QHTFHppleViewController.m */,
+				742BD44A23CC53B4005BD7BA /* QHChatLiveCloudTFHppleView.h */,
+				742BD44B23CC53B4005BD7BA /* QHChatLiveCloudTFHppleView.m */,
+				742BD44D23CC53DF005BD7BA /* QHChatLiveCloudTFHppleUtil.h */,
+				742BD44E23CC53DF005BD7BA /* QHChatLiveCloudTFHppleUtil.m */,
+			);
+			name = QHTFHppleViewController;
+			sourceTree = "<group>";
+		};
+		742BD45023CC5699005BD7BA /* TFHpple */ = {
+			isa = PBXGroup;
+			children = (
+				742BD45123CC5699005BD7BA /* TFHppleElement.h */,
+				742BD45223CC5699005BD7BA /* TFHpple.m */,
+				742BD45323CC569A005BD7BA /* XPathQuery.h */,
+				742BD45423CC569A005BD7BA /* TFHpple.h */,
+				742BD45523CC569A005BD7BA /* TFHppleElement.m */,
+				742BD45623CC569A005BD7BA /* XPathQuery.m */,
+			);
+			path = TFHpple;
 			sourceTree = "<group>";
 		};
 		74343D1121D11A5C004243A0 /* Util */ = {
@@ -547,9 +593,11 @@
 			files = (
 				745E0FA123754A0B0064269E /* QHTKRoomChatVIewUtil.m in Sources */,
 				746FE5C822BA30CC003C9AE0 /* QHSVLChatRoomView.m in Sources */,
+				742BD45923CC569A005BD7BA /* XPathQuery.m in Sources */,
 				74343D1821D238FA004243A0 /* QHDouyuViewController.m in Sources */,
 				7434CBA921D4D21D008E03B2 /* QHChatBaseUtil+DYText.m in Sources */,
 				7434CBB721D62953008E03B2 /* QHChatLiveCloudNewDataView.m in Sources */,
+				742BD44C23CC53B4005BD7BA /* QHChatLiveCloudTFHppleView.m in Sources */,
 				7434CBB421D60DE3008E03B2 /* QHChatLiveCloudContentViewCell.m in Sources */,
 				7405203721CBA3F6003872FA /* QHDetailRootViewController.m in Sources */,
 				74343D0D21D0D017004243A0 /* NSTimer+QHEOCBlocksSupport.m in Sources */,
@@ -568,6 +616,9 @@
 				7434CBA621D4CDED008E03B2 /* QHChatBaseUtil.m in Sources */,
 				74343D1421D1DEB4004243A0 /* QHChatBaseNewDataView.m in Sources */,
 				745E0F99237544700064269E /* QHTKChatRoomView.m in Sources */,
+				742BD45823CC569A005BD7BA /* TFHppleElement.m in Sources */,
+				742BD44923CC537F005BD7BA /* QHTFHppleViewController.m in Sources */,
+				742BD45723CC569A005BD7BA /* TFHpple.m in Sources */,
 				7491F086239D4D2200DD9C1E /* QHBgRoomViewController.m in Sources */,
 				7434CBA221D4AF3B008E03B2 /* QHChatDouyuTipTableViewCell.m in Sources */,
 				7405205621CBABCA003872FA /* QHChatBaseView.m in Sources */,
@@ -577,6 +628,7 @@
 				7491F08B239D4E1500DD9C1E /* QHBGChatRoomView.m in Sources */,
 				746FE5C522BA3097003C9AE0 /* QHSVLRoomChatContentViewCell.m in Sources */,
 				7405204B21CBA3F7003872FA /* main.m in Sources */,
+				742BD44F23CC53DF005BD7BA /* QHChatLiveCloudTFHppleUtil.m in Sources */,
 				7491F08F239D511400DD9C1E /* QHBGRoomChatContentViewCell.m in Sources */,
 				74343D0A21CFE228004243A0 /* QHChatBaseConfig.m in Sources */,
 				7405204021CBA3F6003872FA /* ViewController.m in Sources */,
@@ -722,12 +774,14 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JC9Y4K55DX;
+				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = QHChatDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = com.chen.QHChatDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -739,12 +793,14 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JC9Y4K55DX;
+				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = QHChatDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = com.chen.QHChatDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

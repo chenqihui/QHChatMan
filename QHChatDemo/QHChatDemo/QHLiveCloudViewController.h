@@ -8,9 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+#import "QHChatLiveCloudView.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QHLiveCloudViewController : UIViewController
+
+@property (weak, nonatomic) IBOutlet UIView *chatContainerView;
+
+@property (nonatomic, strong) QHChatLiveCloudView *chatView;
 
 @end
 

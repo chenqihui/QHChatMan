@@ -8,14 +8,10 @@
 
 #import "QHLiveCloudViewController.h"
 
-#import "QHChatLiveCloudView.h"
 #import "NSTimer+QHEOCBlocksSupport.h"
 
 @interface QHLiveCloudViewController () <QHChatBaseViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *chatContainerView;
-
-@property (nonatomic, strong) QHChatLiveCloudView *chatView;
 @property (nonatomic, strong) NSTimer *t;
 
 @end
