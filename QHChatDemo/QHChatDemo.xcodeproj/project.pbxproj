@@ -14,7 +14,6 @@
 		7405203D21CBA3F6003872FA /* QHTableSubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7405203C21CBA3F6003872FA /* QHTableSubViewController.xib */; };
 		7405204021CBA3F6003872FA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7405203F21CBA3F6003872FA /* ViewController.m */; };
 		7405204321CBA3F6003872FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7405204121CBA3F6003872FA /* Main.storyboard */; };
-		7405204521CBA3F7003872FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7405204421CBA3F7003872FA /* Assets.xcassets */; };
 		7405204821CBA3F7003872FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7405204621CBA3F7003872FA /* LaunchScreen.storyboard */; };
 		7405204B21CBA3F7003872FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7405204A21CBA3F7003872FA /* main.m */; };
 		7405205621CBABCA003872FA /* QHChatBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7405205521CBABCA003872FA /* QHChatBaseView.m */; };
@@ -79,7 +78,6 @@
 		7405203E21CBA3F6003872FA /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		7405203F21CBA3F6003872FA /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		7405204221CBA3F6003872FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		7405204421CBA3F7003872FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7405204721CBA3F7003872FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7405204921CBA3F7003872FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7405204A21CBA3F7003872FA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -204,7 +202,6 @@
 				7405203E21CBA3F6003872FA /* ViewController.h */,
 				7405203F21CBA3F6003872FA /* ViewController.m */,
 				7405204121CBA3F6003872FA /* Main.storyboard */,
-				7405204421CBA3F7003872FA /* Assets.xcassets */,
 				7405204621CBA3F7003872FA /* LaunchScreen.storyboard */,
 				7405204921CBA3F7003872FA /* Info.plist */,
 				7405204A21CBA3F7003872FA /* main.m */,
@@ -574,7 +571,6 @@
 				7405204821CBA3F7003872FA /* LaunchScreen.storyboard in Resources */,
 				746FE5D322BA3BC5003C9AE0 /* QHSVLRoomChatViewController.xib in Resources */,
 				7491F14823A1196600DD9C1E /* ggg.png in Resources */,
-				7405204521CBA3F7003872FA /* Assets.xcassets in Resources */,
 				745E0FA623754F040064269E /* QHTKRoomChatViewController.xib in Resources */,
 				7491F14623A1170D00DD9C1E /* ggg@3x.png in Resources */,
 				743D416B21D362C1000FAF61 /* sex_xx@3x.webp in Resources */,

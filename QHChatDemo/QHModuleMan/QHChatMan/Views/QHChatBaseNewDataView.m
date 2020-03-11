@@ -66,10 +66,12 @@
     }
 }
 
-- (void)hide {
+- (BOOL)hide {
     if (self.isHidden == NO) {
         self.hidden = YES;
+        return YES;
     }
+    return NO;
 }
 
 - (void)update:(id)data {

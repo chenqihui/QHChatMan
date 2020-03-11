@@ -315,7 +315,9 @@
     }
     
     if (_bAutoReloadChat == YES) {
-        [_hasNewDataView hide];
+        if ([_hasNewDataView hide]) {
+            [self p_reloadAndRefresh:YES];
+        }
     }
 }
 
