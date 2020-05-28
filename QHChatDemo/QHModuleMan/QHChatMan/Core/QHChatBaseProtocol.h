@@ -12,7 +12,8 @@
 @protocol QHChatBaseNewDataViewProtcol <NSObject>
 
 - (void)show;
-- (void)hide;
+// 返回是否有隐藏更多的操作，拉下底部时通过此来判断是否刷新数据
+- (BOOL)hide;
 
 /**
  刷新，此协议可以类似更新更多View 的显示操作
