@@ -91,7 +91,7 @@ NSString *const kChatOpValueEnter = @"enter";
 }
 
 - (CGFloat)qhChatAnalyseHeight:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    QHChatBaseModel *model = self.chatDatasArray[indexPath.row];
+    QHChatBaseModel *model = [self.buffer getChatData:indexPath.row];
     NSDictionary *data = model.originChatDataDic;
     NSString *op = data[kChatOpKey];
     if ([op isEqualToString:kChatOpValueDate] == YES) {
@@ -112,7 +112,7 @@ NSString *const kChatOpValueEnter = @"enter";
 
 - (UITableViewCell *)qhChatChatView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *chatCell = nil;
-    QHChatBaseModel *model = self.chatDatasArray[indexPath.row];
+    QHChatBaseModel *model = [self.buffer getChatData:indexPath.row];
     NSDictionary *data = model.originChatDataDic;
     NSString *op = data[kChatOpKey];
     if ([op isEqualToString:kChatOpValueDate] == YES) {
@@ -131,7 +131,7 @@ NSString *const kChatOpValueEnter = @"enter";
 }
 
 - (BOOL)qhChatUseReplace:(NSDictionary *)newData old:(NSDictionary *)lastData {
-    if (self.chatDatasArray.count >= 3 && lastData != nil) {
+    if (self.buffer.chatDatasArray.count >= 3 && lastData != nil) {
         NSString *op = newData[kChatOpKey];
         if ([op isEqualToString:kChatOpValueEnter] == YES) {
             NSString *op1 = lastData[kChatOpKey];

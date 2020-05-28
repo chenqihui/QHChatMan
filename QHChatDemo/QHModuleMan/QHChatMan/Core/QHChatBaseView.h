@@ -12,6 +12,7 @@
 #import "QHChatBaseConfig.h"
 #import "QHChatBaseModel.h"
 #import "QHChatBaseUtil.h"
+#import "QHChatBaseBuffer.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -32,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface QHChatBaseView : UIView <QHChatBaseViewProtocol>
 
 @property (nonatomic, strong, readonly) UITableView *mainTableV;
-@property (nonatomic, strong, readonly) NSMutableArray<QHChatBaseModel *> *chatDatasArray;
+@property (nonatomic, strong, readonly) QHChatBaseBuffer *buffer;
 @property (nonatomic, strong) QHChatBaseConfig *config;
 @property (nonatomic, weak) id<QHChatBaseViewDelegate> delegate;
 

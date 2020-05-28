@@ -20,7 +20,7 @@
 
 - (UITableViewCell *)qhChatChatView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *chatCell = nil;
-    QHChatBaseModel *model = self.chatDatasArray[indexPath.row];
+    QHChatBaseModel *model = [self.buffer getChatData:indexPath.row];
     if (model.chatAttributedText != nil) {
         QHBGRoomChatContentViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kQHCHAT_BG_CONTENT_CELLIDENTIFIER];
         cell.contentL.attributedText = model.chatAttributedText;
