@@ -8,6 +8,8 @@
 
 #import "QHChatBaseView.h"
 
+#import <pthread.h>
+
 #import "QHViewUtil.h"
 #import "NSTimer+QHEOCBlocksSupport.h"
 
@@ -19,8 +21,6 @@
 @interface QHChatBaseView () <UITableViewDataSource, UITableViewDelegate, QHChatBaseViewCellDelegate>
 
 @property (nonatomic, strong, readwrite) UITableView *mainTableV;
-@property (nonatomic, strong, readwrite) NSMutableArray<QHChatBaseModel *> *chatDatasArray;
-@property (nonatomic, strong) NSMutableArray<NSDictionary *> *chatDatasTempArray;
 @property (nonatomic) BOOL bAutoReloadChat;
 @property (nonatomic, strong) NSTimer *reloadTimer;
 @property (nonatomic, strong) UIView<QHChatBaseNewDataViewProtcol> *hasNewDataView;
@@ -28,18 +28,18 @@
 @property (nonatomic) dispatch_queue_t chatReloadQueue;
 @property (nonatomic) BOOL bOutHeight;
 
+@property (nonatomic, strong, readwrite) QHChatBaseBuffer *buffer;
+
 @end
 
 @implementation QHChatBaseView
 
 - (void)dealloc {
-#if DEBUG
-    NSLog(@"%s", __FUNCTION__);
-#endif
     [self p_closeReloadTimer];
-    _chatDatasArray = nil;
-    _chatDatasTempArray = nil;
     _hasNewDataView = nil;
+    #if DEBUG
+        NSLog(@"%s", __FUNCTION__);
+    #endif
 }
 
 - (instancetype)init {
@@ -77,72 +77,25 @@
     if (data == nil || data.count <= 0) {
         return;
     }
-    if (![NSThread isMainThread]) {
-        [self performSelectorOnMainThread:_cmd withObject:data waitUntilDone:NO];
-        return;
-    }
-    
-    [_chatDatasTempArray addObjectsFromArray:data];
-    if (_chatDatasTempArray.count > _config.chatCountMax) {
-        [_chatDatasTempArray removeObjectsInRange:NSMakeRange(0, _config.chatCountDelete)];
-    }
-    [self p_reloadAndRefresh:NO];
+    onGlobalThreadAsync(^{
+        [self.buffer append2TempArray:data];
+        onMainThreadAsync(^{
+            [self p_reloadAndRefresh:NO];
+        });
+    });
 }
 
 - (void)clearChatData {
-    if (![NSThread isMainThread]) {
-        [self performSelectorOnMainThread:_cmd withObject:nil waitUntilDone:NO];
-        return;
-    }
-    [self p_closeReloadTimer];
-    [_chatDatasTempArray removeAllObjects];
-    [_chatDatasArray removeAllObjects];
-    _bAutoReloadChat = YES;
-    [_hasNewDataView hide];
-    
-    [CATransaction begin];
-    [CATransaction setDisableActions:YES];
-    [self.mainTableV reloadData];
-    [CATransaction commit];
-    
-    if (_config.bOpenScorllFromBottom == YES) {
-        _bOutHeight = NO;
-    }
+    onMainThreadAsync(^{
+        [self p_clearChatData];
+    });
 }
 
 - (void)scrollToBottom {
-    [self p_closeReloadTimer];
-    _hasNewDataView.hidden = YES;
-    _bAutoReloadChat = YES;
-    if (self.chatDatasArray.count > 0) {
-        [CATransaction begin];
-        [CATransaction setDisableActions:YES];
-        [self.mainTableV reloadData];
-        [CATransaction commit];
-        
-        CGFloat hasCellHeight = 0;
-        
-        if (_config.bOpenScorllFromBottom == YES) {
-            _bOutHeight = NO;
-            hasCellHeight = [self p_hasCellHeight];
-            if (hasCellHeight >= self.mainTableV.bounds.size.height) {
-                _bOutHeight = YES;
-            }
-        }
-        
-        if (_bOutHeight == YES || _config.bOpenScorllFromBottom == NO) {
-            if (self.mainTableV.isDragging == NO && self.mainTableV.tracking == NO) {
-                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.chatDatasArray.count - 1 inSection:0];
-                [self.mainTableV scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-            }
-        }
-        else {
-            [self p_updateTableContentInset:hasCellHeight];
-        }
-    }
-    [self p_reloadAndRefresh:NO];
+    onMainThreadAsync(^{
+        [self p_scrollToBottom];
+    });
 }
-
 
 #pragma mark - Private
 
@@ -153,12 +106,13 @@
 }
 
 - (void)p_setupData {
-    _chatDatasArray = [NSMutableArray new];
-    _chatDatasTempArray = [NSMutableArray new];
+    _buffer = [QHChatBaseBuffer new];
+    _buffer.config = _config;
     _bAutoReloadChat = YES;
     self.backgroundColor = [UIColor clearColor];
     
     _chatReloadQueue = dispatch_queue_create("com.qhchat.queue", NULL);
+    dispatch_set_target_queue(_chatReloadQueue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0));
     if (_config.bOpenScorllFromBottom == YES) {
         _bOutHeight = NO;
     }
@@ -226,47 +180,43 @@
         }
     }
     else {
-        [self.hasNewDataView update:@(_chatDatasTempArray.count)];
+        [self.hasNewDataView update:@(self.buffer.chatDatasTempArray.count)];
     }
 }
 
 - (void)p_reloadAction {
-    if (_chatDatasTempArray.count <= 0) {
+    if (self.buffer.chatDatasTempArray.count <= 0) {
         [self p_closeReloadTimer];
         return;
     }
     if (_bAutoReloadChat == NO) {
-        [self.hasNewDataView update:@(_chatDatasTempArray.count)];
+        [self.hasNewDataView update:@(self.buffer.chatDatasTempArray.count)];
         [self p_closeReloadTimer];
         return;
     }
     
-    NSArray<NSDictionary *> *tempArray = [NSArray arrayWithArray:_chatDatasTempArray];
-    [_chatDatasTempArray removeAllObjects];
+    NSArray<NSDictionary *> *tempArray = [NSArray arrayWithArray:self.buffer.chatDatasTempArray];
+    [self.buffer clearTempArray];
     
     __block BOOL isReplaceChatData = NO;
     [tempArray enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        BOOL bReplace = [self qhChatUseReplace:obj old:[self.chatDatasArray lastObject].originChatDataDic];
+        BOOL bReplace = [self qhChatUseReplace:obj old:[self.buffer.chatDatasArray lastObject].originChatDataDic];
         QHChatBaseModel *model = [[QHChatBaseModel alloc] initWithChatData:obj];
         model.cellConfig = self.config.cellConfig;
         if (bReplace == YES) {
-            [self.chatDatasArray replaceObjectAtIndex:self.chatDatasArray.count - 1 withObject:model];
+            [self.buffer replaceObjectAtLastIndexWith:model];
             isReplaceChatData = YES;
         }
         else {
-            [self.chatDatasArray addObject:model];
+            [self.buffer append2Array:model];
         }
     }];
     
-    BOOL bDeleteChatData = NO;
-    if (_chatDatasArray.count > _config.chatCountMax) {
-        [_chatDatasArray removeObjectsInRange:NSMakeRange(0, _config.chatCountDelete)];
-        bDeleteChatData = YES;
-    }
+    BOOL bDeleteChatData = [self.buffer removeObjectsInRange];
     
     // 只有当加入的数据为1个，且是替换，和此次没有删除数据时，才启动指定刷新
     if (tempArray.count == 1 && bDeleteChatData == NO && isReplaceChatData == YES) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(self.chatDatasArray.count - 1) inSection:0];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(self.buffer.chatDatasArray.count - 1) inSection:0];
 //        if (isReplaceChatData == YES) {
             [self.mainTableV reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 //        }
@@ -292,8 +242,7 @@
     
     if (_bOutHeight == YES || _config.bOpenScorllFromBottom == NO) {
         if (self.mainTableV.isDragging == NO && self.mainTableV.tracking == NO) {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.chatDatasArray.count - 1 inSection:0];
-            [self.mainTableV scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            [self p_scrollToFinalBottom];
         }
     }
     else {
@@ -302,10 +251,20 @@
     tempArray = nil;
 }
 
+- (void)p_scrollToFinalBottom {
+    if (self.buffer.chatDatasArray.count > 0) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.buffer.chatDatasArray.count - 1 inSection:0];
+        // 控制滑动底部的动画时长
+        [UIView animateWithDuration:MIN(0.2, self.config.chatReloadDuration - 0.05) animations:^{
+            [self.mainTableV scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+        }];
+    }
+}
+
 - (void)p_refreshAutoReloadChat {
     NSIndexPath *indexPath = [[_mainTableV indexPathsForVisibleRows] lastObject];
     
-    if (indexPath.row == _chatDatasArray.count - 1) {
+    if (indexPath.row == self.buffer.chatDatasArray.count - 1) {
         _bAutoReloadChat = YES;
     }
     
@@ -329,13 +288,13 @@
 }
 
 - (NSAttributedString *)p_goContent:(NSIndexPath *)indexPath {
-    QHChatBaseModel *model = _chatDatasArray[indexPath.row];
+    QHChatBaseModel *model = [self.buffer getChatData:indexPath.row];
     if (model.chatAttributedText != nil && [_config isEqualToCellConfig:model.cellConfig] == YES) {
         return model.chatAttributedText;
     }
     model.cellConfig = _config.cellConfig;
     
-    NSMutableAttributedString *content = [self qhChatAnalyseContent:_chatDatasArray[indexPath.row].originChatDataDic];
+    NSMutableAttributedString *content = [self qhChatAnalyseContent:[self.buffer getChatData:indexPath.row].originChatDataDic];
     
     if (content != nil) {
         [self qhChatAddCellDefualAttributes:content];
@@ -345,7 +304,7 @@
 }
 
 - (CGFloat)p_goHeight:(NSIndexPath *)indexPath {
-    QHChatBaseModel *model = _chatDatasArray[indexPath.row];
+    QHChatBaseModel *model = [self.buffer getChatData:indexPath.row];
     if (model.cellHeight > 0 && [_config isEqualToCellConfig:model.cellConfig] == YES) {
         return model.cellHeight;
     }
@@ -372,13 +331,12 @@
 }
 
 - (void)p_clickNewDataViewAction {
-    _hasNewDataView.hidden = YES;
-    if (_chatDatasArray.count > 0) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.chatDatasArray.count - 1 inSection:0];
-        [self.mainTableV scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    }
-    _bAutoReloadChat = YES;
-    [self p_reloadAndRefresh:YES];
+    onMainThreadAsync(^{
+        self.hasNewDataView.hidden = YES;
+        [self p_scrollToFinalBottom];
+        self.bAutoReloadChat = YES;
+        [self p_reloadAndRefresh:YES];
+    });
 }
 
 - (CGFloat)p_hasCellHeight {
@@ -393,6 +351,58 @@
 - (void)p_updateTableContentInset:(CGFloat)height {
     CGFloat contentInsetTop = MAX(self.mainTableV.bounds.size.height - height, 0);
     self.mainTableV.contentInset = UIEdgeInsetsMake(contentInsetTop, 0, 0, 0);
+}
+
+- (void)p_clearChatData {
+    [self p_closeReloadTimer];
+    
+    dispatch_async(self.chatReloadQueue, ^{
+        [self.buffer clear];
+    });
+    
+    self.bAutoReloadChat = YES;
+    [self.hasNewDataView hide];
+    
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    [self.mainTableV reloadData];
+    [CATransaction commit];
+    
+    if (self.config.bOpenScorllFromBottom == YES) {
+        self.bOutHeight = NO;
+    }
+}
+
+- (void)p_scrollToBottom {
+    [self p_closeReloadTimer];
+    _hasNewDataView.hidden = YES;
+    _bAutoReloadChat = YES;
+    if (self.buffer.chatDatasArray.count > 0) {
+        [CATransaction begin];
+        [CATransaction setDisableActions:YES];
+        [self.mainTableV reloadData];
+        [CATransaction commit];
+        
+        CGFloat hasCellHeight = 0;
+        
+        if (_config.bOpenScorllFromBottom == YES) {
+            _bOutHeight = NO;
+            hasCellHeight = [self p_hasCellHeight];
+            if (hasCellHeight >= self.mainTableV.bounds.size.height) {
+                _bOutHeight = YES;
+            }
+        }
+        
+        if (_bOutHeight == YES || _config.bOpenScorllFromBottom == NO) {
+            if (self.mainTableV.isDragging == NO && self.mainTableV.tracking == NO) {
+                [self p_scrollToFinalBottom];
+            }
+        }
+        else {
+            [self p_updateTableContentInset:hasCellHeight];
+        }
+    }
+    [self p_reloadAndRefresh:NO];
 }
 
 #pragma mark - QHChatBaseViewProtocol
@@ -422,7 +432,6 @@
 }
 
 - (void)qhChatMakeAfterChatBaseViewCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
 }
 
 - (void)qhChatAddCellDefualAttributes:(NSMutableAttributedString *)attr {
@@ -433,14 +442,28 @@
     return NO;
 }
 
+- (void)qhlongPressAction:(UILongPressGestureRecognizer *)gec {if (gec.state == UIGestureRecognizerStateBegan) {
+        if ([self.delegate respondsToSelector:@selector(chatView:didLongSelectRowWithData:)]) {
+            CGPoint point = [gec locationInView:_mainTableV];
+            NSIndexPath *indexPath = [_mainTableV indexPathForRowAtPoint:point];
+            QHChatBaseModel *model = [self.buffer getChatData:indexPath.row];
+        
+            [self.delegate chatView:self didLongSelectRowWithData:model.originChatDataDic];
+        }
+    }
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _chatDatasArray.count;
+    if (self.buffer == nil) {
+        return 0;
+    }
+    return self.buffer.chatDatasArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    QHChatBaseModel *model = _chatDatasArray[indexPath.row];
+    QHChatBaseModel *model = [self.buffer getChatData:indexPath.row];
     if (model.chatAttributedText == nil) {
         NSAttributedString *content = [self p_goContent:indexPath];
         model.chatAttributedText = content;
@@ -491,7 +514,7 @@
 - (void)selectViewCell:(UITableViewCell *)viewCell {
     if ([self.delegate respondsToSelector:@selector(chatView:didSelectRowWithData:)] == YES) {
         NSIndexPath *indexPath = [_mainTableV indexPathForCell:viewCell];
-        QHChatBaseModel *model = _chatDatasArray[indexPath.row];
+        QHChatBaseModel *model = [self.buffer getChatData:indexPath.row];
         [self.delegate chatView:self didSelectRowWithData:model.originChatDataDic];
     }
 }
@@ -499,7 +522,7 @@
 - (void)deselectViewCell:(UITableViewCell *)viewCell {
     if ([self.delegate respondsToSelector:@selector(chatView:didDeselectRowWithData:)] == YES) {
         NSIndexPath *indexPath = [_mainTableV indexPathForCell:viewCell];
-        QHChatBaseModel *model = _chatDatasArray[indexPath.row];
+        QHChatBaseModel *model = [self.buffer getChatData:indexPath.row];
         [self.delegate chatView:self didDeselectRowWithData:model.originChatDataDic];
     }
 }
@@ -507,15 +530,7 @@
 #pragma mark - Action
 
 - (void)longPressAction:(UILongPressGestureRecognizer *)gec {
-    if (gec.state == UIGestureRecognizerStateBegan) {
-        if ([self.delegate respondsToSelector:@selector(chatView:didLongSelectRowWithData:)]) {
-            CGPoint point = [gec locationInView:_mainTableV];
-            NSIndexPath *indexPath = [_mainTableV indexPathForRowAtPoint:point];
-            QHChatBaseModel *model = _chatDatasArray[indexPath.row];
-        
-            [self.delegate chatView:self didLongSelectRowWithData:model.originChatDataDic];
-        }
-    }
+    [self qhlongPressAction:gec];
 }
 
 #pragma mark - Get

@@ -25,6 +25,7 @@
         _bLongPress = NO;
         _minimumPressDuration = -1;
         _bOpenScorllFromBottom = NO;
+        _hasUnlock = NO;
     }
     return self;
 }
