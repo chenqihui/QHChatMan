@@ -20,6 +20,8 @@
 		7405205F21CCB9A6003872FA /* QHViewUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 7405205E21CCB9A6003872FA /* QHViewUtil.m */; };
 		7405206521CCE03C003872FA /* QHChatBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7405206421CCE03C003872FA /* QHChatBaseModel.m */; };
 		7405206A21CCF770003872FA /* QHChatDouyuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7405206921CCF770003872FA /* QHChatDouyuView.m */; };
+		741250B6247EBDB100DE86EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 741250B5247EBDB100DE86EA /* Assets.xcassets */; };
+		741250B9247EC15600DE86EA /* QHChatBaseBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 741250B8247EC15600DE86EA /* QHChatBaseBuffer.m */; };
 		741C6E5921D7292000ED6E17 /* QHChatLiveCloudUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 741C6E5821D7292000ED6E17 /* QHChatLiveCloudUtil.m */; };
 		742BD44923CC537F005BD7BA /* QHTFHppleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 742BD44823CC537F005BD7BA /* QHTFHppleViewController.m */; };
 		742BD44C23CC53B4005BD7BA /* QHChatLiveCloudTFHppleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 742BD44B23CC53B4005BD7BA /* QHChatLiveCloudTFHppleView.m */; };
@@ -89,6 +91,9 @@
 		7405206421CCE03C003872FA /* QHChatBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHChatBaseModel.m; sourceTree = "<group>"; };
 		7405206821CCF770003872FA /* QHChatDouyuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHChatDouyuView.h; sourceTree = "<group>"; };
 		7405206921CCF770003872FA /* QHChatDouyuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHChatDouyuView.m; sourceTree = "<group>"; };
+		741250B5247EBDB100DE86EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		741250B7247EC15500DE86EA /* QHChatBaseBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHChatBaseBuffer.h; sourceTree = "<group>"; };
+		741250B8247EC15600DE86EA /* QHChatBaseBuffer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHChatBaseBuffer.m; sourceTree = "<group>"; };
 		741C6E5721D7292000ED6E17 /* QHChatLiveCloudUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHChatLiveCloudUtil.h; sourceTree = "<group>"; };
 		741C6E5821D7292000ED6E17 /* QHChatLiveCloudUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHChatLiveCloudUtil.m; sourceTree = "<group>"; };
 		741C6E6021D7689100ED6E17 /* QHChatBaseProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHChatBaseProtocol.h; sourceTree = "<group>"; };
@@ -203,6 +208,7 @@
 				7405203F21CBA3F6003872FA /* ViewController.m */,
 				7405204121CBA3F6003872FA /* Main.storyboard */,
 				7405204621CBA3F7003872FA /* LaunchScreen.storyboard */,
+				741250B5247EBDB100DE86EA /* Assets.xcassets */,
 				7405204921CBA3F7003872FA /* Info.plist */,
 				7405204A21CBA3F7003872FA /* main.m */,
 				7405203121CBA3F6003872FA /* QHTableController */,
@@ -269,6 +275,8 @@
 				7405206421CCE03C003872FA /* QHChatBaseModel.m */,
 				74343D0821CFE228004243A0 /* QHChatBaseConfig.h */,
 				74343D0921CFE228004243A0 /* QHChatBaseConfig.m */,
+				741250B7247EC15500DE86EA /* QHChatBaseBuffer.h */,
+				741250B8247EC15600DE86EA /* QHChatBaseBuffer.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -576,6 +584,7 @@
 				743D416B21D362C1000FAF61 /* sex_xx@3x.webp in Resources */,
 				7405204321CBA3F6003872FA /* Main.storyboard in Resources */,
 				7434CBA321D4AF3B008E03B2 /* QHChatDouyuTipTableViewCell.xib in Resources */,
+				741250B6247EBDB100DE86EA /* Assets.xcassets in Resources */,
 				7434CBAE21D6000C008E03B2 /* QHLiveCloudViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -628,6 +637,7 @@
 				7491F08F239D511400DD9C1E /* QHBGRoomChatContentViewCell.m in Sources */,
 				74343D0A21CFE228004243A0 /* QHChatBaseConfig.m in Sources */,
 				7405204021CBA3F6003872FA /* ViewController.m in Sources */,
+				741250B9247EC15600DE86EA /* QHChatBaseBuffer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -778,7 +788,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_LDFLAGS = "-lxml2";
-				PRODUCT_BUNDLE_IDENTIFIER = com.chen.QHChatDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chen.QHChatDemo2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -797,7 +807,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_LDFLAGS = "-lxml2";
-				PRODUCT_BUNDLE_IDENTIFIER = com.chen.QHChatDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chen.QHChatDemo2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

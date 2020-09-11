@@ -46,7 +46,7 @@ NSString *const kTKChatOpValueNotice = @"notice";
 }
 
 - (CGFloat)qhChatAnalyseHeight:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    QHChatBaseModel *model = self.chatDatasArray[indexPath.row];
+    QHChatBaseModel *model = [self.buffer getChatData:indexPath.row];
     if (model.chatAttributedText == nil) {
         return 0;
     }
@@ -62,7 +62,7 @@ NSString *const kTKChatOpValueNotice = @"notice";
 
 - (UITableViewCell *)qhChatChatView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *chatCell = nil;
-    QHChatBaseModel *model = self.chatDatasArray[indexPath.row];
+    QHChatBaseModel *model = [self.buffer getChatData:indexPath.row];
     if (model.chatAttributedText != nil) {
         QHTKRoomChatContentViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kQHCHAT_TK_CONTENT_CELLIDENTIFIER];
         cell.contentL.attributedText = model.chatAttributedText;
@@ -89,7 +89,7 @@ NSString *const kTKChatOpValueNotice = @"notice";
         if ([self.delegate respondsToSelector:@selector(chatView:didLongSelectRowWithData:)]) {
             CGPoint point = [gec locationInView:self.mainTableV];
             NSIndexPath *indexPath = [self.mainTableV indexPathForRowAtPoint:point];
-            QHChatBaseModel *model = self.chatDatasArray[indexPath.row];
+            QHChatBaseModel *model = [self.buffer getChatData:indexPath.row];
             NSDictionary *data = model.originChatDataDic;
             NSString *op = data[kTKChatOpKey];
             if ([op isEqualToString:kTKChatOpValueChat] == YES) {

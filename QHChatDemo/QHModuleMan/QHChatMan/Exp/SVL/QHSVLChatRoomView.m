@@ -77,7 +77,7 @@
 }
 
 - (CGFloat)qhChatAnalyseHeight:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    QHChatBaseModel *model = self.chatDatasArray[indexPath.row];
+    QHChatBaseModel *model = [self.buffer getChatData:indexPath.row];
     if (model.chatAttributedText == nil) {
         return 0;
     }
@@ -108,7 +108,7 @@
 
 - (UITableViewCell *)qhChatChatView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *chatCell = nil;
-    QHChatBaseModel *model = self.chatDatasArray[indexPath.row];
+    QHChatBaseModel *model = [self.buffer getChatData:indexPath.row];
     if (model.chatAttributedText != nil) {
         QHSVLRoomChatContentViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kQHCHAT_LC_CONTENT_CELLIDENTIFIER];
         cell.contentL.attributedText = model.chatAttributedText;

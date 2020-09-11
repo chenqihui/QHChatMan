@@ -45,6 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
 // 公屏在没有满屏时由下而上显示
 @property (nonatomic) BOOL bOpenScorllFromBottom;
 
+@property (nonatomic) BOOL hasUnlock;
+
 - (BOOL)isEqualToCellConfig:(QHChatCellConfig)cellConfig;
 
 @end
