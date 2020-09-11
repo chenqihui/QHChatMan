@@ -8,8 +8,6 @@
 
 #import "QHChatBaseView.h"
 
-#import <pthread.h>
-
 #import "QHViewUtil.h"
 #import "NSTimer+QHEOCBlocksSupport.h"
 
@@ -165,7 +163,11 @@
             __weak typeof(self) weakSelf = self;
             _reloadTimer = [NSTimer qheoc_scheduledTimerWithTimeInterval:_config.chatReloadDuration block:^{
                 dispatch_sync(weakSelf.chatReloadQueue, ^{
-                    [weakSelf p_reloadAction];
+                    @try {
+                        [weakSelf p_reloadAction];
+                    } @catch (NSException *exception) {
+                    } @finally {
+                    }
                 });
             } repeats:YES];
             [[NSRunLoop mainRunLoop] addTimer:_reloadTimer forMode:NSRunLoopCommonModes];
@@ -443,13 +445,18 @@
     return NO;
 }
 
-- (void)qhlongPressAction:(UILongPressGestureRecognizer *)gec {if (gec.state == UIGestureRecognizerStateBegan) {
+- (void)qhlongPressAction:(UILongPressGestureRecognizer *)gec {
+    if (gec.state == UIGestureRecognizerStateBegan) {
         if ([self.delegate respondsToSelector:@selector(chatView:didLongSelectRowWithData:)]) {
-            CGPoint point = [gec locationInView:_mainTableV];
-            NSIndexPath *indexPath = [_mainTableV indexPathForRowAtPoint:point];
-            QHChatBaseModel *model = [self.buffer getChatData:indexPath.row];
-        
-            [self.delegate chatView:self didLongSelectRowWithData:model.originChatDataDic];
+            @try {
+                CGPoint point = [gec locationInView:_mainTableV];
+                NSIndexPath *indexPath = [_mainTableV indexPathForRowAtPoint:point];
+                QHChatBaseModel *model = [self.buffer getChatData:indexPath.row];
+            
+                [self.delegate chatView:self didLongSelectRowWithData:model.originChatDataDic];
+            } @catch (NSException *exception) {
+            } @finally {
+            }
         }
     }
 }
@@ -487,13 +494,21 @@
 
 #pragma mark - UITableViewDelegate
 
+// 预测 Cell 高度
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 44;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (!self.config.bAutoCellHeight) {
-        CGFloat h = [self p_goHeight:indexPath];
+        CGFloat h = 0;
+        @try {
+            h = [self p_goHeight:indexPath];
+        } @catch (NSException *exception) {
+            h = 0;
+        } @finally {
+            
+        }
         return h;
     }
     return UITableViewAutomaticDimension;

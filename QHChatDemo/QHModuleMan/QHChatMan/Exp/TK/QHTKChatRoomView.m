@@ -67,7 +67,7 @@ NSString *const kTKChatOpValueNotice = @"notice";
         QHTKRoomChatContentViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kQHCHAT_TK_CONTENT_CELLIDENTIFIER];
         cell.contentL.attributedText = model.chatAttributedText;
         cell.delegate = self;
-        [cell cellUpdateConstraints];
+//        [cell cellUpdateConstraints];
         chatCell = cell;
     }
     

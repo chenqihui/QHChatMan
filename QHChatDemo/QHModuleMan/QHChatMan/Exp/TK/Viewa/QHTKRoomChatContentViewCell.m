@@ -33,8 +33,9 @@
 
 #pragma mark - Public
 
+// 使用预测 Cell 高度，更新约束会导致预测失效
 - (void)cellUpdateConstraints {
-    [self.contentL updateConstraints];
+//    [self.contentL updateConstraints];
 }
 
 #pragma mark - Private
