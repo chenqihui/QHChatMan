@@ -26,6 +26,7 @@
         _minimumPressDuration = -1;
         _bOpenScorllFromBottom = NO;
         _hasUnlock = NO;
+        _bAutoCellHeight = YES;
     }
     return self;
 }

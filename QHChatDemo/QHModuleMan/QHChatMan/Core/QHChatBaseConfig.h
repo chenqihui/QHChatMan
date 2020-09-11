@@ -47,6 +47,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) BOOL hasUnlock;
 
+// YES：使用 UITableViewAutomaticDimension，NO：使用 自计算 的高度，默认 YES
+@property (nonatomic) BOOL bAutoCellHeight;
+
 - (BOOL)isEqualToCellConfig:(QHChatCellConfig)cellConfig;
 
 @end

@@ -34,7 +34,8 @@
 
     __weak typeof(self) weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [weakSelf p_doAction];
+//        [weakSelf p_doAction];
+        [weakSelf test_much];
     });
 }
 
@@ -81,6 +82,18 @@
             [NSThread sleepForTimeInterval:t];
         }
     });
+}
+
+- (void)test_much {
+    NSDictionary *enterMeg1 = @{@"t": @(1), @"n": @"<font color='#999999'>小哥哥</font>", @"l": @(18)};
+    NSDictionary *enterMeg2 = @{@"t": @(1), @"n": @"<font color='#999999'>木木子</font>", @"l": @(26)};
+    NSDictionary *enterMeg3 = @{@"t": @(1), @"n": @"<font color='#3300CC'>终于会改名字了</font>", @"l": @(40), @"bc": @(1)};
+    NSDictionary *sayMeg1 = @{@"t": @(2), @"n": @"<font color='#999999'>小姐姐</font>", @"c": @"这个好听唉", @"l": @(57), @"bc": @(2)};
+    NSDictionary *sayMeg2 = @{@"t": @(2), @"n": @"<font color='#999999'>不要叫我</font>", @"c": @"<font color='#33CC66'>好听❤️好听❤️好听❤️好听❤️好听❤️好听❤️好听❤️好听❤️好听❤️好听❤️好听❤️好听❤️好听❤️好听❤️好听❤️好听❤️好听❤️好听❤️好听❤️好听❤️</font>", @"l": @(17)};
+    NSDictionary *sayMeg3 = @{@"t": @(2), @"n": @"<font color='#999999'>用户1266</font>", @"c": @"<font color='#000000'>玩大乱斗</font>", @"l": @(1)};
+    
+    NSArray *ds = @[enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3];
+    [self.chatView insertChatData:ds];
 }
 
 #pragma mark - Util

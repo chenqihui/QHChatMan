@@ -255,9 +255,10 @@
     if (self.buffer.chatDatasArray.count > 0) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.buffer.chatDatasArray.count - 1 inSection:0];
         // 控制滑动底部的动画时长
-        [UIView animateWithDuration:MIN(0.2, self.config.chatReloadDuration - 0.05) animations:^{
+        // 由于使用预测 Cell 高度，所以去掉滑动到底部的动画，避免出现跳动现象
+//        [UIView animateWithDuration:MIN(0.2, self.config.chatReloadDuration - 0.05) animations:^{
             [self.mainTableV scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
-        }];
+//        }];
     }
 }
 
@@ -486,9 +487,16 @@
 
 #pragma mark - UITableViewDelegate
 
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 44;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat h = [self p_goHeight:indexPath];
-    return h;
+    if (!self.config.bAutoCellHeight) {
+        CGFloat h = [self p_goHeight:indexPath];
+        return h;
+    }
+    return UITableViewAutomaticDimension;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
