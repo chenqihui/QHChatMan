@@ -8,6 +8,8 @@
 
 #import "QHDouyuViewController.h"
 
+#import "NSTimer+QHEOCBlocksSupport.h"
+
 #import "QHChatDouyuView.h"
 
 @interface QHDouyuViewController () <QHChatBaseViewDelegate>
@@ -15,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIView *chatContainerView;
 
 @property (nonatomic, strong) QHChatDouyuView *chatView;
+@property (nonatomic, strong) NSTimer *t;
 
 @end
 
@@ -48,6 +51,7 @@
     cellConfig.cellWidth = [UIScreen mainScreen].bounds.size.width;
     v.config.cellConfig = cellConfig;
     v.config.cellEdgeInsets = UIEdgeInsetsMake(4, 10, 4, 10);
+    v.config.hasUnlock = YES;
     v.backgroundColor = [UIColor whiteColor];
     
     _chatView = v;
@@ -93,7 +97,14 @@
     NSDictionary *sayMeg3 = @{@"t": @(2), @"n": @"<font color='#999999'>用户1266</font>", @"c": @"<font color='#000000'>玩大乱斗</font>", @"l": @(1)};
     
     NSArray *ds = @[enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3, enterMeg1, enterMeg2, enterMeg3, sayMeg1, sayMeg2, sayMeg3];
-    [self.chatView insertChatData:ds];
+//    [self.chatView insertChatData:ds];
+    
+    __weak typeof(self) weakSelf = self;
+    _t = [NSTimer qheoc_scheduledTimerWithTimeInterval:0.01 block:^{
+        int index = [QHDouyuViewController getRandomNumber:0 to:(int)(ds.count - 1)];
+        int index2 = [QHDouyuViewController getRandomNumber:0 to:(int)(ds.count - 1)];
+        [weakSelf.chatView insertChatData:@[ds[index], ds[index2]]];
+    } repeats:YES];
 }
 
 #pragma mark - Util
