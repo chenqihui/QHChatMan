@@ -75,12 +75,12 @@
     if (data == nil || data.count <= 0) {
         return;
     }
-    onGlobalThreadAsync(^{
-        [self.buffer append2TempArray:data];
+//    onGlobalThreadAsync(^{
         onMainThreadAsync(^{
+            [self.buffer append2TempArray:data];
             [self p_reloadAndRefresh:NO];
         });
-    });
+//    });
 }
 
 - (void)clearChatData {

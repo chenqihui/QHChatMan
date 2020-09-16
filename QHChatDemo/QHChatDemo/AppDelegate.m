@@ -8,7 +8,11 @@
 
 #import "AppDelegate.h"
 
+#import "YYFPSLabel.h"
+
 @interface AppDelegate ()
+
+@property (nonatomic, strong) YYFPSLabel *fpsL;
 
 @end
 
@@ -17,6 +21,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    _fpsL = [[YYFPSLabel alloc] initWithFrame:CGRectMake(0, 100, 60, 30)];
+    [self.window.rootViewController.view addSubview:_fpsL];
+    
     return YES;
 }
 

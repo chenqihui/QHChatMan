@@ -51,7 +51,8 @@
     cellConfig.cellWidth = [UIScreen mainScreen].bounds.size.width;
     v.config.cellConfig = cellConfig;
     v.config.cellEdgeInsets = UIEdgeInsetsMake(4, 10, 4, 10);
-    v.config.hasUnlock = YES;
+    v.config.hasUnlock = NO;
+    v.config.bAutoCellHeight = YES;
     v.backgroundColor = [UIColor whiteColor];
     
     _chatView = v;
@@ -100,7 +101,7 @@
 //    [self.chatView insertChatData:ds];
     
     __weak typeof(self) weakSelf = self;
-    _t = [NSTimer qheoc_scheduledTimerWithTimeInterval:0.01 block:^{
+    _t = [NSTimer qheoc_scheduledTimerWithTimeInterval:0.02 block:^{
         int index = [QHDouyuViewController getRandomNumber:0 to:(int)(ds.count - 1)];
         int index2 = [QHDouyuViewController getRandomNumber:0 to:(int)(ds.count - 1)];
         [weakSelf.chatView insertChatData:@[ds[index], ds[index2]]];
