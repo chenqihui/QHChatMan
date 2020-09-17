@@ -202,12 +202,17 @@
     
     __block BOOL isReplaceChatData = NO;
     [tempArray enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        BOOL bReplace = [self qhChatUseReplace:obj old:[self.buffer.chatDatasArray lastObject].originChatDataDic];
         QHChatBaseModel *model = [[QHChatBaseModel alloc] initWithChatData:obj];
         model.cellConfig = self.config.cellConfig;
-        if (bReplace == YES) {
-            [self.buffer replaceObjectAtLastIndexWith:model];
-            isReplaceChatData = YES;
+        if (self.config.bInsertReplace) {
+            BOOL bReplace = [self qhChatUseReplace:obj old:[self.buffer.chatDatasArray lastObject].originChatDataDic];
+            if (bReplace == YES) {
+                [self.buffer replaceObjectAtLastIndexWith:model];
+                isReplaceChatData = YES;
+            }
+            else {
+                [self.buffer append2Array:model];
+            }
         }
         else {
             [self.buffer append2Array:model];

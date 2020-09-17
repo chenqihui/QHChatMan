@@ -27,6 +27,7 @@
         _bOpenScorllFromBottom = NO;
         _hasUnlock = NO;
         _bAutoCellHeight = YES;
+        _bInsertReplace = NO;
     }
     return self;
 }

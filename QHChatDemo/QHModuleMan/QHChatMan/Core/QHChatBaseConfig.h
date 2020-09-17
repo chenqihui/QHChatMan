@@ -49,6 +49,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 // YES：使用 UITableViewAutomaticDimension，NO：使用 自计算 的高度，默认 YES
 @property (nonatomic) BOOL bAutoCellHeight;
+// 默认 NO，打开 YES：可通过协议实现与上一个内容比较，来控制是否替换
+@property (nonatomic) BOOL bInsertReplace;
 
 - (BOOL)isEqualToCellConfig:(QHChatCellConfig)cellConfig;
 

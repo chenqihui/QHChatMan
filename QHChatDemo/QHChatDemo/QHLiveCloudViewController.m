@@ -40,6 +40,7 @@
     v.config.cellConfig = cellConfig;
     v.config.chatCountMax = 50;
     v.config.chatCountDelete = 5;
+    v.config.bInsertReplace = YES;
     
     _chatView = v;
 }
