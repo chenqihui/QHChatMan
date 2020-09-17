@@ -93,21 +93,22 @@
 #pragma mark - Private
 
 - (void)p_setup {
-    _lock = dispatch_semaphore_create(1);
+//    _lock = dispatch_semaphore_create(1);
     
     _chatDatasTempArray = [NSMutableArray new];
     _chatDatasArray = [NSMutableArray new];
 }
 
 - (void)p_lock:(void(^)(void))block {
-    if (self.config.hasUnlock == NO) {
-        dispatch_semaphore_wait(_lock, DISPATCH_TIME_FOREVER);
-        block();
-        dispatch_semaphore_signal(_lock);
-    }
-    else {
-        block();
-    }
+//    if (self.config.hasUnlock == NO) {
+//        dispatch_semaphore_wait(_lock, DISPATCH_TIME_FOREVER);
+//        block();
+//        dispatch_semaphore_signal(_lock);
+//    }
+//    else {
+//        block();
+//    }
+    block();
 }
 
 @end
