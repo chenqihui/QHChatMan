@@ -28,7 +28,7 @@ static inline void onGlobalThreadAsync(void (^block)(void)) {
 
 @property (nonatomic, weak) QHChatBaseConfig *config;
 
-@property (nonatomic) dispatch_semaphore_t lock;
+//@property (nonatomic) dispatch_semaphore_t lock;
 
 @property (nonatomic, strong, readonly) NSMutableArray<QHChatBaseModel *> *chatDatasArray;
 @property (nonatomic, strong, readonly) NSMutableArray<NSDictionary *> *chatDatasTempArray;
