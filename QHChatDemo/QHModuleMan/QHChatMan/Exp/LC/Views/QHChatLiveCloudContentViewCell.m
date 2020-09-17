@@ -19,6 +19,12 @@
 
 @implementation QHChatLiveCloudContentViewCell
 
+- (void)dealloc {
+#if DEBUG
+    NSLog(@"%s", __FUNCTION__);
+#endif
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

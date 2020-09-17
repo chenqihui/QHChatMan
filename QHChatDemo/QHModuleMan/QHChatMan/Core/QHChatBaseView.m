@@ -476,6 +476,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    NSLog(@"chen>>cellForRowAtIndexPath-%@", indexPath);
     QHChatBaseModel *model = [self.buffer getChatData:indexPath.row];
     if (model.chatAttributedText == nil) {
         NSAttributedString *content = [self p_goContent:indexPath];
@@ -505,6 +506,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    NSLog(@"chen>>heightForRowAtIndexPath-%@", indexPath);
     if (!self.config.bAutoCellHeight) {
         CGFloat h = 0;
         @try {
