@@ -60,11 +60,13 @@
 
 - (UITableViewCell *)qhChatChatView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QHChatBaseModel *model = [self.buffer getChatData:indexPath.row];
-    NSInteger type = [model.originChatDataDic[@"t"] integerValue];
-    if (type == 4) {
-        QHChatDouyuTipTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kQHCHAT_DY_TIP_CELLIDENTIFIER];
-        cell.contentL.text = model.originChatDataDic[@"c"];
-        return cell;
+    if (model != nil) {
+        NSInteger type = [model.originChatDataDic[@"t"] integerValue];
+        if (type == 4) {
+            QHChatDouyuTipTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kQHCHAT_DY_TIP_CELLIDENTIFIER];
+            cell.contentL.text = model.originChatDataDic[@"c"];
+            return cell;
+        }
     }
     return nil;
 }

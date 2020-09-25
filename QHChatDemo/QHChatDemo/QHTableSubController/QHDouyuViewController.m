@@ -142,4 +142,8 @@ static int i = 0;
     });
 }
 
+- (IBAction)clearAction:(id)sender {
+    [self.chatView clearChatData];
+}
+
 @end

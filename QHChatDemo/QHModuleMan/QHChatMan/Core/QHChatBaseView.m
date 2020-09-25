@@ -238,22 +238,28 @@
         [self.mainTableV reloadData];
         [CATransaction commit];
     }
-    
-    CGFloat hasCellHeight = 0;
-    if (_bOutHeight == NO) {
-        hasCellHeight = [self p_hasCellHeight];
-        if (hasCellHeight >= self.mainTableV.bounds.size.height) {
-            _bOutHeight = YES;
-        }
-    }
-    
-    if (_bOutHeight == YES || _config.bOpenScorllFromBottom == NO) {
+    if (_config.bOpenScorllFromBottom == NO) {
         if (self.mainTableV.isDragging == NO && self.mainTableV.tracking == NO) {
             [self p_scrollToFinalBottom];
         }
     }
     else {
-        [self p_updateTableContentInset:hasCellHeight];
+        CGFloat hasCellHeight = 0;
+        if (_bOutHeight == NO) {
+            hasCellHeight = [self p_hasCellHeight];
+            if (hasCellHeight >= self.mainTableV.bounds.size.height) {
+                _bOutHeight = YES;
+            }
+        }
+        
+        if (_bOutHeight == YES) {
+            if (self.mainTableV.isDragging == NO && self.mainTableV.tracking == NO) {
+                [self p_scrollToFinalBottom];
+            }
+        }
+        else {
+            [self p_updateTableContentInset:hasCellHeight];
+        }
     }
     tempArray = nil;
 }
@@ -364,18 +370,22 @@
 - (void)p_clearChatData {
     [self p_closeReloadTimer];
     
-    dispatch_async(self.chatReloadQueue, ^{
-        [self.buffer clear];
-    });
+    BOOL bRefresh = YES;
+    if (self.buffer.chatDatasArray.count <= 0) {
+        bRefresh = NO;
+    }
+    [self.buffer clear];
     
     self.bAutoReloadChat = YES;
     [self.hasNewDataView hide];
-    
-    [CATransaction begin];
-    [CATransaction setDisableActions:YES];
-    [self.mainTableV reloadData];
-    [CATransaction commit];
-    
+
+    if (bRefresh) {
+        [CATransaction begin];
+        [CATransaction setDisableActions:YES];
+        [self.mainTableV reloadData];
+        [CATransaction commit];
+    }
+        
     if (self.config.bOpenScorllFromBottom == YES) {
         self.bOutHeight = NO;
     }
@@ -478,6 +488,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    NSLog(@"chen>>cellForRowAtIndexPath-%@", indexPath);
     QHChatBaseModel *model = [self.buffer getChatData:indexPath.row];
+    if (model == nil) {
+        return nil;
+    }
     if (model.chatAttributedText == nil) {
         NSAttributedString *content = [self p_goContent:indexPath];
         model.chatAttributedText = content;

@@ -53,9 +53,11 @@
 }
 
 - (QHChatBaseModel *)getChatData:(NSInteger)index {
-    __block QHChatBaseModel *data;
+    __block QHChatBaseModel *data = nil;
     [self p_lock:^{
-        data = self.chatDatasArray[index];
+        if (self.chatDatasArray.count > index) {
+            data = self.chatDatasArray[index];
+        }
     }];
     return data;
 }

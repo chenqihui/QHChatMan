@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -54,16 +52,26 @@
                         <constraint firstAttribute="height" constant="320" id="CV0-Up-pGQ"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1q-Za-Tzk">
+                    <rect key="frame" x="40" y="227" width="34" height="30"/>
+                    <state key="normal" title="clear"/>
+                    <connections>
+                        <action selector="clearAction:" destination="-1" eventType="touchUpInside" id="Uac-vT-DpR"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="hQB-J0-w7p" secondAttribute="bottom" id="7wq-27-23T"/>
+                <constraint firstItem="F1q-Za-Tzk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="BV1-L9-qC2"/>
                 <constraint firstItem="hQB-J0-w7p" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="HGb-mP-O5q"/>
+                <constraint firstItem="JQM-0Y-g5p" firstAttribute="top" secondItem="F1q-Za-Tzk" secondAttribute="bottom" constant="40" id="IZd-jZ-L6Q"/>
                 <constraint firstItem="JQM-0Y-g5p" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="MAg-KO-xmW"/>
                 <constraint firstItem="hQB-J0-w7p" firstAttribute="top" secondItem="JQM-0Y-g5p" secondAttribute="bottom" id="Sa9-Nm-qR1"/>
                 <constraint firstAttribute="trailing" secondItem="hQB-J0-w7p" secondAttribute="trailing" id="bE1-Z7-yOk"/>
                 <constraint firstAttribute="trailing" secondItem="JQM-0Y-g5p" secondAttribute="trailing" id="sNO-To-4Iy"/>
             </constraints>
+            <point key="canvasLocation" x="140" y="153"/>
         </view>
     </objects>
 </document>
