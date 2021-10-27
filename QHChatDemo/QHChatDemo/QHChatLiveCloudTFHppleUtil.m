@@ -8,7 +8,8 @@
 
 #import "QHChatLiveCloudTFHppleUtil.h"
 
-#import "QHChatBaseUtil.h"
+#import <QHChatMan/QHChatMan.h>
+
 #import "TFHpple/TFHpple.h"
 
 @implementation UIColor (QHPlusPlus)

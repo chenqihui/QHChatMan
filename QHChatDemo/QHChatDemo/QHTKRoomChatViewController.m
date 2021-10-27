@@ -14,8 +14,9 @@
 
 #import "QHTKRoomChatViewController.h"
 
+#import <QHChatMan/QHChatMan.h>
+
 #import "QHTKChatRoomView.h"
-#import "NSTimer+QHEOCBlocksSupport.h"
 
 @interface QHTKRoomChatViewController () <QHChatBaseViewDelegate>
 

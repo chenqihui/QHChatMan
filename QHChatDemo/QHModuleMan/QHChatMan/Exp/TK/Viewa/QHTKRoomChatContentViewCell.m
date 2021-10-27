@@ -8,7 +8,7 @@
 
 #import "QHTKRoomChatContentViewCell.h"
 
-#import "QHViewUtil.h"
+#import <QHChatMan/QHChatMan.h>
 
 @implementation QHTKRoomChatContentViewCell
 
@@ -67,7 +67,7 @@
     bgV.layer.masksToBounds = true;
     bgV.layer.cornerRadius = 10;
     [subView addSubview:bgV];
-    [QHViewUtil fullScreen:bgV];
+    [QHChatViewUtil fullScreen:bgV];
     
 }
 
@@ -78,7 +78,7 @@
     self.contentL.lineBreakMode = NSLineBreakByWordWrapping;
     self.contentL.backgroundColor = [UIColor clearColor];
     [_contentV addSubview:self.contentL];
-    [QHViewUtil fullScreen:self.contentL edgeInsets:TKQHCHAT_LC_CONTENT_TEXT_EDGEINSETS];
+    [QHChatViewUtil fullScreen:self.contentL edgeInsets:TKQHCHAT_LC_CONTENT_TEXT_EDGEINSETS];
 }
 
 @end

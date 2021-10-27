@@ -8,9 +8,9 @@
 
 #import "QHChatDouyuView.h"
 
-#import "QHViewUtil.h"
-#import "QHChatBaseUtil+DYText.h"
+#import <QHChatMan/QHChatMan.h>
 
+#import "QHChatBaseUtil+DYText.h"
 #import "QHChatDouyuTipTableViewCell.h"
 
 #define kQHCHAT_DY_TIP_CELLIDENTIFIER @"QHChatDYTipCellIdentifier"

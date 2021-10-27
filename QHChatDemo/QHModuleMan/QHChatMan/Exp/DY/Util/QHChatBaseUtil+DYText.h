@@ -6,7 +6,7 @@
 //  Copyright © 2018 Chen Network Technology. All rights reserved.
 //
 
-#import "QHChatBaseUtil.h"
+#import <QHChatMan/QHChatMan.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

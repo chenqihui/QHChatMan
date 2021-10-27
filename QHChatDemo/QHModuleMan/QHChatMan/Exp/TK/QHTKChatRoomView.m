@@ -8,7 +8,8 @@
 
 #import "QHTKChatRoomView.h"
 
-#import "QHChatBaseUtil.h"
+#import <QHChatMan/QHChatMan.h>
+
 #import "QHTKRoomChatVIewUtil.h"
 #import "QHTKRoomChatContentViewCell.h"
 

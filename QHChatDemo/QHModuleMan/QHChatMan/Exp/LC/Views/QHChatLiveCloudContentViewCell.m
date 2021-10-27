@@ -8,7 +8,7 @@
 
 #import "QHChatLiveCloudContentViewCell.h"
 
-#import "QHViewUtil.h"
+#import <QHChatMan/QHChatMan.h>
 
 @interface QHChatLiveCloudContentViewCell ()
 
@@ -79,7 +79,7 @@
     _contentL.lineBreakMode = NSLineBreakByCharWrapping;
     _contentL.backgroundColor = [UIColor clearColor];
     [_contentV addSubview:_contentL];
-    [QHViewUtil fullScreen:_contentL edgeInsets:QHCHAT_LC_CONTENT_TEXT_EDGEINSETS];
+    [QHChatViewUtil fullScreen:_contentL edgeInsets:QHCHAT_LC_CONTENT_TEXT_EDGEINSETS];
 }
 
 @end

@@ -8,7 +8,7 @@
 
 #import "QHSVLRoomChatContentViewCell.h"
 
-#import "QHViewUtil.h"
+#import <QHChatMan/QHChatMan.h>
 
 @interface QHSVLRoomChatContentViewCell ()
 
@@ -69,7 +69,7 @@
     self.contentL.lineBreakMode = NSLineBreakByWordWrapping;
     self.contentL.backgroundColor = [UIColor clearColor];
     [_contentV addSubview:self.contentL];
-    [QHViewUtil fullScreen:self.contentL edgeInsets:SVLQHCHAT_LC_CONTENT_TEXT_EDGEINSETS];
+    [QHChatViewUtil fullScreen:self.contentL edgeInsets:SVLQHCHAT_LC_CONTENT_TEXT_EDGEINSETS];
 }
 
 @end

@@ -8,7 +8,7 @@
 
 #import "QHTKRoomChatVIewUtil.h"
 
-#import "QHChatBaseUtil.h"
+#import <QHChatMan/QHChatMan.h>
 
 @implementation QHTKRoomChatVIewUtil
 

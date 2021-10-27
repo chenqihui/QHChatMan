@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "QHChatBaseViewCell.h"
+#import <QHChatMan/QHChatMan.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

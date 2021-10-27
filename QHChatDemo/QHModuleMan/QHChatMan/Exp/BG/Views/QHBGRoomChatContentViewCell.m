@@ -8,7 +8,7 @@
 
 #import "QHBGRoomChatContentViewCell.h"
 
-#import "QHViewUtil.h"
+#import <QHChatMan/QHChatMan.h>
 
 @implementation QHBGRoomChatContentViewCell
 
@@ -16,7 +16,7 @@
     self.contentV = [[UIView alloc] initWithFrame:CGRectZero];
     self.contentV.backgroundColor = [UIColor clearColor];
     [self.contentView addSubview:self.contentV];
-    [QHViewUtil fullScreen:self.contentV edgeInsets:UIEdgeInsetsMake(TKQHCHAT_LC_CONTENT_EDGEINSETS.top, TKQHCHAT_LC_CONTENT_EDGEINSETS.left, TKQHCHAT_LC_CONTENT_EDGEINSETS.bottom, TKQHCHAT_LC_CONTENT_EDGEINSETS.right)];
+    [QHChatViewUtil fullScreen:self.contentV edgeInsets:UIEdgeInsetsMake(TKQHCHAT_LC_CONTENT_EDGEINSETS.top, TKQHCHAT_LC_CONTENT_EDGEINSETS.left, TKQHCHAT_LC_CONTENT_EDGEINSETS.bottom, TKQHCHAT_LC_CONTENT_EDGEINSETS.right)];
     
     /*
      例子资源中有两张图片，分别为 ggg.png & ggg@3x.png，如果使用 [UIImage imageWithContentsOfFile:path] & [UIImage imageNamed:path] 来加载图片的话，其 scale 会根据 @3x 来控制，而使用 [UIImage imageWithData:data] 则会忽略，需要自己控制 scale 的 [UIImage imageWithData:data scale:scale] 来创建。
@@ -49,7 +49,7 @@
     image = [image resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeStretch];
     bgV.image = image;
     [self.contentView addSubview:bgV];
-    [QHViewUtil fullScreen:bgV edgeInsets:UIEdgeInsetsMake(2, 0, 0, 0)];
+    [QHChatViewUtil fullScreen:bgV edgeInsets:UIEdgeInsetsMake(2, 0, 0, 0)];
     
 }
 

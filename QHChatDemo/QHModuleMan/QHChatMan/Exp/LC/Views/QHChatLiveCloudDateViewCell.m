@@ -8,7 +8,7 @@
 
 #import "QHChatLiveCloudDateViewCell.h"
 
-#import "QHViewUtil.h"
+#import <QHChatMan/QHChatMan.h>
 
 @interface QHChatLiveCloudDateViewCell ()
 
@@ -53,7 +53,7 @@
     _contentL.lineBreakMode = NSLineBreakByWordWrapping;
     _contentL.backgroundColor = [UIColor clearColor];
     [self.contentView addSubview:_contentL];
-    [QHViewUtil fullScreen:_contentL edgeInsets:UIEdgeInsetsMake(QHCHAT_LC_DATE_SPACE_TOP, 0, 0, 0)];
+    [QHChatViewUtil fullScreen:_contentL edgeInsets:UIEdgeInsetsMake(QHCHAT_LC_DATE_SPACE_TOP, 0, 0, 0)];
 }
 
 @end

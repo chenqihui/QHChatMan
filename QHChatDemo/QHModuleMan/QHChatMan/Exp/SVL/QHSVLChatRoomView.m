@@ -8,8 +8,9 @@
 
 #import "QHSVLChatRoomView.h"
 
+#import <QHChatMan/QHChatMan.h>
+
 #import "QHSVLRoomChatContentViewCell.h"
-#import "QHChatBaseUtil.h"
 #import "QHSVLRoomChatViewUtilHeader.h"
 
 #define kQHCHAT_LC_CONTENT_CELLIDENTIFIER @"SVLQHChatLCContentCellIdentifier"

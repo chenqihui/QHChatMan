@@ -8,7 +8,7 @@
 
 #import "QHChatLiveCloudNewDataView.h"
 
-#import "QHViewUtil.h"
+#import <QHChatMan/QHChatMan.h>
 
 @implementation QHChatLiveCloudNewDataView
 

@@ -8,7 +8,7 @@
 
 #import "QHChatLiveCloudUtil.h"
 
-#import "QHChatBaseUtil.h"
+#import <QHChatMan/QHChatMan.h>
 
 @implementation QHChatLiveCloudUtil
 

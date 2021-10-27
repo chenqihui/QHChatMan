@@ -28,7 +28,7 @@
 
 #import "QHChatLiveCloudTFHppleView.h"
 
-@interface QHTFHppleViewController ()
+@interface QHTFHppleViewController () <QHChatBaseViewDelegate>
 
 @end
 

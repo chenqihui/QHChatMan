@@ -8,7 +8,7 @@
 
 #import "QHDouyuViewController.h"
 
-#import "NSTimer+QHEOCBlocksSupport.h"
+#import <QHChatMan/QHChatMan.h>
 
 #import "QHChatDouyuView.h"
 
@@ -101,7 +101,7 @@
 //    [self.chatView insertChatData:ds];
     
     __weak typeof(self) weakSelf = self;
-    _t = [NSTimer qheoc_scheduledTimerWithTimeInterval:0.02 block:^{
+    _t = [NSTimer qhchateoc_scheduledTimerWithTimeInterval:0.02 block:^{
         int index = [QHDouyuViewController getRandomNumber:0 to:(int)(ds.count - 1)];
         int index2 = [QHDouyuViewController getRandomNumber:0 to:(int)(ds.count - 1)];
         [weakSelf.chatView insertChatData:@[ds[index], ds[index2]]];
