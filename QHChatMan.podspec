@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
 
   s.homepage         = 'https://github.com/chenqihui/QHChatMan'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
+  s.license          = { :type => 'BSD', :file => 'LICENSE' }
   s.author           = { 'AnakinChen' => 'chen_qihui@qq.com' }
   s.source           = { :git => 'https://github.com/chenqihui/QHChatMan.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
