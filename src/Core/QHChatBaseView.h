@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "QHChatBaseProtocol.h"
-#import "QHChatBaseConfig.h"
-#import "QHChatBaseModel.h"
-#import "QHChatBaseUtil.h"
-#import "QHChatBaseBuffer.h"
+#import <QHChatMan/QHChatBaseProtocol.h>
+#import <QHChatMan/QHChatBaseConfig.h>
+#import <QHChatMan/QHChatBaseModel.h>
+#import <QHChatMan/QHChatBaseUtil.h>
+#import <QHChatMan/QHChatBaseBuffer.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

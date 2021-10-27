@@ -133,7 +133,7 @@
 @implementation NSTimer (QHChatEOCBlocksSupport)
 
 + (NSTimer *)qhchateoc_scheduledTimerWithTimeInterval:(NSTimeInterval)interval block:(void (^)(void))block repeats:(BOOL)repeats {
-    return [self scheduledTimerWithTimeInterval:interval target:self selector:@selector(qheoc_blockInvoke:) userInfo:[block copy] repeats:repeats];
+    return [self scheduledTimerWithTimeInterval:interval target:self selector:@selector(qhchateoc_blockInvoke:) userInfo:[block copy] repeats:repeats];
 }
 
 + (void)qhchateoc_blockInvoke:(NSTimer *)timer {

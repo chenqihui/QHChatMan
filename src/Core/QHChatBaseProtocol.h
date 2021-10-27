@@ -9,6 +9,9 @@
 #ifndef QHChatBaseProtocol_h
 #define QHChatBaseProtocol_h
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 @protocol QHChatBaseNewDataViewProtcol <NSObject>
 
 - (void)show;

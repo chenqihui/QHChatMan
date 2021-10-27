@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "QHChatBaseConfig.h"
+#import <QHChatMan/QHChatBaseConfig.h>
 
 @class QHChatBaseModel;
 

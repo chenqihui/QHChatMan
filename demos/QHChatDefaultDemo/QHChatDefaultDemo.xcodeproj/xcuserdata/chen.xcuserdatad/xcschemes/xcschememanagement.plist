@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>QHChatMan.xcscheme_^#shared#^_</key>
+		<key>QHChatDefaultDemo.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -12,7 +12,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>74B1C31327294D1F0034154D</key>
+		<key>7453EC7C272952C40008D72F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
