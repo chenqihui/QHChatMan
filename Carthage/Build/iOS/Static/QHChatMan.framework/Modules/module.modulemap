@@ -1,0 +1,6 @@
+framework module QHChatMan {
+  umbrella header "QHChatMan.h"
+
+  export *
+  module * { export * }
+}

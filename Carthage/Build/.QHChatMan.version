@@ -1,0 +1,19 @@
+{
+  "Mac" : [
+
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
+  "commitish" : "156c774c4fed81d478e4583ae4c1041fe32065b5",
+  "iOS" : [
+    {
+      "name" : "QHChatMan",
+      "hash" : "ff27b86962cb61ab2c2b67ca71545e2ffd62994141b63258472695cadbb8c6fa",
+      "linking" : "static"
+    }
+  ]
+}
