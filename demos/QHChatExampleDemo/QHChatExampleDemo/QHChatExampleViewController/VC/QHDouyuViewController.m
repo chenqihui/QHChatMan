@@ -52,7 +52,6 @@
     v.config.cellConfig = cellConfig;
     v.config.cellEdgeInsets = UIEdgeInsetsMake(4, 10, 4, 10);
     v.config.hasUnlock = NO;
-    v.config.bAutoCellHeight = YES;
     v.backgroundColor = [UIColor whiteColor];
     
     _chatView = v;

@@ -25,8 +25,8 @@
         _bLongPress = NO;
         _minimumPressDuration = -1;
         _bOpenScorllFromBottom = NO;
+        _maxChatCount4closeScorllFromBottom = 0;
         _hasUnlock = NO;
-        _bAutoCellHeight = YES;
         _bInsertReplace = NO;
     }
     return self;

@@ -237,6 +237,9 @@
         [self.mainTableV reloadData];
         [CATransaction commit];
     }
+    if (self.buffer.chatDatasArray.count > self.config.maxChatCount4closeScorllFromBottom) {
+        self.config.bOpenScorllFromBottom = NO;
+    }
     if (_config.bOpenScorllFromBottom == NO) {
         if (self.mainTableV.isDragging == NO && self.mainTableV.tracking == NO) {
             [self p_scrollToFinalBottom];
@@ -385,6 +388,9 @@
         [CATransaction commit];
     }
         
+    if (self.config.maxChatCount4closeScorllFromBottom != 0) {
+        self.config.bOpenScorllFromBottom = YES;
+    }
     if (self.config.bOpenScorllFromBottom == YES) {
         self.bOutHeight = NO;
     }
@@ -519,7 +525,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    NSLog(@"chen>>heightForRowAtIndexPath-%@", indexPath);
-    if (!self.config.bAutoCellHeight) {
+    if (self.config.bOpenScorllFromBottom) {
         CGFloat h = 0;
         @try {
             h = [self p_goHeight:indexPath];

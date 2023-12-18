@@ -42,13 +42,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BOOL bLongPress;
 @property (nonatomic) NSTimeInterval minimumPressDuration;
 
-// 公屏在没有满屏时由下而上显示
+/*
+ bOpenScorllFromBottom：公屏在没有满屏时由下而上显示
+ NO：使用 UITableViewAutomaticDimension，YES：使用 自计算 的高度，默认 YES
+ maxChatCount4closeScorllFromBottom：配合使用，使用一个限制最大的个数的高度，这样可以在超出个数后使用 AutomaticDimension，自预测高度性能较好，
+ !!!: 需要注意 YES 时，一定要 qhChatAnalyseHeight 实现并计算好真实 cell 的高度，否则会异常
+ */
 @property (nonatomic) BOOL bOpenScorllFromBottom;
+@property (nonatomic) NSUInteger maxChatCount4closeScorllFromBottom;
 
 @property (nonatomic) BOOL hasUnlock;
 
-// YES：使用 UITableViewAutomaticDimension，NO：使用 自计算 的高度，默认 YES
-@property (nonatomic) BOOL bAutoCellHeight;
 // 默认 NO，打开 YES：可通过协议实现与上一个内容比较，来控制是否替换
 @property (nonatomic) BOOL bInsertReplace;
 

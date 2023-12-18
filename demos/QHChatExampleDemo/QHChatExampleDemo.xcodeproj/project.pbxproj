@@ -370,10 +370,10 @@
 		74121CF32729985E00B45829 /* DY */ = {
 			isa = PBXGroup;
 			children = (
-				74121CF42729985E00B45829 /* QHChatDouyuView.m */,
-				74121CF52729985E00B45829 /* Util */,
 				74121CF82729985E00B45829 /* QHChatDouyuView.h */,
+				74121CF42729985E00B45829 /* QHChatDouyuView.m */,
 				74121CF92729985E00B45829 /* Resource */,
+				74121CF52729985E00B45829 /* Util */,
 				74121CFD2729985E00B45829 /* Views */,
 			);
 			path = DY;

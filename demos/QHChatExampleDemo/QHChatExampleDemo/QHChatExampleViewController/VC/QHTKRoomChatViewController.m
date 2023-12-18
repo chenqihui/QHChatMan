@@ -35,6 +35,7 @@
     QHChatBaseConfig *config = [QHChatBaseConfig new];
     config.bLongPress = YES;
     config.bOpenScorllFromBottom = YES;
+    config.maxChatCount4closeScorllFromBottom = 10;
     config.chatCountMax = 100;
     config.chatCountDelete = 30;
     QHChatCellConfig cellConfig = config.cellConfig;
@@ -45,8 +46,6 @@
     else
         cellConfig.cellWidth = [UIScreen mainScreen].bounds.size.width*0.7;
     config.cellConfig = cellConfig;
-    // 自下到上，需要自计算高度
-    config.bAutoCellHeight = NO;
     QHTKChatRoomView *v = [QHTKChatRoomView createChatViewToSuperView:_chatSuperView withConfig:config];
     v.delegate = self;
     v.backgroundColor = [UIColor clearColor];
