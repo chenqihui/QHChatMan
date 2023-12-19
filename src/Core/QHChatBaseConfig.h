@@ -44,9 +44,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /*
  bOpenScorllFromBottom：公屏在没有满屏时由下而上显示
- NO：使用 UITableViewAutomaticDimension，YES：使用 自计算 的高度，默认 YES
+ NO：使用 UITableViewAutomaticDimension，YES：使用 自计算 的高度，默认 NO
+ bOpenScorllFromBottom 为 YES 时：
  maxChatCount4closeScorllFromBottom：配合使用，使用一个限制最大的个数的高度，这样可以在超出个数后使用 AutomaticDimension，自预测高度性能较好，
- !!!: 需要注意 YES 时，一定要 qhChatAnalyseHeight 实现并计算好真实 cell 的高度，否则会异常
+ bOpenScorllFromBottom 为 NO 时：
+ maxChatCount4closeScorllFromBottom 强制为设置 0
+ 
+ !!!: 需要注意 YES 时，一定要 - (CGFloat)qhChatAnalyseHeight:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath 实现并计算好真实 cell 的高度，因为需要正确值才能进行底部offset
  */
 @property (nonatomic) BOOL bOpenScorllFromBottom;
 @property (nonatomic) NSUInteger maxChatCount4closeScorllFromBottom;

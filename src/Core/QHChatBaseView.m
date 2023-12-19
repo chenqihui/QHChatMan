@@ -114,6 +114,7 @@
         _bOutHeight = NO;
     }
     else {
+        _config.maxChatCount4closeScorllFromBottom = 0;
         _bOutHeight = YES;
     }
 }
