@@ -21,9 +21,8 @@ typedef void (^AddContentBlock)(UIImageView *imageV);
 
 + (NSAttributedString *)toContent:(NSString *)content color:(UIColor *)color;
 
-+ (NSAttributedString *)toImage:(UIImage *)image size:(CGSize)size;
-
-+ (NSAttributedString *)toImage:(UIImage *)image size:(CGSize)size addContentBlock:(nullable AddContentBlock)block;
++ (NSAttributedString *)toImage:(UIImage *)image size:(CGSize)size offBottom:(CGFloat)offBottom;
++ (NSAttributedString *)toImage:(UIImage *)image size:(CGSize)size offBottom:(CGFloat)offBottom addContentBlock:(nullable AddContentBlock)block;
 
 + (CGSize)calculateString:(NSString *)string size:(CGSize)size font:(UIFont *)font;
 

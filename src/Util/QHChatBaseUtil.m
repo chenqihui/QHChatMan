@@ -26,7 +26,13 @@
         return nil;
     }
     NSError *error = nil;
-    NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[content dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType} documentAttributes:nil error:&error];
+    NSAttributedString *attributedString = nil;
+    @try {
+        attributedString = [[NSAttributedString alloc] initWithData:[content dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType} documentAttributes:nil error:&error];
+    } @catch (NSException *exception) {
+        attributedString = nil;
+    } @finally {
+    }
     if (error != nil) {
         return nil;
     }
@@ -41,22 +47,33 @@
     return contentAttr;
 }
 
-+ (NSAttributedString *)toImage:(UIImage *)image size:(CGSize)size {
-    return [QHChatBaseUtil toImage:image size:size addContentBlock:nil];
++ (NSAttributedString *)toImage:(UIImage *)image size:(CGSize)size offBottom:(CGFloat)offBottom {
+    return [self p_toImage:image size:size offBottom:offBottom];
 }
 
 // [Null passed to a callee that requires a non-nul... - 简书](https://www.jianshu.com/p/3d030d367a34)
-+ (NSAttributedString *)toImage:(UIImage *)image size:(CGSize)size addContentBlock:(nullable AddContentBlock)block {
++ (NSAttributedString *)toImage:(UIImage *)image size:(CGSize)size offBottom:(CGFloat)offBottom addContentBlock:(nullable AddContentBlock)block {
     UIImageView *imageV = [[UIImageView alloc] initWithImage:image];
     imageV.frame = (CGRect){CGPointZero, size};
     if (block != nil) {
         block(imageV);
     }
+    UIImage *i = [self convertViewToImage:imageV];
+    return [self p_toImage:i size:size offBottom:offBottom];
+}
+
++ (NSAttributedString *)p_toImage:(UIImage *)image size:(CGSize)size offBottom:(CGFloat)offBottom {
+    CGSize sizeF = image.size;
+    if (size.width > 0) {
+        CGFloat h = size.height;
+        CGFloat w = image.size.width * h / image.size.height;
+        sizeF = CGSizeMake(w, h);
+    }
     NSAttributedString *imageAttr = nil;
     @try {
         NSTextAttachment *textAttachment = [[NSTextAttachment alloc] init];
-        textAttachment.image = [self convertViewToImage:imageV];;
-        textAttachment.bounds = CGRectMake(0, -2, textAttachment.image.size.width, textAttachment.image.size.height);
+        textAttachment.image = image;
+        textAttachment.bounds = CGRectMake(0, offBottom, sizeF.width, sizeF.height);
         imageAttr = [NSAttributedString attributedStringWithAttachment:textAttachment];
     } @catch (NSException *exception) {
         imageAttr = [[NSAttributedString alloc] initWithString:@""];
@@ -80,18 +97,11 @@
 + (CGSize)calculateString:(NSString *)string size:(CGSize)size font:(UIFont *)font {
     CGSize expectedLabelSize = CGSizeZero;
     
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
-        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-        paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
-        NSDictionary *attributes = @{NSFontAttributeName:font, NSParagraphStyleAttributeName:paragraphStyle.copy};
-        
-        expectedLabelSize = [string boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil].size;
-    }
-    else {
-        //        expectedLabelSize = [string sizeWithFont:font
-        //                             constrainedToSize:size
-        //                                 lineBreakMode:NSLineBreakByWordWrapping];
-    }
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+    NSDictionary *attributes = @{NSFontAttributeName:font, NSParagraphStyleAttributeName:paragraphStyle.copy};
+    
+    expectedLabelSize = [string boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil].size;
     
     return CGSizeMake(ceil(expectedLabelSize.width), ceil(expectedLabelSize.height));
 }

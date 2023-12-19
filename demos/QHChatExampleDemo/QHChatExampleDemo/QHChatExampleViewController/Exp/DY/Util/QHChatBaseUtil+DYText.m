@@ -34,7 +34,7 @@
 }
 
 + (NSAttributedString *)toUserLevelImage:(UIImage *)image {
-    return [QHChatBaseUtil toImage:image size:CGSizeMake(0, 13)];
+    return [QHChatBaseUtil toImage:image size:CGSizeMake(0, 13) offBottom:0];
 }
 
 + (NSAttributedString *)toUserluckNumber:(NSString *)luckNumberString {
@@ -47,7 +47,7 @@
 }
 
 + (NSAttributedString *)toImage:(UIImage *)image size:(CGSize)size titleLabelBlock:(void(^)(UILabel *titleL))block {
-    NSAttributedString *imageAttr = [self toImage:image size:size addContentBlock:^(UIImageView * _Nonnull imageV) {
+    NSAttributedString *imageAttr = [self toImage:image size:size offBottom:0 addContentBlock:^(UIImageView * _Nonnull imageV) {
         CGFloat xx = size.width/4.0;
         UILabel *titleL = [[UILabel alloc] initWithFrame:(CGRect){CGPointMake(xx, 0), CGSizeMake(size.width - xx - 1, size.height)}];
         [titleL setFont:[UIFont systemFontOfSize:12]];

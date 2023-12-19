@@ -54,6 +54,7 @@
 #pragma mark - Private
 
 - (void)setup {
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     [self p_addContentLabel];
     [self addTapGesture];
 }

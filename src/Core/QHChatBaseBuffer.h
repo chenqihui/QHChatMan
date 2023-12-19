@@ -32,14 +32,17 @@ static inline void onGlobalThreadAsync(void (^block)(void)) {
 
 @property (nonatomic, strong, readonly) NSMutableArray<QHChatBaseModel *> *chatDatasArray;
 @property (nonatomic, strong, readonly) NSMutableArray<NSDictionary *> *chatDatasTempArray;
+@property (nonatomic, strong, readonly) NSMutableDictionary<NSString *, QHChatBaseModel *> *removeChatDatasDic;
 
 - (void)append2TempArray:(NSArray<NSDictionary *> *)data;
 - (void)append2Array:(QHChatBaseModel *)model;
+- (void)append2RmoveArray:(QHChatBaseModel *)model;
+- (QHChatBaseModel *)getChatData:(NSInteger)index;
 - (void)clearTempArray;
+- (void)clear;
 - (void)replaceObjectAtLastIndexWith:(QHChatBaseModel *)model;
 - (BOOL)removeObjectsInRange;
-- (QHChatBaseModel *)getChatData:(NSInteger)index;
-- (void)clear;
+- (NSInteger)remove:(NSString *)cid;
 
 @end
 

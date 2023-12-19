@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSAttributedString *chatAttributedText;
 @property (nonatomic) QHChatCellConfig cellConfig;
 @property (nonatomic) CGFloat cellHeight;
+@property (nonatomic, copy) NSString *cid; // 该 key 目前需要 remove 的 chatModel 必须设置
+@property (nonatomic) BOOL bUpdate;
 
 - (instancetype)initWithChatData:(NSDictionary *)data;
 

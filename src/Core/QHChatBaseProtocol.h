@@ -109,6 +109,11 @@
  */
 - (void)qhlongPressAction:(UILongPressGestureRecognizer *)gec;
 
+/*
+ 删除协议：是否加入删除列表，默认 NO，如果为 YES 的话，需要设置 *key 值供记录
+ */
+- (BOOL)qhAllowForRemoveChatData:(NSDictionary *)data key:(NSString **)key;
+
 @end
 
 

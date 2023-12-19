@@ -8,23 +8,28 @@
 
 #import "QHChatBaseBuffer.h"
 
+#import <QHChatMan/QHChatBaseModel.h>
+
 // [iOS 十种线程锁](https://www.jianshu.com/p/7e9dd2cb78a8)
 
 @interface QHChatBaseBuffer ()
 
 @property (nonatomic, strong, readwrite) NSMutableArray<QHChatBaseModel *> *chatDatasArray;
 @property (nonatomic, strong, readwrite) NSMutableArray<NSDictionary *> *chatDatasTempArray;
+@property (nonatomic, strong, readwrite) NSMutableDictionary<NSString *, QHChatBaseModel *> *removeChatDatasDic;
 
 @end
 
 @implementation QHChatBaseBuffer
 
 - (void)dealloc {
+    [self p_clear];
+    _chatDatasArray = nil;
+    _chatDatasTempArray = nil;
+    _removeChatDatasDic = nil;
 #if DEBUG
     NSLog(@"%s", __FUNCTION__);
 #endif
-    _chatDatasArray = nil;
-    _chatDatasTempArray = nil;
 }
 
 - (instancetype)init {
@@ -52,6 +57,15 @@
     }];
 }
 
+- (void)append2RmoveArray:(QHChatBaseModel *)model {
+    if (model.cid == nil || model.cid.length <= 0) {
+        return;
+    }
+    [self p_lock:^{
+        self.removeChatDatasDic[model.cid] = model;
+    }];
+}
+
 - (QHChatBaseModel *)getChatData:(NSInteger)index {
     __block QHChatBaseModel *data = nil;
     [self p_lock:^{
@@ -69,10 +83,7 @@
 }
 
 - (void)clear {
-    [self p_lock:^{
-        [self.chatDatasTempArray removeAllObjects];
-        [self.chatDatasArray removeAllObjects];
-    }];
+    [self p_clear];
 }
 
 - (void)replaceObjectAtLastIndexWith:(QHChatBaseModel *)model {
@@ -88,8 +99,24 @@
             [self.chatDatasArray removeObjectsInRange:NSMakeRange(0, self.config.chatCountDelete)];
             bDeleteChatData = YES;
         }
+        if (self.removeChatDatasDic.count > self.config.chatCountMax) {
+            NSArray *keys = self.removeChatDatasDic.allKeys;
+            [self.removeChatDatasDic removeObjectsForKeys:[keys subarrayWithRange:NSMakeRange(0, self.config.chatCountDelete)]];
+        }
     }];
     return bDeleteChatData;
+}
+
+- (NSInteger)remove:(NSString *)cid {
+    QHChatBaseModel *m = self.removeChatDatasDic[cid];
+    NSInteger index = -1;
+    if (m) {
+        index = [self.chatDatasArray indexOfObject:m];
+        [self.chatDatasArray removeObject:m];
+        [self.removeChatDatasDic removeObjectForKey:cid];
+    }
+    [self.chatDatasTempArray removeObject:m.originChatDataDic];
+    return index;
 }
 
 #pragma mark - Private
@@ -99,6 +126,7 @@
     
     _chatDatasTempArray = [NSMutableArray new];
     _chatDatasArray = [NSMutableArray new];
+    _removeChatDatasDic = [NSMutableDictionary new];
 }
 
 - (void)p_lock:(void(^)(void))block {
@@ -111,6 +139,12 @@
 //        block();
 //    }
     block();
+}
+
+- (void)p_clear {
+    [self.chatDatasTempArray removeAllObjects];
+    [self.chatDatasArray removeAllObjects];
+    [self.removeChatDatasDic removeAllObjects];
 }
 
 @end

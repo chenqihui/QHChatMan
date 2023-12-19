@@ -34,9 +34,9 @@
 - (void)dealloc {
     [self p_closeReloadTimer];
     _hasNewDataView = nil;
-    #if DEBUG
-        NSLog(@"%s", __FUNCTION__);
-    #endif
+#if DEBUG
+    NSLog(@"%s", __FUNCTION__);
+#endif
 }
 
 - (instancetype)init {
@@ -74,12 +74,10 @@
     if (data == nil || data.count <= 0) {
         return;
     }
-//    onGlobalThreadAsync(^{
-        onMainThreadAsync(^{
-            [self.buffer append2TempArray:data];
-            [self p_reloadAndRefresh:NO];
-        });
-//    });
+      onMainThreadAsync(^{
+          [self.buffer append2TempArray:data];
+          [self p_reloadAndRefresh:NO];
+      });
 }
 
 - (void)clearChatData {
@@ -91,6 +89,12 @@
 - (void)scrollToBottom {
     onMainThreadAsync(^{
         [self p_scrollToBottom];
+    });
+}
+
+- (void)removeChatData:(NSString *)key {
+    onMainThreadAsync(^{
+        [self p_removeChatData:key];
     });
 }
 
@@ -191,6 +195,9 @@
         [self p_closeReloadTimer];
         return;
     }
+    if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
+        return;
+    }
     if (_bAutoReloadChat == NO) {
         [self.hasNewDataView update:@(self.buffer.chatDatasTempArray.count)];
         [self p_closeReloadTimer];
@@ -203,6 +210,11 @@
     __block BOOL isReplaceChatData = NO;
     [tempArray enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         QHChatBaseModel *model = [[QHChatBaseModel alloc] initWithChatData:obj];
+        NSString *key;
+        if ([self qhAllowForRemoveChatData:model.originChatDataDic key:&key]) {
+            model.cid = key;
+            [self.buffer append2RmoveArray:model];
+        }
         model.cellConfig = self.config.cellConfig;
         if (self.config.bInsertReplace) {
             BOOL bReplace = [self qhChatUseReplace:obj old:[self.buffer.chatDatasArray lastObject].originChatDataDic];
@@ -431,6 +443,29 @@
     [self p_reloadAndRefresh:NO];
 }
 
+- (void)p_removeChatData:(NSString *)cid {
+    NSInteger index = [self.buffer remove:cid];
+    if (index >= 0) {
+        if (!_bAutoReloadChat || self.reloadTimer == nil || ![self.reloadTimer isValid]) {
+            // [从 UITableView 中删除 Cell 的踩坑](http://jalan.space/2019/09/19/2019/swift-tableview-delete-cell/)
+            // Invalid update: invalid number of sections. The number of sections contained in the table view after the update (1) must be equal to the number of sections contained in the table view before the update (1), plus or minus the number of sections inserted or deleted (0 inserted, 1 deleted).
+            @try {
+                NSIndexPath *ip = [NSIndexPath indexPathForRow:index inSection:0];
+                [self.mainTableV deleteRowsAtIndexPaths:@[ip] withRowAnimation:UITableViewRowAnimationNone];
+            } @catch (NSException *exception) {
+                [CATransaction begin];
+                [CATransaction setDisableActions:YES];
+                [self.mainTableV reloadData];
+                [CATransaction commit];
+            } @finally {
+            }
+            if (!_bAutoReloadChat) {
+                [self p_refreshAutoReloadChat];
+            }
+        }
+    }
+}
+
 #pragma mark - QHChatBaseViewProtocol
 
 - (void)qhChatCustomChatViewSetup {
@@ -484,6 +519,10 @@
     }
 }
 
+- (BOOL)qhAllowForRemoveChatData:(NSDictionary *)data key:(NSString **)key {
+    return NO;
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -494,7 +533,6 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    NSLog(@"chen>>cellForRowAtIndexPath-%@", indexPath);
     QHChatBaseModel *model = [self.buffer getChatData:indexPath.row];
     if (model == nil) {
         return nil;
@@ -527,7 +565,6 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    NSLog(@"chen>>heightForRowAtIndexPath-%@", indexPath);
     if (self.config.bOpenScorllFromBottom) {
         CGFloat h = 0;
         @try {
