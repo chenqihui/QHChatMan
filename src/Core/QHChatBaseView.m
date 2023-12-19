@@ -237,7 +237,9 @@
         [self.mainTableV reloadData];
         [CATransaction commit];
     }
-    if (self.buffer.chatDatasArray.count > self.config.maxChatCount4closeScorllFromBottom) {
+    if (self.config.bOpenScorllFromBottom == YES &&
+        self.config.maxChatCount4closeScorllFromBottom != 0 &&
+        self.buffer.chatDatasArray.count > self.config.maxChatCount4closeScorllFromBottom) {
         self.config.bOpenScorllFromBottom = NO;
     }
     if (_config.bOpenScorllFromBottom == NO) {
