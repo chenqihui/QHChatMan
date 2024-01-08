@@ -254,10 +254,10 @@
 		74121CCB272997FE00B45829 /* YYFPSLabel */ = {
 			isa = PBXGroup;
 			children = (
-				74121CCC272997FE00B45829 /* YYWeakProxy.m */,
 				74121CCD272997FE00B45829 /* YYFPSLabel.h */,
 				74121CCE272997FE00B45829 /* YYFPSLabel.m */,
 				74121CCF272997FF00B45829 /* YYWeakProxy.h */,
+				74121CCC272997FE00B45829 /* YYWeakProxy.m */,
 			);
 			name = YYFPSLabel;
 			path = QHChatExampleViewController/YYFPSLabel;
@@ -278,9 +278,9 @@
 		74121CD32729985E00B45829 /* LC */ = {
 			isa = PBXGroup;
 			children = (
-				74121CD42729985E00B45829 /* Util */,
-				74121CD72729985E00B45829 /* QHChatLiveCloudView.m */,
 				74121CD82729985E00B45829 /* QHChatLiveCloudView.h */,
+				74121CD72729985E00B45829 /* QHChatLiveCloudView.m */,
+				74121CD42729985E00B45829 /* Util */,
 				74121CD92729985E00B45829 /* Views */,
 			);
 			path = LC;
@@ -311,10 +311,10 @@
 		74121CE02729985E00B45829 /* TK */ = {
 			isa = PBXGroup;
 			children = (
-				74121CE12729985E00B45829 /* Util */,
-				74121CE42729985E00B45829 /* QHTKChatRoomView.m */,
 				74121CE52729985E00B45829 /* QHTKChatRoomView.h */,
-				74121CE62729985E00B45829 /* Viewa */,
+				74121CE42729985E00B45829 /* QHTKChatRoomView.m */,
+				74121CE12729985E00B45829 /* Util */,
+				74121CE62729985E00B45829 /* Views */,
 			);
 			path = TK;
 			sourceTree = "<group>";
@@ -328,21 +328,21 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
-		74121CE62729985E00B45829 /* Viewa */ = {
+		74121CE62729985E00B45829 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				74121CE72729985E00B45829 /* QHTKRoomChatContentViewCell.h */,
 				74121CE82729985E00B45829 /* QHTKRoomChatContentViewCell.m */,
 			);
-			path = Viewa;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		74121CE92729985E00B45829 /* SVL */ = {
 			isa = PBXGroup;
 			children = (
 				74121CEA2729985E00B45829 /* QHSVLChatRoomView.h */,
-				74121CEB2729985E00B45829 /* Util */,
 				74121CEF2729985E00B45829 /* QHSVLChatRoomView.m */,
+				74121CEB2729985E00B45829 /* Util */,
 				74121CF02729985E00B45829 /* Views */,
 			);
 			path = SVL;
@@ -411,9 +411,9 @@
 		74121D012729985E00B45829 /* BG */ = {
 			isa = PBXGroup;
 			children = (
+				74121D082729985E00B45829 /* QHBGChatRoomView.h */,
 				74121D022729985E00B45829 /* QHBGChatRoomView.m */,
 				74121D032729985E00B45829 /* Views */,
-				74121D082729985E00B45829 /* QHBGChatRoomView.h */,
 			);
 			path = BG;
 			sourceTree = "<group>";
