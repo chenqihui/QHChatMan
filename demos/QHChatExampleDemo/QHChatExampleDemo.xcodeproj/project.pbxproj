@@ -42,6 +42,9 @@
 		74121D1C2729985E00B45829 /* QHBGRoomChatContentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74121D052729985E00B45829 /* QHBGRoomChatContentViewCell.m */; };
 		74121D1D2729985E00B45829 /* ggg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74121D062729985E00B45829 /* ggg@3x.png */; };
 		74121D1E2729985E00B45829 /* ggg.png in Resources */ = {isa = PBXBuildFile; fileRef = 74121D072729985E00B45829 /* ggg.png */; };
+		74146AB92B4C055100BC0CE8 /* QHGifChatRoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74146AB82B4C055100BC0CE8 /* QHGifChatRoomView.m */; };
+		74146ABD2B4C069400BC0CE8 /* QHChatGifTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74146ABC2B4C069400BC0CE8 /* QHChatGifTableViewCell.m */; };
+		74146AC12B4C071F00BC0CE8 /* QHTKRoomChatVIewUtil+Gif.m in Sources */ = {isa = PBXBuildFile; fileRef = 74146AC02B4C071F00BC0CE8 /* QHTKRoomChatVIewUtil+Gif.m */; };
 		74637E572B30212D00479E58 /* QHTFHppleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74637E422B30212D00479E58 /* QHTFHppleViewController.m */; };
 		74637E582B30212D00479E58 /* QHTKRoomChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74637E432B30212D00479E58 /* QHTKRoomChatViewController.m */; };
 		74637E592B30212D00479E58 /* QHDouyuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74637E442B30212D00479E58 /* QHDouyuViewController.m */; };
@@ -142,6 +145,12 @@
 		74121D062729985E00B45829 /* ggg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ggg@3x.png"; sourceTree = "<group>"; };
 		74121D072729985E00B45829 /* ggg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ggg.png; sourceTree = "<group>"; };
 		74121D082729985E00B45829 /* QHBGChatRoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHBGChatRoomView.h; sourceTree = "<group>"; };
+		74146AB72B4C055100BC0CE8 /* QHGifChatRoomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHGifChatRoomView.h; sourceTree = "<group>"; };
+		74146AB82B4C055100BC0CE8 /* QHGifChatRoomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHGifChatRoomView.m; sourceTree = "<group>"; };
+		74146ABB2B4C069400BC0CE8 /* QHChatGifTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHChatGifTableViewCell.h; sourceTree = "<group>"; };
+		74146ABC2B4C069400BC0CE8 /* QHChatGifTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHChatGifTableViewCell.m; sourceTree = "<group>"; };
+		74146ABF2B4C071F00BC0CE8 /* QHTKRoomChatVIewUtil+Gif.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QHTKRoomChatVIewUtil+Gif.h"; sourceTree = "<group>"; };
+		74146AC02B4C071F00BC0CE8 /* QHTKRoomChatVIewUtil+Gif.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "QHTKRoomChatVIewUtil+Gif.m"; sourceTree = "<group>"; };
 		74637E422B30212D00479E58 /* QHTFHppleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHTFHppleViewController.m; sourceTree = "<group>"; };
 		74637E432B30212D00479E58 /* QHTKRoomChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHTKRoomChatViewController.m; sourceTree = "<group>"; };
 		74637E442B30212D00479E58 /* QHDouyuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHDouyuViewController.m; sourceTree = "<group>"; };
@@ -271,6 +280,7 @@
 				74121CD32729985E00B45829 /* LC */,
 				74121CE92729985E00B45829 /* SVL */,
 				74121CE02729985E00B45829 /* TK */,
+				74146AB52B4C050200BC0CE8 /* Gif */,
 			);
 			path = Exp;
 			sourceTree = "<group>";
@@ -322,8 +332,8 @@
 		74121CE12729985E00B45829 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				74121CE22729985E00B45829 /* QHTKRoomChatVIewUtil.m */,
 				74121CE32729985E00B45829 /* QHTKRoomChatVIewUtil.h */,
+				74121CE22729985E00B45829 /* QHTKRoomChatVIewUtil.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -427,6 +437,35 @@
 				74121D072729985E00B45829 /* ggg.png */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		74146AB52B4C050200BC0CE8 /* Gif */ = {
+			isa = PBXGroup;
+			children = (
+				74146AB72B4C055100BC0CE8 /* QHGifChatRoomView.h */,
+				74146AB82B4C055100BC0CE8 /* QHGifChatRoomView.m */,
+				74146ABE2B4C070100BC0CE8 /* Util */,
+				74146ABA2B4C063A00BC0CE8 /* Views */,
+			);
+			path = Gif;
+			sourceTree = "<group>";
+		};
+		74146ABA2B4C063A00BC0CE8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				74146ABB2B4C069400BC0CE8 /* QHChatGifTableViewCell.h */,
+				74146ABC2B4C069400BC0CE8 /* QHChatGifTableViewCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		74146ABE2B4C070100BC0CE8 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				74146ABF2B4C071F00BC0CE8 /* QHTKRoomChatVIewUtil+Gif.h */,
+				74146AC02B4C071F00BC0CE8 /* QHTKRoomChatVIewUtil+Gif.m */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 		74637E412B30212D00479E58 /* VC */ = {
@@ -555,6 +594,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74146AB92B4C055100BC0CE8 /* QHGifChatRoomView.m in Sources */,
 				74121D122729985E00B45829 /* QHSVLChatRoomView.m in Sources */,
 				74121D0B2729985E00B45829 /* QHChatLiveCloudNewDataView.m in Sources */,
 				74637E612B30212D00479E58 /* QHChatLiveCloudTFHppleUtil.m in Sources */,
@@ -567,6 +607,7 @@
 				74121D0D2729985E00B45829 /* QHChatLiveCloudDateViewCell.m in Sources */,
 				74637E5D2B30212D00479E58 /* QHLiveCloudViewController.m in Sources */,
 				74121D112729985E00B45829 /* QHSVLRoomChatViewUtil.m in Sources */,
+				74146ABD2B4C069400BC0CE8 /* QHChatGifTableViewCell.m in Sources */,
 				74637E5F2B30212D00479E58 /* QHChatLiveCloudTFHppleView.m in Sources */,
 				74637E5A2B30212D00479E58 /* QHSVLRoomChatViewController.m in Sources */,
 				74121D1C2729985E00B45829 /* QHBGRoomChatContentViewCell.m in Sources */,
@@ -578,6 +619,7 @@
 				74121C83272996C500B45829 /* ViewController.m in Sources */,
 				74121C7D272996C500B45829 /* AppDelegate.m in Sources */,
 				74121CC9272997CC00B45829 /* XPathQuery.m in Sources */,
+				74146AC12B4C071F00BC0CE8 /* QHTKRoomChatVIewUtil+Gif.m in Sources */,
 				74121D152729985E00B45829 /* QHChatBaseUtil+DYText.m in Sources */,
 				74121C8E272996C600B45829 /* main.m in Sources */,
 				74121CC7272997CC00B45829 /* TFHpple.m in Sources */,

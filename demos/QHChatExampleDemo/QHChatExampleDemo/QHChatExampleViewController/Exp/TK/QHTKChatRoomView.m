@@ -8,8 +8,6 @@
 
 #import "QHTKChatRoomView.h"
 
-#import <QHChatMan/QHChatMan.h>
-
 #import "QHTKRoomChatVIewUtil.h"
 #import "QHTKRoomChatContentViewCell.h"
 
@@ -19,7 +17,7 @@ NSString *const kTKChatOpKey = @"op";
 NSString *const kTKChatOpValueChat = @"chat";
 NSString *const kTKChatOpValueNotice = @"notice";
 
-@interface QHTKChatRoomView () <QHChatBaseViewCellDelegate>
+@interface QHTKChatRoomView ()
 
 @end
 
