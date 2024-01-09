@@ -294,6 +294,7 @@
 				74121CE92729985E00B45829 /* SVL */,
 				74121CE02729985E00B45829 /* TK */,
 				74146AB52B4C050200BC0CE8 /* Gif */,
+				74146ADA2B4CEE1200BC0CE8 /* TFHpple */,
 			);
 			path = Exp;
 			sourceTree = "<group>";
@@ -495,16 +496,23 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		74146ADA2B4CEE1200BC0CE8 /* TFHpple */ = {
+			isa = PBXGroup;
+			children = (
+				74637E472B30212D00479E58 /* QHChatLiveCloudTFHppleUtil.h */,
+				74637E4E2B30212D00479E58 /* QHChatLiveCloudTFHppleUtil.m */,
+				74637E562B30212D00479E58 /* QHChatLiveCloudTFHppleView.h */,
+				74637E4C2B30212D00479E58 /* QHChatLiveCloudTFHppleView.m */,
+			);
+			path = TFHpple;
+			sourceTree = "<group>";
+		};
 		74637E412B30212D00479E58 /* VC */ = {
 			isa = PBXGroup;
 			children = (
 				74637E452B30212D00479E58 /* QHBgRoomViewController.h */,
 				74637E4F2B30212D00479E58 /* QHBgRoomViewController.m */,
 				74637E4B2B30212D00479E58 /* QHBgRoomViewController.xib */,
-				74637E472B30212D00479E58 /* QHChatLiveCloudTFHppleUtil.h */,
-				74637E4E2B30212D00479E58 /* QHChatLiveCloudTFHppleUtil.m */,
-				74637E562B30212D00479E58 /* QHChatLiveCloudTFHppleView.h */,
-				74637E4C2B30212D00479E58 /* QHChatLiveCloudTFHppleView.m */,
 				74637E512B30212D00479E58 /* QHDouyuViewController.h */,
 				74637E442B30212D00479E58 /* QHDouyuViewController.m */,
 				74637E492B30212D00479E58 /* QHDouyuViewController.xib */,
