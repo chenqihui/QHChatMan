@@ -8,6 +8,8 @@
 #import "QHTKRoomChatVIewUtil+Gif.h"
 
 #import <QHChatMan/QHChatMan.h>
+#import <YYText/YYText.h>
+#import "YYImage.h"
 
 #import "TFHpple.h"
 #import "QHGifTextAttachment.h"
@@ -55,6 +57,46 @@
             attachment.image = nil;
             NSAttributedString *a = [NSAttributedString attributedStringWithAttachment:attachment];
             [*chatData appendAttributedString:a];
+        }
+        else if (type != nil && [type isEqualToString:@"gif2"]) {
+            {
+                NSURL *gifImageUrl = [[NSBundle mainBundle] URLForResource:@"[vip_来一首]" withExtension:@"gif"];
+                NSData *data = [NSData dataWithContentsOfURL:gifImageUrl];
+                YYImage *image = [YYImage imageWithData:data];
+                CGSize size = image.size;
+                CGFloat imageHeight = 18.5;
+                if (imageHeight > 0) {
+                    CGFloat h = imageHeight;
+                    CGFloat w = image.size.width * h / image.size.height;
+                    size = CGSizeMake(w, h);
+                }
+                UIFont *font = [UIFont systemFontOfSize:14];
+                
+                image.preloadAllAnimatedImageFrames = YES;
+                YYAnimatedImageView *imageView = [[YYAnimatedImageView alloc] initWithImage:image];
+                imageView.frame = CGRectMake(0, 0, size.width, size.height);
+                imageView.autoPlayAnimatedImage = YES;
+//                [imageView startAnimating];
+                
+                NSMutableAttributedString *attachText = [NSMutableAttributedString yy_attachmentStringWithContent:imageView contentMode:UIViewContentModeCenter attachmentSize:size alignToFont:font alignment:YYTextVerticalAlignmentBottom];
+                [*chatData appendAttributedString:attachText];
+            }
+            {
+                NSURL *gifImageUrl = [[NSBundle mainBundle] URLForResource:@"vip_来一首" withExtension:@"png"];
+                NSData *data = [NSData dataWithContentsOfURL:gifImageUrl];
+                UIImage *image = [UIImage imageWithData:data];
+                CGSize size = image.size;
+                CGFloat imageHeight = 18.5;
+                if (imageHeight > 0) {
+                    CGFloat h = imageHeight;
+                    CGFloat w = image.size.width * h / image.size.height;
+                    size = CGSizeMake(w, h);
+                }
+                UIFont *font = [UIFont systemFontOfSize:14];
+                NSMutableAttributedString *attachmentString = [NSMutableAttributedString yy_attachmentStringWithContent:image contentMode:UIViewContentModeScaleAspectFill attachmentSize:size alignToFont:font alignment:YYTextVerticalAlignmentCenter];
+                attachmentString.yy_font = font;
+                [*chatData appendAttributedString:attachmentString];
+            }
         }
         else {
             NSString *color = element.attributes[@"color"];

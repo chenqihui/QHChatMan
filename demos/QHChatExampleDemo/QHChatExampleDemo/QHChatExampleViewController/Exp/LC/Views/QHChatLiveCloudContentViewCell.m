@@ -12,7 +12,6 @@
 
 @interface QHChatLiveCloudContentViewCell ()
 
-@property (nonatomic, strong) UIView *contentV;
 @property (nonatomic, strong, readwrite) UILabel *contentL;
 
 @end

@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) QHChatLiveCloudView *chatView;
 
+- (void)p_sendAction;
+
 @end
 
 NS_ASSUME_NONNULL_END

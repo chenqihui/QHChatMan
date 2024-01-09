@@ -8,6 +8,11 @@
 
 #import "QHChatLiveCloudView.h"
 
+extern NSString *const kChatOpKey2;
+extern NSString *const kChatOpValueChat2;
+extern NSString *const kChatOpValueGift2;
+extern NSString *const kChatOpValueEnter2;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QHChatLiveCloudTFHppleView : QHChatLiveCloudView

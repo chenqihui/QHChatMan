@@ -50,6 +50,18 @@
 		74146ACC2B4C0D9100BC0CE8 /* QHTKGifRoomChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74146ACB2B4C0D9100BC0CE8 /* QHTKGifRoomChatViewController.m */; };
 		74146AD02B4CE3F300BC0CE8 /* vip_来一首.png in Resources */ = {isa = PBXBuildFile; fileRef = 74146ACE2B4CE3F300BC0CE8 /* vip_来一首.png */; };
 		74146AD12B4CE3F300BC0CE8 /* [vip_来一首].gif in Resources */ = {isa = PBXBuildFile; fileRef = 74146ACF2B4CE3F300BC0CE8 /* [vip_来一首].gif */; };
+		74146AE72B4D208400BC0CE8 /* YYText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74146AE52B4D207E00BC0CE8 /* YYText.framework */; };
+		74146AE82B4D208400BC0CE8 /* YYText.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 74146AE52B4D207E00BC0CE8 /* YYText.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		74146AEB2B4D20C000BC0CE8 /* QHChatLiveYYLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74146AEA2B4D20C000BC0CE8 /* QHChatLiveYYLabelView.m */; };
+		74146AEE2B4D210200BC0CE8 /* QHYYLabelRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74146AED2B4D210200BC0CE8 /* QHYYLabelRoomViewController.m */; };
+		74146AF32B4D22E200BC0CE8 /* QHChatLiveCloudTFHppleUtil+YYLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74146AF22B4D22E200BC0CE8 /* QHChatLiveCloudTFHppleUtil+YYLabel.m */; };
+		74146AF62B4D233500BC0CE8 /* QHChatLiveYYLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74146AF52B4D233500BC0CE8 /* QHChatLiveYYLabelTableViewCell.m */; };
+		74146B032B4D343400BC0CE8 /* YYSpriteSheetImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 74146AFB2B4D343400BC0CE8 /* YYSpriteSheetImage.m */; };
+		74146B042B4D343400BC0CE8 /* Animated image support.txt in Resources */ = {isa = PBXBuildFile; fileRef = 74146AFD2B4D343400BC0CE8 /* Animated image support.txt */; };
+		74146B052B4D343400BC0CE8 /* YYImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 74146AFE2B4D343400BC0CE8 /* YYImage.m */; };
+		74146B062B4D343400BC0CE8 /* YYImageCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 74146AFF2B4D343400BC0CE8 /* YYImageCoder.m */; };
+		74146B072B4D343400BC0CE8 /* YYFrameImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 74146B002B4D343400BC0CE8 /* YYFrameImage.m */; };
+		74146B082B4D343400BC0CE8 /* YYAnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74146B012B4D343400BC0CE8 /* YYAnimatedImageView.m */; };
 		74637E572B30212D00479E58 /* QHTFHppleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74637E422B30212D00479E58 /* QHTFHppleViewController.m */; };
 		74637E582B30212D00479E58 /* QHTKRoomChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74637E432B30212D00479E58 /* QHTKRoomChatViewController.m */; };
 		74637E592B30212D00479E58 /* QHDouyuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74637E442B30212D00479E58 /* QHDouyuViewController.m */; };
@@ -83,6 +95,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				74121C9C272996E100B45829 /* QHChatMan.framework in Embed Frameworks */,
+				74146AE82B4D208400BC0CE8 /* YYText.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -164,6 +177,26 @@
 		74146ACB2B4C0D9100BC0CE8 /* QHTKGifRoomChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHTKGifRoomChatViewController.m; sourceTree = "<group>"; };
 		74146ACE2B4CE3F300BC0CE8 /* vip_来一首.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vip_来一首.png"; sourceTree = "<group>"; };
 		74146ACF2B4CE3F300BC0CE8 /* [vip_来一首].gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "[vip_来一首].gif"; sourceTree = "<group>"; };
+		74146AE52B4D207E00BC0CE8 /* YYText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YYText.framework; sourceTree = "<group>"; };
+		74146AE92B4D20C000BC0CE8 /* QHChatLiveYYLabelView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHChatLiveYYLabelView.h; sourceTree = "<group>"; };
+		74146AEA2B4D20C000BC0CE8 /* QHChatLiveYYLabelView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHChatLiveYYLabelView.m; sourceTree = "<group>"; };
+		74146AEC2B4D210200BC0CE8 /* QHYYLabelRoomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHYYLabelRoomViewController.h; sourceTree = "<group>"; };
+		74146AED2B4D210200BC0CE8 /* QHYYLabelRoomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHYYLabelRoomViewController.m; sourceTree = "<group>"; };
+		74146AF12B4D22E200BC0CE8 /* QHChatLiveCloudTFHppleUtil+YYLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QHChatLiveCloudTFHppleUtil+YYLabel.h"; sourceTree = "<group>"; };
+		74146AF22B4D22E200BC0CE8 /* QHChatLiveCloudTFHppleUtil+YYLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "QHChatLiveCloudTFHppleUtil+YYLabel.m"; sourceTree = "<group>"; };
+		74146AF42B4D233500BC0CE8 /* QHChatLiveYYLabelTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHChatLiveYYLabelTableViewCell.h; sourceTree = "<group>"; };
+		74146AF52B4D233500BC0CE8 /* QHChatLiveYYLabelTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHChatLiveYYLabelTableViewCell.m; sourceTree = "<group>"; };
+		74146AF82B4D343400BC0CE8 /* YYImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYImage.h; sourceTree = "<group>"; };
+		74146AF92B4D343400BC0CE8 /* YYImageCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYImageCoder.h; sourceTree = "<group>"; };
+		74146AFA2B4D343400BC0CE8 /* YYFrameImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYFrameImage.h; sourceTree = "<group>"; };
+		74146AFB2B4D343400BC0CE8 /* YYSpriteSheetImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYSpriteSheetImage.m; sourceTree = "<group>"; };
+		74146AFC2B4D343400BC0CE8 /* YYAnimatedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYAnimatedImageView.h; sourceTree = "<group>"; };
+		74146AFD2B4D343400BC0CE8 /* Animated image support.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Animated image support.txt"; sourceTree = "<group>"; };
+		74146AFE2B4D343400BC0CE8 /* YYImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYImage.m; sourceTree = "<group>"; };
+		74146AFF2B4D343400BC0CE8 /* YYImageCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYImageCoder.m; sourceTree = "<group>"; };
+		74146B002B4D343400BC0CE8 /* YYFrameImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYFrameImage.m; sourceTree = "<group>"; };
+		74146B012B4D343400BC0CE8 /* YYAnimatedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYAnimatedImageView.m; sourceTree = "<group>"; };
+		74146B022B4D343400BC0CE8 /* YYSpriteSheetImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYSpriteSheetImage.h; sourceTree = "<group>"; };
 		74637E422B30212D00479E58 /* QHTFHppleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHTFHppleViewController.m; sourceTree = "<group>"; };
 		74637E432B30212D00479E58 /* QHTKRoomChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHTKRoomChatViewController.m; sourceTree = "<group>"; };
 		74637E442B30212D00479E58 /* QHDouyuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHDouyuViewController.m; sourceTree = "<group>"; };
@@ -193,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				74121C9B272996E100B45829 /* QHChatMan.framework in Frameworks */,
+				74146AE72B4D208400BC0CE8 /* YYText.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +327,7 @@
 				74121CE02729985E00B45829 /* TK */,
 				74146AB52B4C050200BC0CE8 /* Gif */,
 				74146ADA2B4CEE1200BC0CE8 /* TFHpple */,
+				74146AE22B4D204200BC0CE8 /* YYLabel */,
 			);
 			path = Exp;
 			sourceTree = "<group>";
@@ -320,12 +355,12 @@
 		74121CD92729985E00B45829 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				74121CDA2729985E00B45829 /* QHChatLiveCloudNewDataView.m */,
-				74121CDB2729985E00B45829 /* QHChatLiveCloudDateViewCell.h */,
-				74121CDC2729985E00B45829 /* QHChatLiveCloudContentViewCell.m */,
-				74121CDD2729985E00B45829 /* QHChatLiveCloudNewDataView.h */,
-				74121CDE2729985E00B45829 /* QHChatLiveCloudDateViewCell.m */,
 				74121CDF2729985E00B45829 /* QHChatLiveCloudContentViewCell.h */,
+				74121CDC2729985E00B45829 /* QHChatLiveCloudContentViewCell.m */,
+				74121CDB2729985E00B45829 /* QHChatLiveCloudDateViewCell.h */,
+				74121CDE2729985E00B45829 /* QHChatLiveCloudDateViewCell.m */,
+				74121CDD2729985E00B45829 /* QHChatLiveCloudNewDataView.h */,
+				74121CDA2729985E00B45829 /* QHChatLiveCloudNewDataView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -508,10 +543,67 @@
 		74146ADE2B4CF17200BC0CE8 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				74146AF72B4D343400BC0CE8 /* YYImage */,
+				74146AE42B4D205000BC0CE8 /* YYText */,
 				74121CCB272997FE00B45829 /* YYFPSLabel */,
 				74121CBD272997CC00B45829 /* TFHpple */,
 			);
 			path = Library;
+			sourceTree = "<group>";
+		};
+		74146AE22B4D204200BC0CE8 /* YYLabel */ = {
+			isa = PBXGroup;
+			children = (
+				74146AE92B4D20C000BC0CE8 /* QHChatLiveYYLabelView.h */,
+				74146AEA2B4D20C000BC0CE8 /* QHChatLiveYYLabelView.m */,
+				74146AEF2B4D219800BC0CE8 /* Util */,
+				74146AF02B4D21A100BC0CE8 /* Views */,
+			);
+			path = YYLabel;
+			sourceTree = "<group>";
+		};
+		74146AE42B4D205000BC0CE8 /* YYText */ = {
+			isa = PBXGroup;
+			children = (
+				74146AE52B4D207E00BC0CE8 /* YYText.framework */,
+			);
+			path = YYText;
+			sourceTree = "<group>";
+		};
+		74146AEF2B4D219800BC0CE8 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				74146AF12B4D22E200BC0CE8 /* QHChatLiveCloudTFHppleUtil+YYLabel.h */,
+				74146AF22B4D22E200BC0CE8 /* QHChatLiveCloudTFHppleUtil+YYLabel.m */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		74146AF02B4D21A100BC0CE8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				74146AF42B4D233500BC0CE8 /* QHChatLiveYYLabelTableViewCell.h */,
+				74146AF52B4D233500BC0CE8 /* QHChatLiveYYLabelTableViewCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		74146AF72B4D343400BC0CE8 /* YYImage */ = {
+			isa = PBXGroup;
+			children = (
+				74146AF82B4D343400BC0CE8 /* YYImage.h */,
+				74146AF92B4D343400BC0CE8 /* YYImageCoder.h */,
+				74146AFA2B4D343400BC0CE8 /* YYFrameImage.h */,
+				74146AFB2B4D343400BC0CE8 /* YYSpriteSheetImage.m */,
+				74146AFC2B4D343400BC0CE8 /* YYAnimatedImageView.h */,
+				74146AFD2B4D343400BC0CE8 /* Animated image support.txt */,
+				74146AFE2B4D343400BC0CE8 /* YYImage.m */,
+				74146AFF2B4D343400BC0CE8 /* YYImageCoder.m */,
+				74146B002B4D343400BC0CE8 /* YYFrameImage.m */,
+				74146B012B4D343400BC0CE8 /* YYAnimatedImageView.m */,
+				74146B022B4D343400BC0CE8 /* YYSpriteSheetImage.h */,
+			);
+			path = YYImage;
 			sourceTree = "<group>";
 		};
 		74637E412B30212D00479E58 /* VC */ = {
@@ -536,6 +628,8 @@
 				74637E482B30212D00479E58 /* QHTKRoomChatViewController.xib */,
 				74146ACA2B4C0D9100BC0CE8 /* QHTKGifRoomChatViewController.h */,
 				74146ACB2B4C0D9100BC0CE8 /* QHTKGifRoomChatViewController.m */,
+				74146AEC2B4D210200BC0CE8 /* QHYYLabelRoomViewController.h */,
+				74146AED2B4D210200BC0CE8 /* QHYYLabelRoomViewController.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -619,6 +713,7 @@
 				74146AD12B4CE3F300BC0CE8 /* [vip_来一首].gif in Resources */,
 				74121C88272996C600B45829 /* Assets.xcassets in Resources */,
 				74121D162729985E00B45829 /* sex_xx@2x.webp in Resources */,
+				74146B042B4D343400BC0CE8 /* Animated image support.txt in Resources */,
 				74121D182729985E00B45829 /* dy_level.png in Resources */,
 				74121D1E2729985E00B45829 /* ggg.png in Resources */,
 				74637E5E2B30212D00479E58 /* QHBgRoomViewController.xib in Resources */,
@@ -642,16 +737,22 @@
 			files = (
 				74146AB92B4C055100BC0CE8 /* QHGifChatRoomView.m in Sources */,
 				74121D122729985E00B45829 /* QHSVLChatRoomView.m in Sources */,
+				74146AF62B4D233500BC0CE8 /* QHChatLiveYYLabelTableViewCell.m in Sources */,
 				74146AC92B4C0B3A00BC0CE8 /* QHGifTextView.m in Sources */,
+				74146B032B4D343400BC0CE8 /* YYSpriteSheetImage.m in Sources */,
+				74146B072B4D343400BC0CE8 /* YYFrameImage.m in Sources */,
 				74121D0B2729985E00B45829 /* QHChatLiveCloudNewDataView.m in Sources */,
 				74637E612B30212D00479E58 /* QHChatLiveCloudTFHppleUtil.m in Sources */,
 				74121D132729985E00B45829 /* QHSVLRoomChatContentViewCell.m in Sources */,
 				74146AC62B4C0A8C00BC0CE8 /* QHGifTextAttachment.m in Sources */,
 				74121D0E2729985E00B45829 /* QHTKRoomChatVIewUtil.m in Sources */,
 				74121CC8272997CC00B45829 /* TFHppleElement.m in Sources */,
+				74146AF32B4D22E200BC0CE8 /* QHChatLiveCloudTFHppleUtil+YYLabel.m in Sources */,
 				74121D0C2729985E00B45829 /* QHChatLiveCloudContentViewCell.m in Sources */,
 				74121CD1272997FF00B45829 /* YYFPSLabel.m in Sources */,
 				74121D0F2729985E00B45829 /* QHTKChatRoomView.m in Sources */,
+				74146B082B4D343400BC0CE8 /* YYAnimatedImageView.m in Sources */,
+				74146AEB2B4D20C000BC0CE8 /* QHChatLiveYYLabelView.m in Sources */,
 				74121D0D2729985E00B45829 /* QHChatLiveCloudDateViewCell.m in Sources */,
 				74637E5D2B30212D00479E58 /* QHLiveCloudViewController.m in Sources */,
 				74121D112729985E00B45829 /* QHSVLRoomChatViewUtil.m in Sources */,
@@ -660,6 +761,7 @@
 				74637E5A2B30212D00479E58 /* QHSVLRoomChatViewController.m in Sources */,
 				74121D1C2729985E00B45829 /* QHBGRoomChatContentViewCell.m in Sources */,
 				74637E572B30212D00479E58 /* QHTFHppleViewController.m in Sources */,
+				74146B062B4D343400BC0CE8 /* YYImageCoder.m in Sources */,
 				74121D092729985E00B45829 /* QHChatLiveCloudUtil.m in Sources */,
 				74637E622B30212D00479E58 /* QHBgRoomViewController.m in Sources */,
 				74121D102729985E00B45829 /* QHTKRoomChatContentViewCell.m in Sources */,
@@ -669,7 +771,9 @@
 				74121CC9272997CC00B45829 /* XPathQuery.m in Sources */,
 				74146AC12B4C071F00BC0CE8 /* QHTKRoomChatVIewUtil+Gif.m in Sources */,
 				74121D152729985E00B45829 /* QHChatBaseUtil+DYText.m in Sources */,
+				74146B052B4D343400BC0CE8 /* YYImage.m in Sources */,
 				74121C8E272996C600B45829 /* main.m in Sources */,
+				74146AEE2B4D210200BC0CE8 /* QHYYLabelRoomViewController.m in Sources */,
 				74146ACC2B4C0D9100BC0CE8 /* QHTKGifRoomChatViewController.m in Sources */,
 				74121CC7272997CC00B45829 /* TFHpple.m in Sources */,
 				74637E582B30212D00479E58 /* QHTKRoomChatViewController.m in Sources */,
@@ -823,6 +927,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 559F36FNHV;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/QHChatExampleDemo/Library/YYText",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = QHChatExampleDemo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -851,6 +959,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 559F36FNHV;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/QHChatExampleDemo/Library/YYText",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = QHChatExampleDemo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

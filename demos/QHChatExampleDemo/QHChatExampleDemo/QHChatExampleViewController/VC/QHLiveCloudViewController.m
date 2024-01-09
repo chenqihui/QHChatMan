@@ -41,9 +41,7 @@
     _chatView = v;
 }
 
-#pragma mark - Action
-
-- (IBAction)sendAction:(id)sender {
+- (void)p_sendAction {
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSDictionary *body = @{@"uid": @"test", @"rid": @"123456", @"nickname": @"顾小杰", @"content": @"会议几点开始啊，好期待。会议几点开始啊，好期待。会议几点开始啊，好期待。会议几点开始啊，好期待。"};
@@ -53,6 +51,12 @@
         NSDictionary *sayMeg2 = @{@"op": @"chat", @"body": body2};
         [weakSelf.chatView lcInsertChatData:@[sayMeg2]];
     });
+}
+
+#pragma mark - Action
+
+- (IBAction)sendAction:(id)sender {
+    [self p_sendAction];
 }
 
 - (IBAction)sendGiftAction:(id)sender {

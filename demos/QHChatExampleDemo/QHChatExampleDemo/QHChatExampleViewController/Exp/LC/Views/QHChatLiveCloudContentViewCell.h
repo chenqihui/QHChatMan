@@ -15,7 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QHChatLiveCloudContentViewCell : UITableViewCell
 
+@property (nonatomic, strong) UIView *contentV;
 @property (nonatomic, strong, readonly) UILabel *contentL;
+
+- (void)p_addContentLabel;
 
 @end
 

@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSMutableAttributedString *)toChatGif:(NSDictionary *)data;
 
-
++ (void)anaylzeHtml:(NSMutableAttributedString **)chatData content:(NSString *)contentString;
 + (UIImage *)download:(NSString *)url;
 + (UIImageView *)gif:(NSString *)name;
 
