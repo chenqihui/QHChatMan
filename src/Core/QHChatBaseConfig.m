@@ -20,7 +20,11 @@
         _cellEdgeInsets = UIEdgeInsetsZero;
         
         _chatCountMax = 300;
-        _chatCountDelete = 100;
+        _chatCountDelete = 150;
+        _chatCountMax4Temp = 100;
+        _chatCountDelete4Temp = 50;
+        _chatCountMax4Remove = 300;
+        _chatCountDelete4Remove = 150;
         _chatReloadDuration = 0.2;
         _bLongPress = NO;
         _minimumPressDuration = -1;

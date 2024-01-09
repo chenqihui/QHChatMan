@@ -48,7 +48,7 @@
     QHChatCellConfig cellConfig = v.config.cellConfig;
     cellConfig.cellLineSpacing = 1;
     cellConfig.fontSize = 15;
-    cellConfig.cellWidth = [UIScreen mainScreen].bounds.size.width;
+    cellConfig.cellWidth = [UIScreen mainScreen].bounds.size.width * 0.8;
     v.config.cellConfig = cellConfig;
     v.config.cellEdgeInsets = UIEdgeInsetsMake(4, 10, 4, 10);
     v.config.hasUnlock = NO;

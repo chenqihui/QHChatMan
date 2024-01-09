@@ -156,7 +156,7 @@
     
     _mainTableV = tableV;
     
-    //    [tableView registerClass:[QHChatBaseViewCell class] forCellReuseIdentifier:kQHCHATBASE_CELLIDENTIFIER];
+    [tableV registerClass:[QHChatBaseViewCell class] forCellReuseIdentifier:kQHCHATBASE_CELLIDENTIFIER];
     
     [self qhChatAddCell2TableView:_mainTableV];
 }
@@ -203,6 +203,12 @@
         [self p_closeReloadTimer];
         return;
     }
+    if (self.config.bOpenScorllFromBottom) {
+        NSInteger numRows = [self tableView:self.mainTableV numberOfRowsInSection:0];
+        if (numRows == 0) {
+            [self p_updateTableContentInset:0];
+        }
+    }
     
     NSArray<NSDictionary *> *tempArray = [NSArray arrayWithArray:self.buffer.chatDatasTempArray];
     [self.buffer clearTempArray];
@@ -210,6 +216,7 @@
     __block BOOL isReplaceChatData = NO;
     [tempArray enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         QHChatBaseModel *model = [[QHChatBaseModel alloc] initWithChatData:obj];
+        model.emojiType = [self qhChatEmojiType:obj];
         NSString *key;
         if ([self qhAllowForRemoveChatData:model.originChatDataDic key:&key]) {
             model.cid = key;
@@ -270,6 +277,7 @@
         }
         
         if (_bOutHeight == YES) {
+            [self p_resetTableContentInset];
             if (self.mainTableV.isDragging == NO && self.mainTableV.tracking == NO) {
                 [self p_scrollToFinalBottom];
             }
@@ -287,7 +295,7 @@
         // 控制滑动底部的动画时长
         // 由于使用预测 Cell 高度，所以去掉滑动到底部的动画，避免出现跳动现象
 //        [UIView animateWithDuration:MIN(0.2, self.config.chatReloadDuration - 0.05) animations:^{
-            [self.mainTableV scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+            [self.mainTableV scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:NO];
 //        }];
     }
 }
@@ -325,10 +333,11 @@
     }
     model.cellConfig = _config.cellConfig;
     
-    NSMutableAttributedString *content = [self qhChatAnalyseContent:[self.buffer getChatData:indexPath.row].originChatDataDic];
+    NSDictionary *data = [self.buffer getChatData:indexPath.row].originChatDataDic;
+    NSMutableAttributedString *content = [self qhChatAnalyseContent:data emojiType:model.emojiType];
     
     if (content != nil) {
-        [self qhChatAddCellDefualAttributes:content];
+        [self qhChatAddCellDefualAttributes:content dic:data];
         model.chatAttributedText = content;
     }
     return content;
@@ -356,9 +365,14 @@
             h = rect.size.height + _config.cellConfig.cellLineSpacing + _config.cellEdgeInsets.top + _config.cellEdgeInsets.bottom;
         }
     }
-    
+    model.cellConfig = self.config.cellConfig;
     model.cellHeight = h;
     return model.cellHeight;
+}
+
+- (BOOL)p_useManualHeight:(NSIndexPath *)indexPath {
+    QHChatBaseModel *model = [self.buffer getChatData:indexPath.row];
+    return model.emojiType == 1;
 }
 
 - (void)p_clickNewDataViewAction {
@@ -379,6 +393,11 @@
     return hasCellHeight;
 }
 
+- (void)p_resetTableContentInset {
+    if (self.mainTableV.contentInset.top == 0) { return; }
+    self.mainTableV.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+}
+
 - (void)p_updateTableContentInset:(CGFloat)height {
     CGFloat contentInsetTop = MAX(self.mainTableV.bounds.size.height - height, 0);
     self.mainTableV.contentInset = UIEdgeInsetsMake(contentInsetTop, 0, 0, 0);
@@ -395,7 +414,7 @@
     
     self.bAutoReloadChat = YES;
     [self.hasNewDataView hide];
-
+    
     if (bRefresh) {
         [CATransaction begin];
         [CATransaction setDisableActions:YES];
@@ -432,6 +451,7 @@
         }
         
         if (_bOutHeight == YES || _config.bOpenScorllFromBottom == NO) {
+            [self p_resetTableContentInset];
             if (self.mainTableV.isDragging == NO && self.mainTableV.tracking == NO) {
                 [self p_scrollToFinalBottom];
             }
@@ -474,8 +494,8 @@
 - (void)qhChatAddCell2TableView:(UITableView *)tableView {
 }
 
-- (NSMutableAttributedString *)qhChatAnalyseContent:(NSDictionary *)data {
-    NSMutableAttributedString *c = [[NSMutableAttributedString alloc] initWithString:data[@"c"]];
+- (NSMutableAttributedString *)qhChatAnalyseContent:(NSDictionary *)data emojiType:(NSUInteger)type {
+    NSMutableAttributedString *c = [[NSMutableAttributedString alloc] initWithString:@""];
     return c;
 }
 
@@ -495,7 +515,7 @@
 - (void)qhChatMakeAfterChatBaseViewCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 
-- (void)qhChatAddCellDefualAttributes:(NSMutableAttributedString *)attr {
+- (void)qhChatAddCellDefualAttributes:(NSMutableAttributedString *)attr dic:(NSDictionary *)data {
     [QHChatBaseUtil addCellDefualAttributes:attr lineSpacing:_config.cellConfig.cellLineSpacing fontSize:_config.cellConfig.fontSize];
 }
 
@@ -523,6 +543,10 @@
     return NO;
 }
 
+- (NSUInteger)qhChatEmojiType:(NSDictionary *)data {
+    return 0;
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -534,38 +558,40 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QHChatBaseModel *model = [self.buffer getChatData:indexPath.row];
-    if (model == nil) {
-        return nil;
+    UITableViewCell *customCell = nil;
+    if (model != nil) {
+        if (model.chatAttributedText == nil) {
+            NSAttributedString *content = [self p_goContent:indexPath];
+            model.chatAttributedText = content;
+        }
+        if (model.chatAttributedText != nil) {
+            customCell = [self qhChatChatView:tableView cellForRowAtIndexPath:indexPath];
+        }
     }
-    if (model.chatAttributedText == nil) {
-        NSAttributedString *content = [self p_goContent:indexPath];
-        model.chatAttributedText = content;
+    if (customCell == nil) {
+        QHChatBaseViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kQHCHATBASE_CELLIDENTIFIER];
+        if (cell == nil) {
+            cell = [[QHChatBaseViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kQHCHATBASE_CELLIDENTIFIER];
+            [cell makeContent:_config.cellEdgeInsets];
+        }
+        cell.contentL.attributedText = model.chatAttributedText;
+        cell.delegate = self;
+        customCell = cell;
     }
-    UITableViewCell *customCell = [self qhChatChatView:tableView cellForRowAtIndexPath:indexPath];
-    if (customCell != nil) {
-        return customCell;
-    }
-    QHChatBaseViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kQHCHATBASE_CELLIDENTIFIER];
-    if (cell == nil) {
-        cell = [[QHChatBaseViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kQHCHATBASE_CELLIDENTIFIER];
-        [cell makeContent:_config.cellEdgeInsets];
-    }
-    cell.contentL.attributedText = model.chatAttributedText;
-    cell.delegate = self;
-    [self qhChatMakeAfterChatBaseViewCell:cell forRowAtIndexPath:indexPath];
+    [self qhChatMakeAfterChatBaseViewCell:customCell forRowAtIndexPath:indexPath];
     
-    return cell;
+    return customCell;
 }
 
 #pragma mark - UITableViewDelegate
 
 // 预测 Cell 高度
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44;
+    return 28;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.config.bOpenScorllFromBottom) {
+    if ([self p_useManualHeight:indexPath] || self.config.bOpenScorllFromBottom) {
         CGFloat h = 0;
         @try {
             h = [self p_goHeight:indexPath];

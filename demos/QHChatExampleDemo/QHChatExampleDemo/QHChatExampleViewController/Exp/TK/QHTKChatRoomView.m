@@ -34,7 +34,7 @@ NSString *const kTKChatOpValueNotice = @"notice";
     [tableView registerClass:[QHTKRoomChatContentViewCell class] forCellReuseIdentifier:kQHCHAT_TK_CONTENT_CELLIDENTIFIER];
 }
 
-- (NSMutableAttributedString *)qhChatAnalyseContent:(NSDictionary *)data {
+- (NSMutableAttributedString *)qhChatAnalyseContent:(NSDictionary *)data emojiType:(NSUInteger)type {
     NSString *op = data[kTKChatOpKey];
     NSMutableAttributedString *content = nil;
     if ([op isEqualToString:kTKChatOpValueChat] == YES) {

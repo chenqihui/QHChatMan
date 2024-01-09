@@ -402,8 +402,8 @@
 			isa = PBXGroup;
 			children = (
 				74121CFE2729985E00B45829 /* QHChatDouyuTipTableViewCell.h */,
-				74121CFF2729985E00B45829 /* QHChatDouyuTipTableViewCell.xib */,
 				74121D002729985E00B45829 /* QHChatDouyuTipTableViewCell.m */,
+				74121CFF2729985E00B45829 /* QHChatDouyuTipTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";

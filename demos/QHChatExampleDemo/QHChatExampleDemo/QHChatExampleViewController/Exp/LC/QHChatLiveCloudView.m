@@ -68,7 +68,7 @@ NSString *const kChatOpValueEnter = @"enter";
     [tableView registerClass:[QHChatLiveCloudDateViewCell class] forCellReuseIdentifier:kQHCHAT_LC_DATE_CELLIDENTIFIER];
 }
 
-- (NSMutableAttributedString *)qhChatAnalyseContent:(NSDictionary *)data {
+- (NSMutableAttributedString *)qhChatAnalyseContent:(NSDictionary *)data emojiType:(NSUInteger)type {
     NSString *op = data[kChatOpKey];
     NSMutableAttributedString *content = nil;
     if ([op isEqualToString:kChatOpValueChat] == YES) {

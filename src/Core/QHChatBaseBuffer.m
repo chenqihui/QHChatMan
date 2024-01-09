@@ -45,8 +45,9 @@
 - (void)append2TempArray:(NSArray<NSDictionary *> *)data {
     [self p_lock:^{
         [self.chatDatasTempArray addObjectsFromArray:data];
-        if (self.chatDatasTempArray.count > self.config.chatCountMax) {
-            [self.chatDatasTempArray removeObjectsInRange:NSMakeRange(0, self.config.chatCountDelete)];
+        NSUInteger c = self.chatDatasTempArray.count;
+        if (c > self.config.chatCountMax4Temp) {
+            [self.chatDatasTempArray removeObjectsInRange:NSMakeRange(0, MAX(self.config.chatCountDelete4Temp, c - self.config.chatCountMax4Temp))];
         }
     }];
 }
@@ -95,13 +96,15 @@
 - (BOOL)removeObjectsInRange {
     __block BOOL bDeleteChatData = NO;
     [self p_lock:^{
-        if (self.chatDatasArray.count > self.config.chatCountMax) {
-            [self.chatDatasArray removeObjectsInRange:NSMakeRange(0, self.config.chatCountDelete)];
+        NSUInteger c = self.chatDatasArray.count;
+        if (c > self.config.chatCountMax) {
+            [self.chatDatasArray removeObjectsInRange:NSMakeRange(0, MAX(self.config.chatCountDelete, c - self.config.chatCountMax))];
             bDeleteChatData = YES;
         }
-        if (self.removeChatDatasDic.count > self.config.chatCountMax) {
+        NSUInteger c1 = self.removeChatDatasDic.count;
+        if (c1 > self.config.chatCountMax4Remove) {
             NSArray *keys = self.removeChatDatasDic.allKeys;
-            [self.removeChatDatasDic removeObjectsForKeys:[keys subarrayWithRange:NSMakeRange(0, self.config.chatCountDelete)]];
+            [self.removeChatDatasDic removeObjectsForKeys:[keys subarrayWithRange:NSMakeRange(0, MAX(self.config.chatCountDelete4Remove, c1 - self.config.chatCountMax4Remove))]];
         }
     }];
     return bDeleteChatData;
