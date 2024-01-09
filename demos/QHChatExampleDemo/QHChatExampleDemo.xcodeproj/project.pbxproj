@@ -219,7 +219,7 @@
 		74121C7A272996C500B45829 /* QHChatExampleDemo */ = {
 			isa = PBXGroup;
 			children = (
-				74121CCB272997FE00B45829 /* YYFPSLabel */,
+				74146ADE2B4CF17200BC0CE8 /* Library */,
 				74121C9E2729978200B45829 /* QHChatExampleViewController */,
 				74121C7B272996C500B45829 /* AppDelegate.h */,
 				74121C7C272996C500B45829 /* AppDelegate.m */,
@@ -254,7 +254,6 @@
 			isa = PBXGroup;
 			children = (
 				74121CD22729985E00B45829 /* Exp */,
-				74121CBD272997CC00B45829 /* TFHpple */,
 				74637E412B30212D00479E58 /* VC */,
 			);
 			path = QHChatExampleViewController;
@@ -281,8 +280,7 @@
 				74121CCF272997FF00B45829 /* YYWeakProxy.h */,
 				74121CCC272997FE00B45829 /* YYWeakProxy.m */,
 			);
-			name = YYFPSLabel;
-			path = QHChatExampleViewController/YYFPSLabel;
+			path = YYFPSLabel;
 			sourceTree = "<group>";
 		};
 		74121CD22729985E00B45829 /* Exp */ = {
@@ -505,6 +503,15 @@
 				74637E4C2B30212D00479E58 /* QHChatLiveCloudTFHppleView.m */,
 			);
 			path = TFHpple;
+			sourceTree = "<group>";
+		};
+		74146ADE2B4CF17200BC0CE8 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				74121CCB272997FE00B45829 /* YYFPSLabel */,
+				74121CBD272997CC00B45829 /* TFHpple */,
+			);
+			path = Library;
 			sourceTree = "<group>";
 		};
 		74637E412B30212D00479E58 /* VC */ = {
