@@ -24,10 +24,10 @@
     [tableView registerNib:cellNib forCellReuseIdentifier:kQHCHAT_DY_TIP_CELLIDENTIFIER];
 }
 
-- (NSMutableAttributedString *)qhChatAnalyseContent:(NSDictionary *)data {
-    NSInteger type = [data[@"t"] integerValue];
+- (NSMutableAttributedString *)qhChatAnalyseContent:(NSDictionary *)data emojiType:(NSUInteger)type {
+    NSInteger t = [data[@"t"] integerValue];
     NSMutableAttributedString *content = nil;
-    switch (type) {
+    switch (t) {
         case 1:
             content = [QHChatBaseUtil enter:data];
             break;
@@ -61,12 +61,12 @@
 - (UITableViewCell *)qhChatChatView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QHChatBaseModel *model = [self.buffer getChatData:indexPath.row];
     if (model != nil) {
-        NSInteger type = [model.originChatDataDic[@"t"] integerValue];
-        if (type == 4) {
-            QHChatDouyuTipTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kQHCHAT_DY_TIP_CELLIDENTIFIER];
-            cell.contentL.text = model.originChatDataDic[@"c"];
-            return cell;
-        }
+//        NSInteger type = [model.originChatDataDic[@"t"] integerValue];
+//        if (type == 4) {
+        QHChatDouyuTipTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kQHCHAT_DY_TIP_CELLIDENTIFIER];
+        cell.contentL.text = model.originChatDataDic[@"c"];
+        return cell;
+//        }
     }
     return nil;
 }

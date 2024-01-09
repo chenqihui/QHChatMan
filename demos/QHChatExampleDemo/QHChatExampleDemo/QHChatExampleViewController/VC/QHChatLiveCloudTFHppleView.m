@@ -17,7 +17,7 @@ NSString *const kChatOpValueEnter2 = @"enter";
 
 @implementation QHChatLiveCloudTFHppleView
 
-- (NSMutableAttributedString *)qhChatAnalyseContent:(NSDictionary *)data {
+- (NSMutableAttributedString *)qhChatAnalyseContent:(NSDictionary *)data emojiType:(NSUInteger)type {
     NSString *op = data[kChatOpKey2];
     NSMutableAttributedString *content = nil;
     if ([op isEqualToString:kChatOpValueChat2] == YES) {

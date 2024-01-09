@@ -31,9 +31,29 @@ NS_ASSUME_NONNULL_BEGIN
 // 只对 QHChatBaseViewCell 有效
 @property (nonatomic) UIEdgeInsets cellEdgeInsets;
 
-// 数据池大小 & 清空数据多少，建议保证 chatCountDelete 小于 chatCountMax
+/*
+ 显示：最大量chatCountMax，超出减少最少 chatCountDelete
+      理论范围：[0, chatCountMax]
+ 插入：最大量chatCountMax4Temp，超出减少最少 chatCountDelete4Temp
+      理论范围：[0, chatCountMax4Temp]
+ 
+ 设置值参考：
+ chatCountMax: 300, chatCountDelete: 150
+ [0, 300]
+ chatCountMax4Temp: 100, chatCountDelete4Temp: 50
+ [0, 100]
+ chatCountMax4Remove 同 chatCountMax
+ chatCountDelete4Remove 同 chatCountDelete
+ */
+// 显示的数据：数据池大小 & 清空数据多少，保证 chatCountDelete 小于 chatCountMax，可取一半
 @property (nonatomic) NSInteger chatCountMax;
 @property (nonatomic) NSInteger chatCountDelete;
+// 待查入数据：规则同上
+@property (nonatomic) NSInteger chatCountMax4Temp;
+@property (nonatomic) NSInteger chatCountDelete4Temp;
+// 待删除数据：规则同上
+@property (nonatomic) NSInteger chatCountMax4Remove;
+@property (nonatomic) NSInteger chatCountDelete4Remove;
 
 // 刷新的帧率（默认 0.2s）
 @property (nonatomic) CGFloat chatReloadDuration;
@@ -41,6 +61,8 @@ NS_ASSUME_NONNULL_BEGIN
 // 继承 QHChatBaseViewCell 的 长按手势开关 & 长按时长（小于等于 0 为默认值）
 @property (nonatomic) BOOL bLongPress;
 @property (nonatomic) NSTimeInterval minimumPressDuration;
+
+@property (nonatomic) BOOL bScrollAnimated;
 
 /*
  bOpenScorllFromBottom：公屏在没有满屏时由下而上显示

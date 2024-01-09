@@ -47,7 +47,7 @@
  @param data 数据
  @return 结果
  */
-- (NSMutableAttributedString *)qhChatAnalyseContent:(NSDictionary *)data;
+- (NSMutableAttributedString *)qhChatAnalyseContent:(NSDictionary *)data emojiType:(NSUInteger)type;
 
 /**
  自定义 更多View，但必须实现 QHChatBaseNewDataViewProtcol，不支持扩展，可直接继承 QHChatBaseNewDataView
@@ -113,6 +113,8 @@
  删除协议：是否加入删除列表，默认 NO，如果为 YES 的话，需要设置 *key 值供记录
  */
 - (BOOL)qhAllowForRemoveChatData:(NSDictionary *)data key:(NSString **)key;
+
+- (NSUInteger)qhChatEmojiType:(NSDictionary *)data;
 
 @end
 

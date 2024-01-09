@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) CGFloat cellHeight;
 @property (nonatomic, copy) NSString *cid; // 该 key 目前需要 remove 的 chatModel 必须设置
 @property (nonatomic) BOOL bUpdate;
+@property (nonatomic) NSUInteger emojiType; // 0: Small 1: Big
 
 - (instancetype)initWithChatData:(NSDictionary *)data;
 

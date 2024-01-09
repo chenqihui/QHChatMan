@@ -21,6 +21,7 @@
     if (self) {
         _originChatDataDic = data;
         _cellHeight = 0;
+        _emojiType = 0;
     }
     return self;
 }

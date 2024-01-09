@@ -69,7 +69,7 @@
     [tableView registerClass:[QHSVLRoomChatContentViewCell class] forCellReuseIdentifier:kQHCHAT_LC_CONTENT_CELLIDENTIFIER];
 }
 
-- (NSMutableAttributedString *)qhChatAnalyseContent:(NSDictionary *)data {
+- (NSMutableAttributedString *)qhChatAnalyseContent:(NSDictionary *)data emojiType:(NSUInteger)type {
     NSString *formatString = @"<font color='#FFFFFF'>%@</font>";
     NSString *contentString = [NSString stringWithFormat:formatString, data[@"c"]];
     NSMutableAttributedString *chatData = [NSMutableAttributedString new];
