@@ -7,17 +7,32 @@
 
 #import "QHChatGifTableViewCell.h"
 
+#import <QHChatMan/QHChatMan.h>
+
+#define TKQHCHAT_GIF_CONTENT_TEXT_EDGEINSETS UIEdgeInsetsMake(3, 5, 3, 5)
+
+@interface QHChatGifTableViewCell ()
+
+@property (nonatomic, strong, readwrite) QHGifTextView *contentTV;
+
+@end
+
 @implementation QHChatGifTableViewCell
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
+- (void)dealloc {
+#if DEBUG
+    NSLog(@"%s", __FUNCTION__);
+#endif
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+#pragma mark - Private
 
-    // Configure the view for the selected state
+- (void)p_addContentLabel {
+    QHGifTextView *contentTV = [QHGifTextView new];
+    contentTV.backgroundColor = [UIColor clearColor];
+    [self.contentV addSubview:contentTV];
+    [QHChatViewUtil fullScreen:contentTV edgeInsets:TKQHCHAT_GIF_CONTENT_TEXT_EDGEINSETS];
+    _contentTV = contentTV;
 }
 
 @end

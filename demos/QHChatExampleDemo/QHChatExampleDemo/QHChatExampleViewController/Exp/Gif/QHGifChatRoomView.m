@@ -8,6 +8,7 @@
 #import "QHGifChatRoomView.h"
 
 #import "QHChatGifTableViewCell.h"
+#import "QHTKRoomChatVIewUtil+Gif.h"
 
 #define kQHCHAT_GIF_CONTENT_CELLIDENTIFIER @"QHChatGIFContentCellIdentifier"
 
@@ -24,7 +25,7 @@
     NSString *op = data[kTKChatOpKey];
     NSMutableAttributedString *content = nil;
     if ([op isEqualToString:kTKChatOpValueChat] == YES) {
-        content = [QHTKRoomChatVIewUtil toChat:data isAnchor:YES isCurrentUser:NO];
+        content = [QHTKRoomChatVIewUtil toChatGif:data];
     }
     else if ([op isEqualToString:kTKChatOpValueNotice] == YES) {
         content = [QHTKRoomChatVIewUtil toNotice:data];
@@ -36,10 +37,10 @@
     UITableViewCell *chatCell = nil;
     QHChatBaseModel *model = [self.buffer getChatData:indexPath.row];
     if (model.chatAttributedText != nil) {
-        QHTKRoomChatContentViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kQHCHAT_TK_CONTENT_CELLIDENTIFIER];
-        cell.contentL.attributedText = model.chatAttributedText;
+        QHChatGifTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kQHCHAT_GIF_CONTENT_CELLIDENTIFIER];
+        cell.contentTV.attributedText = model.chatAttributedText;
         cell.delegate = self;
-//        [cell cellUpdateConstraints];
+        [cell.contentTV start];
         chatCell = cell;
     }
     

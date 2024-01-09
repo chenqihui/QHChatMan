@@ -8,9 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+#import <QHChatMan/QHChatMan.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface QHTKRoomChatViewController : UIViewController
+@interface QHTKRoomChatViewController : UIViewController <QHChatBaseViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UIView *chatSuperView;
+
+- (void)p_setup;
+- (void)p_chat;
 
 @end
 

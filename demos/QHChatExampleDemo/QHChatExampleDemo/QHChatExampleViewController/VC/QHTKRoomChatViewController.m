@@ -14,13 +14,10 @@
 
 #import "QHTKRoomChatViewController.h"
 
-#import <QHChatMan/QHChatMan.h>
-
 #import "QHTKChatRoomView.h"
 
-@interface QHTKRoomChatViewController () <QHChatBaseViewDelegate>
+@interface QHTKRoomChatViewController ()
 
-@property (weak, nonatomic) IBOutlet UIView *chatSuperView;
 @property (nonatomic, strong) QHTKChatRoomView *chatView;
 @property (nonatomic, strong) NSTimer *t;
 
@@ -31,7 +28,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self p_setup];
+}
     
+- (void)p_setup {
     QHChatBaseConfig *config = [QHChatBaseConfig new];
     config.bLongPress = YES;
     config.bOpenScorllFromBottom = YES;
@@ -86,6 +86,12 @@
     [self.chatView scrollToBottom];
 }
 
+- (void)p_chat {
+    NSDictionary *body = @{@"c": @"主播你好", @"n": @"小跟班"};
+    NSDictionary *msg = @{@"op": @"chat", @"body": body};
+    [self.chatView insertChatData:@[msg]];
+}
+
 #pragma mark - Util
 
 - (void)addMaskView:(UIView *)superView height:(CGFloat)height {
@@ -104,9 +110,7 @@
 #pragma mark - Action
 
 - (IBAction)sayAction:(id)sender {
-    NSDictionary *body = @{@"c": @"主播你好", @"n": @"小跟班"};
-    NSDictionary *msg = @{@"op": @"chat", @"body": body};
-    [self.chatView insertChatData:@[msg]];
+    [self p_chat];
 }
 
 @end

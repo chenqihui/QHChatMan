@@ -13,6 +13,7 @@
 #import "QHTKRoomChatViewController.h"
 #import "QHBgRoomViewController.h"
 #import "QHTFHppleViewController.h"
+#import "QHTKGifRoomChatViewController.h"
 
 @interface ViewController ()
  
@@ -28,7 +29,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 6;
+    return 7;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -59,6 +60,9 @@
             break;
         case 6:
             subVC = [QHTFHppleViewController new];
+            break;
+        case 7:
+            subVC = [QHTKGifRoomChatViewController new];
             break;
         default:
             break;

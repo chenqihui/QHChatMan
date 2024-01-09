@@ -8,6 +8,10 @@
 
 #import <QHChatMan/QHChatMan.h>
 
+NSString *const kTKChatOpKey = @"op";
+NSString *const kTKChatOpValueChat = @"chat";
+NSString *const kTKChatOpValueNotice = @"notice";
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QHTKChatRoomView : QHChatBaseView <QHChatBaseViewCellDelegate>

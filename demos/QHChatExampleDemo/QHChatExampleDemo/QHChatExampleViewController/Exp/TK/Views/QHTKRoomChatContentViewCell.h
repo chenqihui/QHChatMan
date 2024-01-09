@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)cellUpdateConstraints;
 
+- (void)p_addContentLabel;
+
 @end
 
 NS_ASSUME_NONNULL_END

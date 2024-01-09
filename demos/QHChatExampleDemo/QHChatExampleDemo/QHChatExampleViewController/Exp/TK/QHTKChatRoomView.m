@@ -13,10 +13,6 @@
 
 #define kQHCHAT_TK_CONTENT_CELLIDENTIFIER @"TKQHChatLCContentCellIdentifier"
 
-NSString *const kTKChatOpKey = @"op";
-NSString *const kTKChatOpValueChat = @"chat";
-NSString *const kTKChatOpValueNotice = @"notice";
-
 @interface QHTKChatRoomView ()
 
 @end
