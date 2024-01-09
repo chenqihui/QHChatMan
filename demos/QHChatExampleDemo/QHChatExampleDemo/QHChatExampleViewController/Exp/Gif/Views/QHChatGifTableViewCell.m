@@ -9,8 +9,6 @@
 
 #import <QHChatMan/QHChatMan.h>
 
-#define TKQHCHAT_GIF_CONTENT_TEXT_EDGEINSETS UIEdgeInsetsMake(3, 5, 3, 5)
-
 @interface QHChatGifTableViewCell ()
 
 @property (nonatomic, strong, readwrite) QHGifTextView *contentTV;

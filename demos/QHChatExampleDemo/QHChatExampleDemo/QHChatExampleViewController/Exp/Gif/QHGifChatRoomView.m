@@ -33,6 +33,21 @@
     return content;
 }
 
+- (CGFloat)qhChatAnalyseHeight:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    QHChatBaseModel *model = [self.buffer getChatData:indexPath.row];
+    if (model.chatAttributedText == nil) {
+        return 0;
+    }
+    UIEdgeInsets contentEI = TKQHCHAT_LC_CONTENT_EDGEINSETS;
+    UIEdgeInsets contentTextEI = TKQHCHAT_GIF_CONTENT_TEXT_EDGEINSETS;
+    
+    CGFloat w = self.config.cellConfig.cellWidth - contentEI.left - contentEI.right - contentTextEI.left - contentTextEI.right;
+    NSStringDrawingOptions options = NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading;
+    CGRect rect = [model.chatAttributedText boundingRectWithSize:CGSizeMake(w, CGFLOAT_MAX) options:options context:nil];
+    CGFloat h = rect.size.height + self.config.cellConfig.cellLineSpacing + contentEI.top + contentEI.bottom + contentTextEI.top + contentTextEI.bottom;
+    return h;
+}
+
 - (UITableViewCell *)qhChatChatView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *chatCell = nil;
     QHChatBaseModel *model = [self.buffer getChatData:indexPath.row];

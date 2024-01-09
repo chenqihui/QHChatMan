@@ -9,6 +9,8 @@
 
 #import "QHGifTextView.h"
 
+#define TKQHCHAT_GIF_CONTENT_TEXT_EDGEINSETS UIEdgeInsetsMake(3, 5, 3, 5)
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QHChatGifTableViewCell : QHTKRoomChatContentViewCell
