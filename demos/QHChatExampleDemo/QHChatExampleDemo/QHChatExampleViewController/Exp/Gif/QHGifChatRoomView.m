@@ -21,7 +21,7 @@
     [tableView registerClass:[QHChatGifTableViewCell class] forCellReuseIdentifier:kQHCHAT_GIF_CONTENT_CELLIDENTIFIER];
 }
 
-- (NSMutableAttributedString *)qhChatAnalyseContent:(NSDictionary *)data {
+- (NSMutableAttributedString *)qhChatAnalyseContent:(NSDictionary *)data emojiType:(NSUInteger)type {
     NSString *op = data[kTKChatOpKey];
     NSMutableAttributedString *content = nil;
     if ([op isEqualToString:kTKChatOpValueChat] == YES) {
